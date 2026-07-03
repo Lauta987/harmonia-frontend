@@ -1196,3 +1196,120 @@ body {
   border-radius: 16px;
   border: 2px solid #e7d8ca;
 } 
+/* ========================= */
+/*   ADMIN MEJORAS VISUALES  */
+/* ========================= */
+
+.admin-layout {
+  background: linear-gradient(135deg, #f8f4ef 0%, #efe3d6 100%);
+}
+
+.admin-sidebar {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #2f2a22 0%, #473829 100%);
+  box-shadow: 12px 0 35px rgba(47, 42, 34, 0.12);
+}
+
+.admin-sidebar-logo {
+  width: 125px;
+}
+
+.admin-sidebar a,
+.admin-sidebar button {
+  font-weight: 600;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar button:hover {
+  background: rgba(255, 250, 244, 0.16);
+  transform: translateX(4px);
+}
+
+.admin-content {
+  max-width: 1300px;
+  width: 100%;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 35px;
+}
+
+.admin-header h1 {
+  margin-bottom: 0;
+}
+
+.admin-create-button {
+  margin-bottom: 0;
+  box-shadow: 0 12px 24px rgba(102, 113, 59, 0.25);
+}
+
+.admin-table-card,
+.admin-form,
+.dashboard-card {
+  background: rgba(255, 250, 244, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.admin-table tr {
+  transition: 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+  background: #f7efe6;
+}
+
+.admin-actions {
+  flex-wrap: wrap;
+}
+
+.admin-edit-button,
+.admin-featured-button,
+.admin-toggle-button,
+.admin-delete-button {
+  transition: 0.25s ease;
+}
+
+.admin-edit-button:hover,
+.admin-featured-button:hover,
+.admin-toggle-button:hover,
+.admin-delete-button:hover {
+  transform: translateY(-2px);
+}
+
+.status-active,
+.status-hidden {
+  display: inline-block;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.status-active {
+  background: #e7f4e8;
+}
+
+.status-hidden {
+  background: #fdeaea;
+}
+
+@media (max-width: 900px) {
+  .admin-sidebar {
+    position: relative;
+    min-height: auto;
+  }
+
+  .admin-header {
+    flex-direction: column;
+  }
+
+  .admin-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+} 
