@@ -12,7 +12,7 @@ import {
   FaWhatsapp,
   FaTiktok,
   FaEnvelope
-} from "react-icons/fa"; 
+} from "react-icons/fa";
 
 import aromaFrutales from "./assets/aromaFrutales.png";
 import aromaIntensos from "./assets/aromaIntensos.png";
@@ -119,18 +119,15 @@ function App() {
   }, []);
 
   const getProductImages = (product: Product) => {
-  if (product.images && product.images.length > 0) {
-    return product.images.map(
-      (image) => `https://harmonia-backend-4uu0.onrender.com${image}`
-    );
-  }
+    if (product.images && product.images.length > 0) {
+      return product.images.map(
+        (image) => `https://harmonia-backend-4uu0.onrender.com${image}`
+      );
+    }
 
-  return productImages[product.name] || [
-    VelaOsito1,
-    VelaOsito2,
-    VelaOsito3
-  ];
-}; 
+    return productImages[product.name] || [VelaOsito1, VelaOsito2, VelaOsito3];
+  };
+
   return (
     <main className="app">
       <nav className="navbar">
@@ -171,6 +168,20 @@ function App() {
           <div className="hero-product-badge">
             <span>Velas artesanales</span>
             <strong>Hechas con amor 🤎</strong>
+          </div>
+        </div>
+      </section>
+
+      <section className="shipping-banner">
+        <div className="shipping-content">
+          <span className="shipping-icon">🚚</span>
+
+          <div>
+            <h3>Envíos a toda Argentina</h3>
+            <p>
+              Empaquetamos cada vela con cuidado para que llegue en perfectas
+              condiciones a tu hogar.
+            </p>
           </div>
         </div>
       </section>
@@ -230,74 +241,72 @@ function App() {
       </section>
 
       <footer id="contacto" className="footer">
-  <p className="section-subtitle">Nuestras redes 🌿</p>
+        <p className="section-subtitle">Nuestras redes 🌿</p>
 
-  <h2>Seguinos y contactanos</h2>
+        <h2>Seguinos y contactanos</h2>
 
-  <p className="footer-text">
-    Encontranos en nuestras redes y escribinos cuando quieras.
-  </p>
+        <p className="footer-text">
+          Encontranos en nuestras redes y escribinos cuando quieras.
+        </p>
 
-  <div className="social-grid">
-    <a
-      href="https://mail.google.com/mail/?view=cm&fs=1&to=harmonia.aromas1@gmail.com"
-      className="social-card"
-    >
-      <FaEnvelope className="social-icon email-icon" />
+        <div className="social-grid">
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=harmonia.aromas1@gmail.com"
+            className="social-card"
+          >
+            <FaEnvelope className="social-icon email-icon" />
 
-      <h3>Email</h3>
+            <h3>Email</h3>
 
-      <p>Escribinos</p>
-    </a>
+            <p>Escribinos</p>
+          </a>
 
-    <a
-      href="https://instagram.com/harmonia_aromass"
-      target="_blank"
-      rel="noreferrer"
-      className="social-card"
-    >
-      <FaInstagram className="social-icon instagram-icon" />
+          <a
+            href="https://instagram.com/harmonia_aromass"
+            target="_blank"
+            rel="noreferrer"
+            className="social-card"
+          >
+            <FaInstagram className="social-icon instagram-icon" />
 
-      <h3>Instagram</h3>
+            <h3>Instagram</h3>
 
-      <p>@harmonia_aromass</p>
-    </a>
+            <p>@harmonia_aromass</p>
+          </a>
 
-    <a
-      href="https://wa.me/5493465659024"
-      target="_blank"
-      rel="noreferrer"
-      className="social-card"
-    >
-      <FaWhatsapp className="social-icon whatsapp-icon" />
+          <a
+            href="https://wa.me/5493465659024"
+            target="_blank"
+            rel="noreferrer"
+            className="social-card"
+          >
+            <FaWhatsapp className="social-icon whatsapp-icon" />
 
-      <h3>WhatsApp</h3>
+            <h3>WhatsApp</h3>
 
-      <p>Escribinos</p>
-    </a>
+            <p>Escribinos</p>
+          </a>
 
-    <a
-      href="https://www.tiktok.com/@harmonia.aromas2"
-      target="_blank"
-      rel="noreferrer"
-      className="social-card"
-    >
-      <FaTiktok className="social-icon tiktok-icon" />
+          <a
+            href="https://www.tiktok.com/@harmonia.aromas2"
+            target="_blank"
+            rel="noreferrer"
+            className="social-card"
+          >
+            <FaTiktok className="social-icon tiktok-icon" />
 
-      <h3>TikTok</h3>
+            <h3>TikTok</h3>
 
-      <p>@harmonia.aromas2</p>
-    </a>
-  </div>
+            <p>@harmonia.aromas2</p>
+          </a>
+        </div>
 
-  <div className="footer-divider">
-    <span>🤎</span>
-  </div>
+        <div className="footer-divider">
+          <span>🤎</span>
+        </div>
 
-  <p className="footer-copy">
-    © 2026 Harmonia Aromas · Hecho con 🤎
-  </p>
-</footer>
+        <p className="footer-copy">© 2026 Harmonia Aromas · Hecho con 🤎</p>
+      </footer>
 
       {selectedProduct && (
         <ProductModal

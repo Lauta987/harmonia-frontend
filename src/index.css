@@ -1313,3 +1313,43 @@ body {
     align-items: flex-start;
   }
 } 
+.shipping-banner {
+  background: #fffaf4;
+  padding: 28px 20px;
+}
+
+.shipping-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid #e7d8ca;
+  border-radius: 24px;
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 12px 30px rgba(92, 64, 39, 0.08);
+}
+
+.shipping-icon {
+  font-size: 2.5rem;
+}
+
+.shipping-content h3 {
+  margin: 0 0 8px;
+  color: #2f2a22;
+  font-size: 1.3rem;
+}
+
+.shipping-content p {
+  margin: 0;
+  color: #675b4d;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .shipping-content {
+    flex-direction: column;
+    text-align: center;
+  }
+} 
