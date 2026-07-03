@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -36,7 +37,6 @@ function AdminLogin() {
       }
 
       localStorage.setItem("token", data.token);
-
       navigate("/admin");
     } catch (error) {
       setError("Error al iniciar sesión");
@@ -44,42 +44,33 @@ function AdminLogin() {
   };
 
   return (
-    <div className="admin-login-container">
-      <form
-        className="admin-login-form"
-        onSubmit={handleSubmit}
-      >
+    <div className="admin-login-page">
+      <form className="admin-login-card" onSubmit={handleSubmit}>
+        <img src={logo} alt="Harmonia Aromas" className="admin-login-logo" />
+
         <h1>Panel de Administración</h1>
 
-        {error && (
-          <p className="admin-error">
-            {error}
-          </p>
-        )}
+        <p>Iniciá sesión para gestionar Harmonia Aromas</p>
 
-        <label>Email</label>
+        {error && <p className="admin-error">{error}</p>}
+
         <input
           type="email"
+          placeholder="Email"
           value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        <label>Contraseña</label>
         <input
           type="password"
+          placeholder="Contraseña"
           value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        <button type="submit">
-          Ingresar
-        </button>
+        <button type="submit">Ingresar</button>
       </form>
     </div>
   );
