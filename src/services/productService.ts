@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:4000/api/products";
+const API_URL = "https://harmonia-backend-4uu0.onrender.com/api/products";
 
 export const getProducts = async () => {
   const response = await fetch(API_URL);

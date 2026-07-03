@@ -121,7 +121,7 @@ function App() {
   const getProductImages = (product: Product) => {
   if (product.images && product.images.length > 0) {
     return product.images.map(
-      (image) => `http://localhost:4000${image}`
+      (image) => `https://harmonia-backend-4uu0.onrender.com${image}`
     );
   }
 

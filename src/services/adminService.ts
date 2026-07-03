@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:4000/api/admin";
+const API_URL = "https://harmonia-backend-4uu0.onrender.com/api/admin";
 
 export const loginAdmin = async (
   username: string,
