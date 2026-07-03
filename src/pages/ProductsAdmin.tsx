@@ -32,18 +32,18 @@ function ProductsAdmin() {
   };
 
   const handleToggleAvailable = async (id: string, available: boolean) => {
-    await updateProduct(id, {
-      available: !available
-    });
+    const formData = new FormData();
+    formData.append("available", String(!available));
 
+    await updateProduct(id, formData);
     fetchProducts();
   };
 
   const handleToggleFeatured = async (id: string, featured: boolean) => {
-    await updateProduct(id, {
-      featured: !featured
-    });
+    const formData = new FormData();
+    formData.append("featured", String(!featured));
 
+    await updateProduct(id, formData);
     fetchProducts();
   };
 
@@ -81,11 +81,19 @@ function ProductsAdmin() {
                   <td>{product.name}</td>
 
                   <td>
-                    $ {(product.unitPrice || product.price || 0).toLocaleString("es-AR")}
+                    ${" "}
+                    {(product.unitPrice || product.price || 0).toLocaleString(
+                      "es-AR"
+                    )}
                   </td>
 
                   <td>
-                    $ {(product.wholesalePrice || product.price || 0).toLocaleString("es-AR")}
+                    ${" "}
+                    {(
+                      product.wholesalePrice ||
+                      product.price ||
+                      0
+                    ).toLocaleString("es-AR")}
                   </td>
 
                   <td>{product.wholesaleMinQuantity} unidades</td>
