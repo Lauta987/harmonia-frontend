@@ -1,81 +1,80 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginAdmin } from "../services/adminService";
-import logo from "../assets/logo.png";
 
 function AdminLogin() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (
-    e: React.FormEvent
+    e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
 
     try {
-      const data = await loginAdmin(
-        username,
-        password
+      const response = await fetch(
+        "https://harmonia-backend-4uu0.onrender.com/api/admin/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            password
+          })
+        }
       );
 
-      localStorage.setItem(
-        "token",
-        data.token
-      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Credenciales incorrectas");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
 
       navigate("/admin");
-    } catch (err: any) {
-      setError(
-        err.message ||
-          "Error al iniciar sesión"
-      );
+    } catch (error) {
+      setError("Error al iniciar sesión");
     }
   };
 
   return (
-    <div className="admin-login-page">
+    <div className="admin-login-container">
       <form
-        className="admin-login-card"
+        className="admin-login-form"
         onSubmit={handleSubmit}
       >
-        <img
-          src={logo}
-          alt="Harmonia Aromas" 
-          className="admin-login-logo"
-        />
-
         <h1>Panel de Administración</h1>
 
-        <p>
-          Iniciá sesión para gestionar
-          Harmonia Aromas
-        </p>
-
         {error && (
-          <div className="admin-error">
+          <p className="admin-error">
             {error}
-          </div>
+          </p>
         )}
 
+        <label>Email</label>
         <input
-          type="text"
-          placeholder="Usuario"
-          value={username}
+          type="email"
+          value={email}
           onChange={(e) =>
-            setUsername(e.target.value)
+            setEmail(e.target.value)
           }
+          required
         />
 
+        <label>Contraseña</label>
         <input
           type="password"
-          placeholder="Contraseña"
           value={password}
           onChange={(e) =>
             setPassword(e.target.value)
           }
+          required
         />
 
         <button type="submit">
