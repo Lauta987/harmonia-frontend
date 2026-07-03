@@ -5,7 +5,7 @@ import logo from "../assets/logo.png";
 function AdminLogin() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -23,7 +23,7 @@ function AdminLogin() {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            email,
+            username,
             password
           })
         }
@@ -32,7 +32,7 @@ function AdminLogin() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || "Credenciales incorrectas");
+        setError(data.message || "Usuario o contraseña incorrectos");
         return;
       }
 
@@ -55,10 +55,10 @@ function AdminLogin() {
         {error && <p className="admin-error">{error}</p>}
 
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          placeholder="Usuario"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
 
