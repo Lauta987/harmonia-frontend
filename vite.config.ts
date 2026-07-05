@@ -10,10 +10,12 @@ export default defineConfig({
       registerType: "autoUpdate",
 
       manifest: {
+        id: "/admin/login",
         name: "Harmonia Admin",
         short_name: "Harmonia",
         description: "Panel de administración de Harmonia Aromas",
 
+        lang: "es",
         theme_color: "#66713b",
         background_color: "#fffaf4",
 
@@ -21,6 +23,7 @@ export default defineConfig({
         orientation: "portrait",
 
         start_url: "/admin/login",
+        scope: "/",
 
         icons: [
           {
