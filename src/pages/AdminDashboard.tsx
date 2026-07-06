@@ -1,4 +1,11 @@
 import { useEffect, useState } from "react";
+import {
+  Package,
+  CircleCheck,
+  EyeOff,
+  Star,
+  Leaf
+} from "lucide-react";
 import AdminSidebar from "../components/AdminSidebar";
 import type { Product } from "../types/Product";
 import { getProductsAdmin } from "../services/productService";
@@ -30,7 +37,9 @@ function AdminDashboard() {
         <section className="admin-dashboard-hero">
           <div>
             <p>Panel de administración</p>
+
             <h1>Resumen de Harmonia</h1>
+
             <span>
               Gestioná productos, destacados y disponibilidad desde un solo
               lugar.
@@ -38,14 +47,17 @@ function AdminDashboard() {
           </div>
 
           <div className="admin-dashboard-badge">
-            <span>🌿</span>
+            <Leaf size={18} strokeWidth={2.2} />
             Harmonia Aromas
           </div>
         </section>
 
         <section className="admin-stats-grid">
           <article className="admin-stat-card">
-            <div className="admin-stat-icon">🕯️</div>
+            <div className="admin-stat-icon">
+              <Package size={24} strokeWidth={2.2} />
+            </div>
+
             <div>
               <p>Total productos</p>
               <h2>{totalProducts}</h2>
@@ -53,7 +65,10 @@ function AdminDashboard() {
           </article>
 
           <article className="admin-stat-card">
-            <div className="admin-stat-icon">✅</div>
+            <div className="admin-stat-icon">
+              <CircleCheck size={24} strokeWidth={2.2} />
+            </div>
+
             <div>
               <p>Productos activos</p>
               <h2>{activeProducts}</h2>
@@ -61,7 +76,10 @@ function AdminDashboard() {
           </article>
 
           <article className="admin-stat-card">
-            <div className="admin-stat-icon">🙈</div>
+            <div className="admin-stat-icon">
+              <EyeOff size={24} strokeWidth={2.2} />
+            </div>
+
             <div>
               <p>Productos ocultos</p>
               <h2>{hiddenProducts}</h2>
@@ -69,7 +87,10 @@ function AdminDashboard() {
           </article>
 
           <article className="admin-stat-card">
-            <div className="admin-stat-icon">⭐</div>
+            <div className="admin-stat-icon">
+              <Star size={24} strokeWidth={2.2} />
+            </div>
+
             <div>
               <p>Destacados</p>
               <h2>{featuredProducts}</h2>
@@ -95,6 +116,7 @@ function AdminDashboard() {
                 <article key={product._id} className="admin-recent-item">
                   <div>
                     <h4>{product.name}</h4>
+
                     <p>
                       ${" "}
                       {(product.unitPrice || product.price || 0).toLocaleString(

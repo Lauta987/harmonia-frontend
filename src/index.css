@@ -2417,3 +2417,64 @@ body {
     grid-template-columns: 1fr;
   }
 } 
+/* ========================= */
+/*   ADMIN DARK GREEN TONE   */
+/* ========================= */
+
+.admin-sidebar {
+  background: linear-gradient(180deg, #1f2a18 0%, #2f3b22 100%);
+}
+
+.admin-sidebar-nav a:hover,
+.admin-sidebar-nav .admin-nav-active {
+  background: #f8f1e8;
+  color: #1f2a18;
+}
+
+.admin-dashboard-badge {
+  background: #2f3b22;
+  color: #fffaf4;
+  box-shadow: 0 12px 28px rgba(31, 42, 24, 0.25);
+}
+
+.admin-stat-icon {
+  background: #e8eddf;
+  color: #2f3b22;
+}
+
+.admin-panel-header p,
+.admin-dashboard-hero p {
+  color: #2f3b22;
+}
+
+.admin-pill-active {
+  background: #e8eddf;
+  color: #2f3b22;
+}
+
+.admin-create-button,
+.admin-form button,
+.admin-featured-button {
+  background: #2f3b22;
+}
+
+.admin-create-button:hover,
+.admin-form button:hover,
+.admin-featured-button:hover {
+  background: #1f2a18;
+} 
+.admin-sidebar-nav a svg,
+.admin-sidebar-footer button svg,
+.admin-sidebar-status svg,
+.admin-dashboard-badge svg,
+.admin-stat-icon svg {
+  flex-shrink: 0;
+}
+
+.admin-sidebar-status {
+  color: #e8d9c8;
+}
+
+.admin-sidebar-status svg {
+  color: #9fca86;
+} 

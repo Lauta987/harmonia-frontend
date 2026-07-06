@@ -1,4 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Package,
+  LogOut,
+  CircleCheck
+} from "lucide-react";
 import logo from "../assets/logo.png";
 
 function AdminSidebar() {
@@ -16,45 +22,47 @@ function AdminSidebar() {
 
   return (
     <aside className="admin-sidebar">
-      <div className="admin-sidebar-brand">
-        <img src={logo} alt="Harmonia Aromas" className="admin-sidebar-logo" />
+      <div>
+        <div className="admin-sidebar-brand">
+          <img src={logo} alt="Harmonia Aromas" className="admin-sidebar-logo" />
 
-        <div>
-          <h2>Harmonia</h2>
-          <p>Panel Admin</p>
+          <div>
+            <h2>Harmonia</h2>
+            <p>Panel Admin</p>
+          </div>
         </div>
+
+        <nav className="admin-sidebar-nav">
+          <Link
+            to="/admin"
+            className={isActive("/admin") ? "admin-nav-active" : ""}
+          >
+            <LayoutDashboard size={19} strokeWidth={2} />
+            Dashboard
+          </Link>
+
+          <Link
+            to="/admin/products"
+            className={
+              location.pathname.includes("/admin/products")
+                ? "admin-nav-active"
+                : ""
+            }
+          >
+            <Package size={19} strokeWidth={2} />
+            Productos
+          </Link>
+        </nav>
       </div>
-
-      <nav className="admin-sidebar-nav">
-        <Link
-          to="/admin"
-          className={isActive("/admin") ? "admin-nav-active" : ""}
-        >
-          <span>📊</span>
-          Dashboard
-        </Link>
-
-        <Link
-          to="/admin/products"
-          className={
-            location.pathname.includes("/admin/products")
-              ? "admin-nav-active"
-              : ""
-          }
-        >
-          <span>🕯️</span>
-          Productos
-        </Link>
-      </nav>
 
       <div className="admin-sidebar-footer">
         <div className="admin-sidebar-status">
-          <span></span>
+          <CircleCheck size={16} strokeWidth={2.3} />
           Sistema activo
         </div>
 
         <button type="button" onClick={handleLogout}>
-          <span>↩</span>
+          <LogOut size={18} strokeWidth={2} />
           Cerrar sesión
         </button>
       </div>
