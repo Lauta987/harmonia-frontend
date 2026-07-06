@@ -1367,6 +1367,10 @@ body {
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(232, 217, 200, 0.8);
   box-shadow: 0 8px 30px rgba(47, 42, 34, 0.04);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .brand-logo {
