@@ -33,14 +33,17 @@ function ProductsAdmin() {
   }, []);
 
   const getProductImage = (product: Product) => {
-    if (!product.images || product.images.length === 0) return "";
+  const image =
+    product.images && product.images.length > 0
+      ? product.images[0]
+      : product.imageUrl;
 
-    const image = product.images[0];
+  if (!image) return "";
 
-    if (image.startsWith("http")) return image;
+  if (image.startsWith("http")) return image;
 
-    return `${API_BASE_URL}${image}`;
-  };
+  return `${API_BASE_URL}${image}`;
+}; 
 
   const handleDelete = async (id: string, name: string) => {
     const confirmDelete = window.confirm(

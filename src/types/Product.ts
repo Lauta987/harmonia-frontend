@@ -10,6 +10,7 @@ export interface Product {
   wholesaleMinQuantity: number;
 
   images: string[];
+  imageUrl?: string;
 
   available: boolean;
   featured: boolean;
