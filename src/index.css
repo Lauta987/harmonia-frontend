@@ -2528,4 +2528,48 @@ button {
     text-align: center;
   }
 }
- 
+ .admin-chart-wrapper {
+  width: 100%;
+  height: 280px;
+  margin-top: 10px;
+}
+
+.admin-top-products {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-top-product-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid #e7dacd;
+  border-radius: 18px;
+  background: #fffdf9;
+}
+
+.admin-top-product-rank {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #2f4f3f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.admin-top-product-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #2f2a22;
+}
+
+.admin-top-product-info p {
+  margin: 4px 0 0;
+  color: #6d6257;
+  font-size: 0.95rem;
+} 

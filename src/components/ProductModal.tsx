@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Product } from "../types/Product";
+import { registerInquiry } from "../services/inquiryService";
 
 interface ProductModalProps {
   product: Product;
@@ -10,18 +11,26 @@ interface ProductModalProps {
 function ProductModal({ product, images, onClose }: ProductModalProps) {
   const [currentImage, setCurrentImage] = useState(0);
 
-  const whatsappMessage = `¡Hola! 😊 Me interesa la ${product.name} que vi en la página de Harmonia Aromas. ¿Podrían brindarme más información?`;
-
-  const whatsappUrl = `https://wa.me/5493465659024?text=${encodeURIComponent(
-    whatsappMessage
-  )}`;
-
   const nextImage = () => {
     setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   const previousImage = () => {
     setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handleWhatsAppClick = () => {
+    registerInquiry(product._id, product.name).catch(() => {
+      console.error("No se pudo registrar la consulta");
+    });
+
+    const message = `¡Hola! 😊 Me interesa la ${product.name} que vi en la página de Harmonia Aromas. ¿Podrían brindarme más información?`;
+
+    const whatsappUrl = `https://wa.me/5493465659024?text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -69,19 +78,20 @@ function ProductModal({ product, images, onClose }: ProductModalProps) {
 
             <div className="modal-price-box">
               <span>Precio mayorista</span>
-              <strong>$ {product.wholesalePrice.toLocaleString("es-AR")}</strong>
+              <strong>
+                $ {product.wholesalePrice.toLocaleString("es-AR")}
+              </strong>
               <small>desde {product.wholesaleMinQuantity} unidades</small>
             </div>
           </div>
 
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
             className="whatsapp-button"
+            onClick={handleWhatsAppClick}
           >
             Pedir por WhatsApp
-          </a>
+          </button>
         </div>
       </div>
     </div>
