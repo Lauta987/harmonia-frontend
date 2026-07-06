@@ -101,6 +101,7 @@ function App() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
   const [selectedAromaCategory, setSelectedAromaCategory] = useState<{
     title: string;
     aromas: string[];
@@ -133,7 +134,11 @@ function App() {
   return (
     <main className="app">
       <nav className="navbar">
-  <a href="#inicio" className="brand-logo">
+  <a
+    href="#inicio"
+    className="brand-logo"
+    onClick={() => setIsMobileMenuOpen(false)}
+  >
     <img src={logo} alt="Harmonia Aromas" className="brand-logo-img" />
 
     <div className="brand-logo-text">
@@ -142,12 +147,37 @@ function App() {
     </div>
   </a>
 
-  <div className="nav-links">
-    <a href="#inicio">Inicio</a>
-    <a href="#destacados">Destacados</a>
-    <a href="#catalogo">Catálogo</a>
-    <a href="#aromas">Aromas</a>
-    <a href="#contacto">Contacto</a>
+  <button
+    type="button"
+    className="mobile-menu-button"
+    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+    aria-label="Abrir menú"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div className={`nav-links ${isMobileMenuOpen ? "nav-links-open" : ""}`}>
+    <a href="#inicio" onClick={() => setIsMobileMenuOpen(false)}>
+      Inicio
+    </a>
+
+    <a href="#destacados" onClick={() => setIsMobileMenuOpen(false)}>
+      Destacados
+    </a>
+
+    <a href="#catalogo" onClick={() => setIsMobileMenuOpen(false)}>
+      Catálogo
+    </a>
+
+    <a href="#aromas" onClick={() => setIsMobileMenuOpen(false)}>
+      Aromas
+    </a>
+
+    <a href="#contacto" onClick={() => setIsMobileMenuOpen(false)}>
+      Contacto
+    </a>
   </div>
 
   <a
@@ -353,8 +383,17 @@ function App() {
           onClose={() => setSelectedAromaCategory(null)}
         />
       )}
+      <a
+       href="https://wa.me/5493465659024"
+       target="_blank"
+       rel="noreferrer"
+       className="floating-whatsapp"
+       aria-label="Contactar por WhatsApp"
+      > 
+      <FaWhatsapp />
+</a>
     </main>
-  );
+  ); 
 }
 
 export default App; 
