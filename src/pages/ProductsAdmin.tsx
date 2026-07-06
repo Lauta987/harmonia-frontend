@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Plus,
+  Pencil,
+  Star,
+  Eye,
+  EyeOff,
+  Trash2,
+  Package
+} from "lucide-react";
 import type { Product } from "../types/Product";
 import {
   getProductsAdmin,
@@ -7,6 +16,9 @@ import {
   updateProduct
 } from "../services/productService";
 import AdminSidebar from "../components/AdminSidebar";
+import AdminMobileNav from "../components/AdminMobileNav";
+
+const API_BASE_URL = "https://harmonia-backend-4uu0.onrender.com";
 
 function ProductsAdmin() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -19,6 +31,16 @@ function ProductsAdmin() {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const getProductImage = (product: Product) => {
+    if (!product.images || product.images.length === 0) return "";
+
+    const image = product.images[0];
+
+    if (image.startsWith("http")) return image;
+
+    return `${API_BASE_URL}${image}`;
+  };
 
   const handleDelete = async (id: string, name: string) => {
     const confirmDelete = window.confirm(
@@ -51,15 +73,140 @@ function ProductsAdmin() {
     <div className="admin-layout">
       <AdminSidebar />
 
-      <main className="admin-content">
+      <main className="admin-content admin-products-page">
+        <section className="admin-products-mobile-hero">
+          <div>
+            <p>Gestión</p>
+            <h1>Productos</h1>
+            <span>Administrá tus velas desde el celular.</span>
+          </div>
+
+          <Link to="/admin/products/create" className="admin-mobile-add-button">
+            <Plus size={18} strokeWidth={2.2} />
+            Nueva vela
+          </Link>
+        </section>
+
         <div className="admin-header">
-          <p>Gestión</p>
-          <h1>Productos</h1>
+          <div>
+            <p>Gestión</p>
+            <h1>Productos</h1>
+          </div>
 
           <Link to="/admin/products/create" className="admin-create-button">
             + Nueva vela
           </Link>
         </div>
+
+        <section className="admin-products-mobile-list">
+          {products.map((product) => {
+            const image = getProductImage(product);
+
+            return (
+              <article key={product._id} className="admin-product-mobile-card">
+                <div className="admin-product-mobile-top">
+                  <div className="admin-product-mobile-image">
+                    {image ? (
+                      <img src={image} alt={product.name} />
+                    ) : (
+                      <Package size={28} strokeWidth={2.1} />
+                    )}
+                  </div>
+
+                  <div className="admin-product-mobile-info">
+                    <div className="admin-product-mobile-title">
+                      <h3>{product.name}</h3>
+
+                      <span
+                        className={
+                          product.available
+                            ? "admin-pill-active"
+                            : "admin-pill-hidden"
+                        }
+                      >
+                        {product.available ? "Activo" : "Oculto"}
+                      </span>
+                    </div>
+
+                    <p>
+                      ${" "}
+                      {(product.unitPrice || product.price || 0).toLocaleString(
+                        "es-AR"
+                      )}
+                    </p>
+
+                    <small>
+                      Mayorista ${" "}
+                      {(
+                        product.wholesalePrice ||
+                        product.price ||
+                        0
+                      ).toLocaleString("es-AR")}{" "}
+                      · desde {product.wholesaleMinQuantity || 10} unidades
+                    </small>
+                  </div>
+                </div>
+
+                <div className="admin-product-mobile-meta">
+                  <span>
+                    <Star size={14} strokeWidth={2.2} />
+                    {product.featured ? "Destacado" : "Sin destacar"}
+                  </span>
+
+                  <span>
+                    <Package size={14} strokeWidth={2.2} />
+                    {product.wholesaleMinQuantity || 10} mín.
+                  </span>
+                </div>
+
+                <div className="admin-product-mobile-actions">
+                  <Link
+                    to={`/admin/products/edit/${product._id}`}
+                    className="admin-mobile-action edit"
+                  >
+                    <Pencil size={16} strokeWidth={2.2} />
+                    Editar
+                  </Link>
+
+                  <button
+                    type="button"
+                    className="admin-mobile-action featured"
+                    onClick={() =>
+                      handleToggleFeatured(product._id, product.featured)
+                    }
+                  >
+                    <Star size={16} strokeWidth={2.2} />
+                    {product.featured ? "Quitar" : "Destacar"}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="admin-mobile-action visibility"
+                    onClick={() =>
+                      handleToggleAvailable(product._id, product.available)
+                    }
+                  >
+                    {product.available ? (
+                      <EyeOff size={16} strokeWidth={2.2} />
+                    ) : (
+                      <Eye size={16} strokeWidth={2.2} />
+                    )}
+                    {product.available ? "Ocultar" : "Activar"}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="admin-mobile-action delete"
+                    onClick={() => handleDelete(product._id, product.name)}
+                  >
+                    <Trash2 size={16} strokeWidth={2.2} />
+                    Eliminar
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </section>
 
         <div className="admin-table-card">
           <table className="admin-table">
@@ -137,9 +284,7 @@ function ProductsAdmin() {
 
                       <button
                         className="admin-delete-button"
-                        onClick={() =>
-                          handleDelete(product._id, product.name)
-                        }
+                        onClick={() => handleDelete(product._id, product.name)}
                       >
                         Eliminar
                       </button>
@@ -151,6 +296,8 @@ function ProductsAdmin() {
           </table>
         </div>
       </main>
+
+      <AdminMobileNav />
     </div>
   );
 }
