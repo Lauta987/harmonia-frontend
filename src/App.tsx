@@ -188,20 +188,34 @@ function App() {
         </div>
       </section>
 
-      <section className="shipping-banner">
-        <div className="shipping-content">
-          <span className="shipping-icon">🚚</span>
+<section className="trust-section">
+  <div className="trust-grid">
+    <article className="trust-card">
+      <span>🌿</span>
+      <h3>Cera de soja</h3>
+      <p>Velas elaboradas con materiales seleccionados y aromas cuidadosamente elegidos.</p>
+    </article>
 
-          <div>
-            <h3>Envíos a toda Argentina</h3>
-            <p>
-              Empaquetamos cada vela con cuidado para que llegue en perfectas
-              condiciones a tu hogar.
-            </p>
-          </div>
-        </div> 
-      </section>
+    <article className="trust-card">
+      <span>🤎</span>
+      <h3>Hechas a mano</h3>
+      <p>Cada pieza se realiza con dedicación, detalle y una terminación única.</p>
+    </article>
 
+    <article className="trust-card">
+      <span>🚚</span>
+      <h3>Envíos a todo el país</h3>
+      <p>Preparamos cada pedido con cuidado para que llegue en perfectas condiciones.</p>
+    </article>
+
+    <article className="trust-card">
+      <span>🏷️</span>
+      <h3>Venta mayorista</h3>
+      <p>Opciones ideales para souvenirs, eventos, regalos empresariales y reventa.</p>
+    </article>
+  </div>
+</section> 
+ 
       <section id="destacados" className="section">
         <p className="section-subtitle">Nuestros favoritos</p>
         <h2>Productos destacados</h2>
