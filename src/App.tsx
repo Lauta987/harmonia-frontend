@@ -119,14 +119,16 @@ function App() {
   }, []);
 
   const getProductImages = (product: Product) => {
-    if (product.images && product.images.length > 0) {
-      return product.images.map(
-        (image) => `https://harmonia-backend-4uu0.onrender.com${image}`
-      );
-    }
+  if (product.images && product.images.length > 0) {
+    return product.images.map((image) => {
+      if (image.startsWith("http")) return image;
 
-    return productImages[product.name] || [VelaOsito1, VelaOsito2, VelaOsito3];
-  };
+      return `https://harmonia-backend-4uu0.onrender.com${image}`;
+    });
+  }
+
+  return productImages[product.name] || [VelaOsito1, VelaOsito2, VelaOsito3];
+}; 
 
   return (
     <main className="app">
