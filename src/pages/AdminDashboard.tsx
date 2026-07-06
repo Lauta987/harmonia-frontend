@@ -4,11 +4,17 @@ import {
   CircleCheck,
   EyeOff,
   Star,
-  Leaf
+  Leaf,
+  Plus,
+  Box,
+  BarChart3,
+  ChevronRight
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import AdminSidebar from "../components/AdminSidebar";
 import type { Product } from "../types/Product";
 import { getProductsAdmin } from "../services/productService";
+import AdminMobileNav from "../components/AdminMobileNav"; 
 
 function AdminDashboard() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -34,6 +40,21 @@ function AdminDashboard() {
       <AdminSidebar />
 
       <main className="admin-content admin-dashboard">
+        <section className="admin-mobile-hero">
+          <div className="admin-mobile-brand">
+            <Leaf size={20} strokeWidth={2.2} />
+            <div>
+              <h2>Harmonia</h2>
+              <p>Panel Admin</p>
+            </div>
+          </div>
+
+          <div className="admin-mobile-hello">
+            <h1>Hola, Admin</h1>
+            <p>Todo en armonía ✨</p>
+          </div>
+        </section>
+
         <section className="admin-dashboard-hero">
           <div>
             <p>Panel de administración</p>
@@ -52,7 +73,7 @@ function AdminDashboard() {
           </div>
         </section>
 
-        <section className="admin-stats-grid">
+        <section className="admin-stats-grid admin-mobile-stats">
           <article className="admin-stat-card">
             <div className="admin-stat-icon">
               <Package size={24} strokeWidth={2.2} />
@@ -70,7 +91,7 @@ function AdminDashboard() {
             </div>
 
             <div>
-              <p>Productos activos</p>
+              <p>Activos</p>
               <h2>{activeProducts}</h2>
             </div>
           </article>
@@ -81,7 +102,7 @@ function AdminDashboard() {
             </div>
 
             <div>
-              <p>Productos ocultos</p>
+              <p>Ocultos</p>
               <h2>{hiddenProducts}</h2>
             </div>
           </article>
@@ -98,13 +119,48 @@ function AdminDashboard() {
           </article>
         </section>
 
+        <section className="admin-mobile-quick-actions">
+          <div className="admin-panel-header">
+            <div>
+              <p>Accesos rápidos</p>
+              <h3>Gestioná tu tienda</h3>
+            </div>
+          </div>
+
+          <div className="admin-quick-grid">
+            <Link to="/admin/products/create" className="admin-quick-card primary">
+              <Plus size={22} strokeWidth={2.2} />
+              <span>Nueva vela</span>
+            </Link>
+
+            <Link to="/admin/products" className="admin-quick-card">
+              <Box size={22} strokeWidth={2.2} />
+              <span>Productos</span>
+            </Link>
+
+            <Link to="/admin/products" className="admin-quick-card">
+              <Star size={22} strokeWidth={2.2} />
+              <span>Destacar</span>
+            </Link>
+
+            <Link to="/admin/products" className="admin-quick-card">
+              <BarChart3 size={22} strokeWidth={2.2} />
+              <span>Resumen</span>
+            </Link>
+          </div>
+        </section>
+
         <section className="admin-dashboard-grid">
           <div className="admin-dashboard-panel">
-            <div className="admin-panel-header">
+            <div className="admin-panel-header admin-panel-header-row">
               <div>
                 <p>Últimos movimientos</p>
                 <h3>Productos recientes</h3>
               </div>
+
+              <Link to="/admin/products" className="admin-see-all">
+                Ver todos
+              </Link>
             </div>
 
             <div className="admin-recent-list">
@@ -125,15 +181,19 @@ function AdminDashboard() {
                     </p>
                   </div>
 
-                  <span
-                    className={
-                      product.available
-                        ? "admin-pill-active"
-                        : "admin-pill-hidden"
-                    }
-                  >
-                    {product.available ? "Activo" : "Oculto"}
-                  </span>
+                  <div className="admin-recent-right">
+                    <span
+                      className={
+                        product.available
+                          ? "admin-pill-active"
+                          : "admin-pill-hidden"
+                      }
+                    >
+                      {product.available ? "Activo" : "Oculto"}
+                    </span>
+
+                    <ChevronRight size={18} strokeWidth={2.2} />
+                  </div>
                 </article>
               ))}
             </div>
@@ -156,6 +216,7 @@ function AdminDashboard() {
           </div>
         </section>
       </main>
+      <AdminMobileNav /> 
     </div>
   );
 }
