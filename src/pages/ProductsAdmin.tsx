@@ -17,8 +17,24 @@ import {
 } from "../services/productService";
 import AdminSidebar from "../components/AdminSidebar";
 import AdminMobileNav from "../components/AdminMobileNav";
+import VelaOsito1 from "../assets/VelaOsito1.png";
+import VelaMacarron1 from "../assets/VelaMacarron1.png";
+import VelaFrutilla1 from "../assets/VelaFrutilla1.png";
+import VelaMinicircul1 from "../assets/VelaMinicircul1.png";
+import VelaReluciente1 from "../assets/VelaReluciente1.png";
+import VelaSol1 from "../assets/VelaSol1.png";
+import VelaRusticaCorazon1 from "../assets/VelaRusticaCorazon1.png";
 
 const API_BASE_URL = "https://harmonia-backend-4uu0.onrender.com";
+const productFallbackImages: Record<string, string> = {
+  "Vela Osito": VelaOsito1,
+  "Vela Macarron": VelaMacarron1,
+  "Vela Frutilla": VelaFrutilla1,
+  "Vela Minicircul": VelaMinicircul1,
+  "Vela Reluciente": VelaReluciente1,
+  "Vela Sol": VelaSol1,
+  "Vela Rústica Corazon": VelaRusticaCorazon1
+}; 
 
 function ProductsAdmin() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -38,11 +54,27 @@ function ProductsAdmin() {
       ? product.images[0]
       : product.imageUrl;
 
-  if (!image) return "";
+  const fallbackImage = productFallbackImages[product.name] || "";
 
-  if (image.startsWith("http")) return image;
+  if (!image) return fallbackImage;
 
-  return `${API_BASE_URL}${image}`;
+  if (image.includes("mis-imagenes")) {
+    return fallbackImage;
+  }
+
+  if (image.startsWith("https://res.cloudinary.com")) {
+    return image;
+  }
+
+  if (image.startsWith("/uploads")) {
+    return `${API_BASE_URL}${image}`;
+  }
+
+  if (image.startsWith("http")) {
+    return image;
+  }
+
+  return fallbackImage;
 }; 
 
   const handleDelete = async (id: string, name: string) => {
