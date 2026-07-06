@@ -133,18 +133,32 @@ function App() {
   return (
     <main className="app">
       <nav className="navbar">
-        <div className="logo">
-          <img src={logo} alt="Harmonia Aromas" className="navbar-logo" />
-        </div>
+  <a href="#inicio" className="brand-logo">
+    <img src={logo} alt="Harmonia Aromas" className="brand-logo-img" />
 
-        <div className="nav-links">
-          <a href="#inicio">Inicio</a>
-          <a href="#destacados">Destacados</a>
-          <a href="#catalogo">Catálogo</a>
-          <a href="#aromas">Aromas</a>
-          <a href="#contacto">Contacto</a>
-        </div>
-      </nav>
+    <div className="brand-logo-text">
+      <span>HARMONIA</span>
+      <small>AROMAS</small>
+    </div>
+  </a>
+
+  <div className="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#destacados">Destacados</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#aromas">Aromas</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+
+  <a
+    href="https://wa.me/5493465659024"
+    target="_blank"
+    rel="noreferrer"
+    className="navbar-whatsapp"
+  >
+    Pedidos
+  </a>
+</nav> 
 
       <section id="inicio" className="hero">
         <div className="hero-text">
@@ -185,7 +199,7 @@ function App() {
               condiciones a tu hogar.
             </p>
           </div>
-        </div>
+        </div> 
       </section>
 
       <section id="destacados" className="section">
