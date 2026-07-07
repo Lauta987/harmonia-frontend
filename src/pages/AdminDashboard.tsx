@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import AdminSidebar from "../components/AdminSidebar";
-import type { Product } from "../types/Product";
-import { getProductsAdmin } from "../services/productService";
-import { getInquiryStats } from "../services/inquiryService";
+import { Link } from "react-router-dom";
 import {
   Package,
   CircleCheck,
   EyeOff,
   Star,
+  Leaf,
   MessageCircleMore,
-  Leaf
+  Plus,
+  Box,
+  BarChart3,
+  ChevronRight
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -20,6 +21,12 @@ import {
   CartesianGrid,
   Tooltip
 } from "recharts";
+
+import AdminSidebar from "../components/AdminSidebar";
+import AdminMobileNav from "../components/AdminMobileNav";
+import type { Product } from "../types/Product";
+import { getProductsAdmin } from "../services/productService";
+import { getInquiryStats } from "../services/inquiryService";
 
 interface InquiryStats {
   totalConsultas: number;
@@ -66,12 +73,31 @@ function AdminDashboard() {
       <AdminSidebar />
 
       <main className="admin-content admin-dashboard">
+        <section className="admin-mobile-hero">
+          <div className="admin-mobile-brand">
+            <Leaf size={20} strokeWidth={2.2} />
+
+            <div>
+              <h2>Harmonia</h2>
+              <p>Panel Admin</p>
+            </div>
+          </div>
+
+          <div className="admin-mobile-hello">
+            <h1>Hola, Admin</h1>
+            <p>Consultas y catálogo en tiempo real</p>
+          </div>
+        </section>
+
         <section className="admin-dashboard-hero">
           <div>
             <p>Panel de administración</p>
+
             <h1>Resumen de Harmonia</h1>
+
             <span>
-              Gestioná productos, disponibilidad y consultas desde un solo lugar.
+              Gestioná productos, disponibilidad y consultas desde un solo
+              lugar.
             </span>
           </div>
 
@@ -81,11 +107,12 @@ function AdminDashboard() {
           </div>
         </section>
 
-        <section className="admin-stats-grid">
+        <section className="admin-stats-grid admin-mobile-stats">
           <article className="admin-stat-card">
             <div className="admin-stat-icon">
-              <Package size={22} />
+              <Package size={24} strokeWidth={2.2} />
             </div>
+
             <div>
               <p>Total productos</p>
               <h2>{totalProducts}</h2>
@@ -94,46 +121,81 @@ function AdminDashboard() {
 
           <article className="admin-stat-card">
             <div className="admin-stat-icon">
-              <CircleCheck size={22} />
+              <CircleCheck size={24} strokeWidth={2.2} />
             </div>
+
             <div>
-              <p>Productos activos</p>
+              <p>Activos</p>
               <h2>{activeProducts}</h2>
             </div>
           </article>
 
           <article className="admin-stat-card">
             <div className="admin-stat-icon">
-              <EyeOff size={22} />
+              <EyeOff size={24} strokeWidth={2.2} />
             </div>
+
             <div>
-              <p>Productos ocultos</p>
+              <p>Ocultos</p>
               <h2>{hiddenProducts}</h2>
             </div>
           </article>
 
           <article className="admin-stat-card">
             <div className="admin-stat-icon">
-              <Star size={22} />
+              <Star size={24} strokeWidth={2.2} />
             </div>
+
             <div>
               <p>Destacados</p>
               <h2>{featuredProducts}</h2>
             </div>
           </article>
 
-          <article className="admin-stat-card">
+          <article className="admin-stat-card admin-consultas-card">
             <div className="admin-stat-icon">
-              <MessageCircleMore size={22} />
+              <MessageCircleMore size={24} strokeWidth={2.2} />
             </div>
+
             <div>
-              <p>Total consultas</p>
+              <p>Consultas</p>
               <h2>{inquiryStats.totalConsultas}</h2>
             </div>
           </article>
         </section>
 
-        <section className="admin-dashboard-grid">
+        <section className="admin-mobile-quick-actions">
+          <div className="admin-panel-header">
+            <div>
+              <p>Accesos rápidos</p>
+              <h3>Gestioná tu tienda</h3>
+            </div>
+          </div>
+
+          <div className="admin-quick-grid">
+            <Link to="/admin/products/create" className="admin-quick-card primary">
+              <Plus size={22} strokeWidth={2.2} />
+              <span>Nueva vela</span>
+            </Link>
+
+            <Link to="/admin/products" className="admin-quick-card">
+              <Box size={22} strokeWidth={2.2} />
+              <span>Productos</span>
+            </Link>
+
+            <Link to="/admin/products" className="admin-quick-card">
+              <Star size={22} strokeWidth={2.2} />
+              <span>Destacar</span>
+            </Link>
+
+            <Link to="/admin" className="admin-quick-card">
+              <BarChart3 size={22} strokeWidth={2.2} />
+              <span>Consultas</span>
+            </Link>
+          </div>
+        </section>
+
+        <section className="admin-dashboard-grid admin-consultas-grid">
           <div className="admin-dashboard-panel">
             <div className="admin-panel-header">
               <div>
@@ -143,7 +205,7 @@ function AdminDashboard() {
             </div>
 
             <div className="admin-chart-wrapper">
-              <ResponsiveContainer width="100%" height={280}>
+              <ResponsiveContainer width="100%" height={260}>
                 <BarChart data={inquiryStats.chartData}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="date" />
@@ -186,11 +248,15 @@ function AdminDashboard() {
 
         <section className="admin-dashboard-grid">
           <div className="admin-dashboard-panel">
-            <div className="admin-panel-header">
+            <div className="admin-panel-header admin-panel-header-row">
               <div>
                 <p>Últimos movimientos</p>
                 <h3>Productos recientes</h3>
               </div>
+
+              <Link to="/admin/products" className="admin-see-all">
+                Ver todos
+              </Link>
             </div>
 
             <div className="admin-recent-list">
@@ -202,30 +268,34 @@ function AdminDashboard() {
                 <article key={product._id} className="admin-recent-item">
                   <div>
                     <h4>{product.name}</h4>
+
                     <p>
-                      $
-                      {" "}
+                      ${" "}
                       {(product.unitPrice || product.price || 0).toLocaleString(
                         "es-AR"
                       )}
                     </p>
                   </div>
 
-                  <span
-                    className={
-                      product.available
-                        ? "admin-pill-active"
-                        : "admin-pill-hidden"
-                    }
-                  >
-                    {product.available ? "Activo" : "Oculto"}
-                  </span>
+                  <div className="admin-recent-right">
+                    <span
+                      className={
+                        product.available
+                          ? "admin-pill-active"
+                          : "admin-pill-hidden"
+                      }
+                    >
+                      {product.available ? "Activo" : "Oculto"}
+                    </span>
+
+                    <ChevronRight size={18} strokeWidth={2.2} />
+                  </div>
                 </article>
               ))}
             </div>
           </div>
 
-          <div className="admin-dashboard-panel">
+          <div className="admin-dashboard-panel admin-status-panel">
             <div className="admin-panel-header">
               <div>
                 <p>Lectura rápida</p>
@@ -242,8 +312,10 @@ function AdminDashboard() {
           </div>
         </section>
       </main>
+
+      <AdminMobileNav />
     </div>
   );
 }
 
-export default AdminDashboard;
+export default AdminDashboard; 

@@ -2573,3 +2573,107 @@ button {
   color: #6d6257;
   font-size: 0.95rem;
 } 
+/* ========================= */
+/*  FIX DASHBOARD MOBILE NEW */
+/* ========================= */
+
+.admin-chart-wrapper {
+  width: 100%;
+  height: 260px;
+  margin-top: 10px;
+}
+
+.admin-top-products {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-top-product-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid #e7dacd;
+  border-radius: 18px;
+  background: #fffdf9;
+}
+
+.admin-top-product-rank {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #2f3b22;
+  color: #fffaf4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.admin-top-product-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #2f2a22;
+}
+
+.admin-top-product-info p {
+  margin: 4px 0 0;
+  color: #6d6257;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 800px) {
+  .admin-consultas-card {
+    grid-column: span 4;
+    min-height: 92px !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 16px !important;
+  }
+
+  .admin-consultas-card .admin-stat-icon {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .admin-consultas-card .admin-stat-icon svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .admin-consultas-card h2 {
+    font-size: 1.7rem !important;
+  }
+
+  .admin-consultas-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .admin-chart-wrapper {
+    height: 220px;
+  }
+
+  .admin-chart-wrapper .recharts-wrapper,
+  .admin-chart-wrapper .recharts-surface {
+    max-width: 100%;
+  }
+
+  .admin-top-product-item {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .admin-top-product-rank {
+    width: 36px;
+    height: 36px;
+    font-size: 0.82rem;
+  }
+
+  .admin-status-panel {
+    display: none;
+  }
+} 
