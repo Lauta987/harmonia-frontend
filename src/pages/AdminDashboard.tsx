@@ -12,15 +12,6 @@ import {
   BarChart3,
   ChevronRight
 } from "lucide-react";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip
-} from "recharts";
 
 import AdminSidebar from "../components/AdminSidebar";
 import AdminMobileNav from "../components/AdminMobileNav";
@@ -51,11 +42,15 @@ function AdminDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const productsData = await getProductsAdmin();
-      const statsData = await getInquiryStats();
+      try {
+        const productsData = await getProductsAdmin();
+        const statsData = await getInquiryStats();
 
-      setProducts(productsData);
-      setInquiryStats(statsData);
+        setProducts(productsData);
+        setInquiryStats(statsData);
+      } catch (error) {
+        console.error("Error al cargar el dashboard:", error);
+      }
     };
 
     fetchData();
@@ -67,6 +62,13 @@ function AdminDashboard() {
   const featuredProducts = products.filter((product) => product.featured).length;
 
   const latestProducts = [...products].slice(-4).reverse();
+
+  const chartData = inquiryStats.chartData || [];
+
+  const maxConsultas = Math.max(
+    ...chartData.map((item) => item.total),
+    1
+  );
 
   return (
     <div className="admin-layout">
@@ -204,16 +206,32 @@ function AdminDashboard() {
               </div>
             </div>
 
-            <div className="admin-chart-wrapper">
-              <ResponsiveContainer width="100%" height={260}>
-                <BarChart data={inquiryStats.chartData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="date" />
-                  <YAxis allowDecimals={false} />
-                  <Tooltip />
-                  <Bar dataKey="total" radius={[8, 8, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="admin-simple-chart">
+              {chartData.map((item) => {
+                const barHeight =
+                  item.total === 0
+                    ? 8
+                    : Math.max((item.total / maxConsultas) * 130, 18);
+
+                return (
+                  <div className="admin-simple-chart-column" key={item.date}>
+                    <span className="admin-simple-chart-value">
+                      {item.total}
+                    </span>
+
+                    <div className="admin-simple-chart-track">
+                      <div
+                        className="admin-simple-chart-bar"
+                        style={{ height: `${barHeight}px` }}
+                      />
+                    </div>
+
+                    <span className="admin-simple-chart-label">
+                      {item.date}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
