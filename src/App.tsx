@@ -4,6 +4,8 @@ import { getFeaturedProducts, getProducts } from "./services/productService";
 import ProductCard from "./components/ProductCard";
 import ProductModal from "./components/ProductModal";
 import AromaModal from "./components/AromaModal";
+import CartButton from "./components/CartButton";
+import CartDrawer from "./components/CartDrawer";
 import logo from "./assets/logo.png";
 import hero from "./assets/hero.png";
 
@@ -101,7 +103,9 @@ function App() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   const [selectedAromaCategory, setSelectedAromaCategory] = useState<{
     title: string;
     aromas: string[];
@@ -120,75 +124,79 @@ function App() {
   }, []);
 
   const getProductImages = (product: Product) => {
-  if (product.images && product.images.length > 0) {
-    return product.images.map((image) => {
-      if (image.startsWith("http")) return image;
+    if (product.images && product.images.length > 0) {
+      return product.images.map((image) => {
+        if (image.startsWith("http")) return image;
 
-      return `https://harmonia-backend-4uu0.onrender.com${image}`;
-    });
-  }
+        return `https://harmonia-backend-4uu0.onrender.com${image}`;
+      });
+    }
 
-  return productImages[product.name] || [VelaOsito1, VelaOsito2, VelaOsito3];
-}; 
+    return productImages[product.name] || [VelaOsito1, VelaOsito2, VelaOsito3];
+  };
+
+  const openCart = () => {
+    setIsMobileMenuOpen(false);
+    setIsCartOpen(true);
+  };
 
   return (
     <main className="app">
       <nav className="navbar">
-  <a
-    href="#inicio"
-    className="brand-logo"
-    onClick={() => setIsMobileMenuOpen(false)}
-  >
-    <img src={logo} alt="Harmonia Aromas" className="brand-logo-img" />
+        <a
+          href="#inicio"
+          className="brand-logo"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <img src={logo} alt="Harmonia Aromas" className="brand-logo-img" />
 
-    <div className="brand-logo-text">
-      <span>HARMONIA</span>
-      <small>AROMAS</small>
-    </div>
-  </a>
+          <div className="brand-logo-text">
+            <span>HARMONIA</span>
+            <small>AROMAS</small>
+          </div>
+        </a>
 
-  <button
-    type="button"
-    className="mobile-menu-button"
-    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-    aria-label="Abrir menú"
-  >
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+        <button
+          type="button"
+          className="mobile-menu-button"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Abrir menú"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-  <div className={`nav-links ${isMobileMenuOpen ? "nav-links-open" : ""}`}>
-    <a href="#inicio" onClick={() => setIsMobileMenuOpen(false)}>
-      Inicio
-    </a>
+        <div className={`nav-links ${isMobileMenuOpen ? "nav-links-open" : ""}`}>
+          <a href="#inicio" onClick={() => setIsMobileMenuOpen(false)}>
+            Inicio
+          </a>
 
-    <a href="#destacados" onClick={() => setIsMobileMenuOpen(false)}>
-      Destacados
-    </a>
+          <a href="#destacados" onClick={() => setIsMobileMenuOpen(false)}>
+            Destacados
+          </a>
 
-    <a href="#catalogo" onClick={() => setIsMobileMenuOpen(false)}>
-      Catálogo
-    </a>
+          <a href="#catalogo" onClick={() => setIsMobileMenuOpen(false)}>
+            Catálogo
+          </a>
 
-    <a href="#aromas" onClick={() => setIsMobileMenuOpen(false)}>
-      Aromas
-    </a>
+          <a href="#aromas" onClick={() => setIsMobileMenuOpen(false)}>
+            Aromas
+          </a>
 
-    <a href="#contacto" onClick={() => setIsMobileMenuOpen(false)}>
-      Contacto
-    </a>
-  </div>
+          <a href="#contacto" onClick={() => setIsMobileMenuOpen(false)}>
+            Contacto
+          </a>
+        </div>
 
-  <a
-    href="https://wa.me/5493465659024"
-    target="_blank"
-    rel="noreferrer"
-    className="navbar-whatsapp"
-  >
-    Pedidos
-  </a>
-</nav> 
+        <button
+          type="button"
+          className="navbar-whatsapp"
+          onClick={openCart}
+        >
+          Carrito
+        </button>
+      </nav>
 
       <section id="inicio" className="hero">
         <div className="hero-text">
@@ -218,34 +226,46 @@ function App() {
         </div>
       </section>
 
-<section className="trust-section">
-  <div className="trust-grid">
-    <article className="trust-card">
-      <span>🌿</span>
-      <h3>Cera de soja</h3>
-      <p>Velas elaboradas con materiales seleccionados y aromas cuidadosamente elegidos.</p>
-    </article>
+      <section className="trust-section">
+        <div className="trust-grid">
+          <article className="trust-card">
+            <span>🌿</span>
+            <h3>Cera de soja</h3>
+            <p>
+              Velas elaboradas con materiales seleccionados y aromas
+              cuidadosamente elegidos.
+            </p>
+          </article>
 
-    <article className="trust-card">
-      <span>🤎</span>
-      <h3>Hechas a mano</h3>
-      <p>Cada pieza se realiza con dedicación, detalle y una terminación única.</p>
-    </article>
+          <article className="trust-card">
+            <span>🤎</span>
+            <h3>Hechas a mano</h3>
+            <p>
+              Cada pieza se realiza con dedicación, detalle y una terminación
+              única.
+            </p>
+          </article>
 
-    <article className="trust-card">
-      <span>🚚</span>
-      <h3>Envíos a todo el país</h3>
-      <p>Preparamos cada pedido con cuidado para que llegue en perfectas condiciones.</p>
-    </article>
+          <article className="trust-card">
+            <span>🚚</span>
+            <h3>Envíos a todo el país</h3>
+            <p>
+              Preparamos cada pedido con cuidado para que llegue en perfectas
+              condiciones.
+            </p>
+          </article>
 
-    <article className="trust-card">
-      <span>🏷️</span>
-      <h3>Venta mayorista</h3>
-      <p>Opciones ideales para souvenirs, eventos, regalos empresariales y reventa.</p>
-    </article>
-  </div>
-</section> 
- 
+          <article className="trust-card">
+            <span>🏷️</span>
+            <h3>Venta mayorista</h3>
+            <p>
+              Opciones ideales para souvenirs, eventos, regalos empresariales y
+              reventa.
+            </p>
+          </article>
+        </div>
+      </section>
+
       <section id="destacados" className="section">
         <p className="section-subtitle">Nuestros favoritos</p>
         <h2>Productos destacados</h2>
@@ -383,17 +403,15 @@ function App() {
           onClose={() => setSelectedAromaCategory(null)}
         />
       )}
-      <a
-       href="https://wa.me/5493465659024"
-       target="_blank"
-       rel="noreferrer"
-       className="floating-whatsapp"
-       aria-label="Contactar por WhatsApp"
-      > 
-      <FaWhatsapp />
-</a>
+
+      <CartButton onClick={() => setIsCartOpen(true)} />
+
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
     </main>
-  ); 
+  );
 }
 
 export default App; 

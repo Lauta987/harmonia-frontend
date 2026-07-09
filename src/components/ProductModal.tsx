@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
-import { registerInquiry } from "../services/inquiryService";
+import { useCart } from "../context/CartContext";
 
 interface ProductModalProps {
   product: Product;
@@ -10,12 +10,18 @@ interface ProductModalProps {
 
 function ProductModal({ product, images, onClose }: ProductModalProps) {
   const [currentImage, setCurrentImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [addedMessage, setAddedMessage] = useState("");
+
+  const { addToCart } = useCart();
 
   const hasMultipleImages = images.length > 1;
   const activeImage = images[currentImage] || images[0];
 
   useEffect(() => {
     setCurrentImage(0);
+    setQuantity(1);
+    setAddedMessage("");
   }, [product._id, images]);
 
   const nextImage = () => {
@@ -30,18 +36,22 @@ function ProductModal({ product, images, onClose }: ProductModalProps) {
     setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
-  const handleWhatsAppClick = () => {
-    registerInquiry(product._id, product.name).catch(() => {
-      console.error("No se pudo registrar la consulta");
-    });
+  const increaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
 
-    const message = `¡Hola! 😊 Me interesa la ${product.name} que vi en la página de Harmonia Aromas. ¿Podrían brindarme más información?`;
+  const decreaseQuantity = () => {
+    setQuantity((prev) => (prev === 1 ? 1 : prev - 1));
+  };
 
-    const whatsappUrl = `https://wa.me/5493465659024?text=${encodeURIComponent(
-      message
-    )}`;
+  const handleAddToCart = () => {
+    addToCart(product, quantity, activeImage);
 
-    window.open(whatsappUrl, "_blank");
+    setAddedMessage("Producto agregado al carrito");
+
+    setTimeout(() => {
+      setAddedMessage("");
+    }, 1800);
   };
 
   return (
@@ -102,12 +112,32 @@ function ProductModal({ product, images, onClose }: ProductModalProps) {
             </div>
           </div>
 
+          <div className="modal-quantity-box">
+            <span>Cantidad</span>
+
+            <div className="modal-quantity-controls">
+              <button type="button" onClick={decreaseQuantity}>
+                -
+              </button>
+
+              <strong>{quantity}</strong>
+
+              <button type="button" onClick={increaseQuantity}>
+                +
+              </button>
+            </div>
+          </div>
+
+          {addedMessage && (
+            <p className="modal-added-message">{addedMessage}</p>
+          )}
+
           <button
             type="button"
             className="whatsapp-button"
-            onClick={handleWhatsAppClick}
+            onClick={handleAddToCart}
           >
-            Pedir por WhatsApp
+            Agregar al carrito
           </button>
         </div>
       </div>
