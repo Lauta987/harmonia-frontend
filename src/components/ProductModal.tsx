@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
 import { registerInquiry } from "../services/inquiryService";
 
@@ -11,11 +11,22 @@ interface ProductModalProps {
 function ProductModal({ product, images, onClose }: ProductModalProps) {
   const [currentImage, setCurrentImage] = useState(0);
 
+  const hasMultipleImages = images.length > 1;
+  const activeImage = images[currentImage] || images[0];
+
+  useEffect(() => {
+    setCurrentImage(0);
+  }, [product._id, images]);
+
   const nextImage = () => {
+    if (!hasMultipleImages) return;
+
     setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   const previousImage = () => {
+    if (!hasMultipleImages) return;
+
     setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
@@ -41,25 +52,31 @@ function ProductModal({ product, images, onClose }: ProductModalProps) {
         </button>
 
         <div className="modal-image carousel">
-          <button className="carousel-button left" onClick={previousImage}>
-            ‹
-          </button>
+          {hasMultipleImages && (
+            <button className="carousel-button left" onClick={previousImage}>
+              ‹
+            </button>
+          )}
 
-          <img src={images[currentImage]} alt={product.name} />
+          {activeImage && <img src={activeImage} alt={product.name} />}
 
-          <button className="carousel-button right" onClick={nextImage}>
-            ›
-          </button>
+          {hasMultipleImages && (
+            <button className="carousel-button right" onClick={nextImage}>
+              ›
+            </button>
+          )}
 
-          <div className="carousel-dots">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                className={index === currentImage ? "dot active" : "dot"}
-                onClick={() => setCurrentImage(index)}
-              />
-            ))}
-          </div>
+          {hasMultipleImages && (
+            <div className="carousel-dots">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  className={index === currentImage ? "dot active" : "dot"}
+                  onClick={() => setCurrentImage(index)}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="modal-info">

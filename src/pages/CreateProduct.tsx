@@ -17,6 +17,8 @@ function CreateProduct() {
   });
 
   const [images, setImages] = useState<File[]>([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -41,32 +43,89 @@ function CreateProduct() {
   };
 
   const handleImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
+    const selectedFiles = Array.from(e.target.files || []);
 
-    const files = Array.from(e.target.files);
-    setImages(files.slice(0, 3));
+    setError("");
+
+    if (selectedFiles.length > 3) {
+      setError("Podés subir como máximo 3 imágenes.");
+      e.target.value = "";
+      setImages([]);
+      return;
+    }
+
+    setImages(selectedFiles);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData = new FormData();
+    setError("");
 
-    formData.append("name", form.name);
-    formData.append("description", form.description);
-    formData.append("unitPrice", form.unitPrice);
-    formData.append("wholesalePrice", form.wholesalePrice);
-    formData.append("wholesaleMinQuantity", form.wholesaleMinQuantity);
-    formData.append("available", String(form.available));
-    formData.append("featured", String(form.featured));
+    if (!form.name.trim()) {
+      setError("El nombre del producto es obligatorio.");
+      return;
+    }
 
-    images.forEach((image) => {
-      formData.append("images", image);
-    });
+    if (!form.description.trim()) {
+      setError("La descripción del producto es obligatoria.");
+      return;
+    }
 
-    await createProduct(formData);
+    if (!form.unitPrice || Number(form.unitPrice) <= 0) {
+      setError("El precio unitario debe ser mayor a 0.");
+      return;
+    }
 
-    navigate("/admin/products");
+    if (!form.wholesalePrice || Number(form.wholesalePrice) <= 0) {
+      setError("El precio mayorista debe ser mayor a 0.");
+      return;
+    }
+
+    if (
+      !form.wholesaleMinQuantity ||
+      Number(form.wholesaleMinQuantity) <= 0
+    ) {
+      setError("La cantidad mínima mayorista debe ser mayor a 0.");
+      return;
+    }
+
+    if (images.length === 0) {
+      setError("Subí al menos una imagen del producto.");
+      return;
+    }
+
+    if (images.length > 3) {
+      setError("Podés subir como máximo 3 imágenes.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+
+      formData.append("name", form.name);
+      formData.append("description", form.description);
+      formData.append("unitPrice", form.unitPrice);
+      formData.append("wholesalePrice", form.wholesalePrice);
+      formData.append("wholesaleMinQuantity", form.wholesaleMinQuantity);
+      formData.append("available", String(form.available));
+      formData.append("featured", String(form.featured));
+
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+
+      await createProduct(formData);
+
+      navigate("/admin/products");
+    } catch (error) {
+      console.error("Error al crear producto:", error);
+      setError("No se pudo guardar el producto. Intentá nuevamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -80,14 +139,22 @@ function CreateProduct() {
         </div>
 
         <form className="admin-form" onSubmit={handleSubmit}>
+          {error && <p className="admin-form-error">{error}</p>}
+
           <label>Nombre</label>
-          <input name="name" value={form.name} onChange={handleChange} />
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Ej: Vela Osito"
+          />
 
           <label>Descripción</label>
           <textarea
             name="description"
             value={form.description}
             onChange={handleChange}
+            placeholder="Descripción del producto"
           />
 
           <label>Precio unitario</label>
@@ -96,6 +163,7 @@ function CreateProduct() {
             type="number"
             value={form.unitPrice}
             onChange={handleChange}
+            placeholder="Ej: 5000"
           />
 
           <label>Precio mayorista</label>
@@ -104,6 +172,7 @@ function CreateProduct() {
             type="number"
             value={form.wholesalePrice}
             onChange={handleChange}
+            placeholder="Ej: 4000"
           />
 
           <label>Cantidad mínima mayorista</label>
@@ -114,24 +183,30 @@ function CreateProduct() {
             onChange={handleChange}
           />
 
-          <label>Imágenes del producto, máximo 3</label>
+          <label>Imágenes del producto</label>
           <input
             type="file"
-            multiple
             accept="image/*"
+            multiple
             onChange={handleImagesChange}
           />
 
-          <div className="admin-preview-images">
-            {images.map((image, index) => (
-              <img
-                key={index}
-                src={URL.createObjectURL(image)}
-                alt={`Vista previa ${index + 1}`}
-                className="admin-preview-image"
-              />
-            ))}
-          </div>
+          <small className="admin-form-help">
+            Podés subir entre 1 y 3 imágenes.
+          </small>
+
+          {images.length > 0 && (
+            <div className="admin-preview-images">
+              {images.map((image, index) => (
+                <img
+                  key={index}
+                  src={URL.createObjectURL(image)}
+                  alt={`Vista previa ${index + 1}`}
+                  className="admin-preview-image"
+                />
+              ))}
+            </div>
+          )}
 
           <label className="admin-checkbox">
             <input
@@ -153,11 +228,13 @@ function CreateProduct() {
             Producto activo
           </label>
 
-          <button type="submit">Guardar producto</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Guardando..." : "Guardar producto"}
+          </button>
         </form>
       </main>
     </div>
   );
 }
 
-export default CreateProduct;  
+export default CreateProduct; 
