@@ -22,7 +22,7 @@ function ProductCard({ product, image, onClick }: ProductCardProps) {
 
       <div className="premium-product-content">
         <div className="premium-product-header">
-          <p className="premium-product-category">Vela artesanal</p>
+          <p className="premium-product-category">Vela aromatica</p>
           <h3>{product.name}</h3>
         </div>
 

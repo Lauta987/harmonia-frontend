@@ -3229,3 +3229,10 @@ button {
     min-height: 90px;
   }
 } 
+.cart-wholesale-label {
+  display: block;
+  margin-top: 4px;
+  color: #2f3b22;
+  font-size: 0.76rem;
+  font-weight: 800;
+} 

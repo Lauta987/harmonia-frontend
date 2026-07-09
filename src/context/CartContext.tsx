@@ -11,6 +11,8 @@ export interface CartItem {
   productId: string;
   name: string;
   unitPrice: number;
+  wholesalePrice: number;
+  wholesaleMinQuantity: number;
   quantity: number;
   image?: string;
   aroma?: string;
@@ -38,6 +40,30 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | null>(null);
 
 const CART_STORAGE_KEY = "harmonia-cart";
+
+export const getCartItemUnitPrice = (item: CartItem) => {
+  const hasWholesalePrice = item.wholesalePrice && item.wholesalePrice > 0;
+  const hasWholesaleMin =
+    item.wholesaleMinQuantity && item.wholesaleMinQuantity > 0;
+
+  if (
+    hasWholesalePrice &&
+    hasWholesaleMin &&
+    item.quantity >= item.wholesaleMinQuantity
+  ) {
+    return item.wholesalePrice;
+  }
+
+  return item.unitPrice;
+};
+
+export const hasWholesaleApplied = (item: CartItem) => {
+  return (
+    item.wholesalePrice > 0 &&
+    item.wholesaleMinQuantity > 0 &&
+    item.quantity >= item.wholesaleMinQuantity
+  );
+};
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(() => {
@@ -67,7 +93,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           item.productId === product._id
             ? {
                 ...item,
-                quantity: item.quantity + quantity
+                quantity: item.quantity + quantity,
+                unitPrice: product.unitPrice || product.price || item.unitPrice,
+                wholesalePrice:
+                  product.wholesalePrice || item.wholesalePrice || 0,
+                wholesaleMinQuantity:
+                  product.wholesaleMinQuantity ||
+                  item.wholesaleMinQuantity ||
+                  10
               }
             : item
         );
@@ -79,6 +112,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           productId: product._id,
           name: product.name,
           unitPrice: product.unitPrice || product.price || 0,
+          wholesalePrice: product.wholesalePrice || 0,
+          wholesaleMinQuantity: product.wholesaleMinQuantity || 10,
           quantity,
           image,
           aroma: "",
@@ -150,10 +185,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items]);
 
   const totalPrice = useMemo(() => {
-    return items.reduce(
-      (total, item) => total + item.unitPrice * item.quantity,
-      0
-    );
+    return items.reduce((total, item) => {
+      const finalUnitPrice = getCartItemUnitPrice(item);
+
+      return total + finalUnitPrice * item.quantity;
+    }, 0);
   }, [items]);
 
   return (

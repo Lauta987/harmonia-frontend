@@ -1,5 +1,9 @@
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
-import { useCart } from "../context/CartContext";
+import {
+  getCartItemUnitPrice,
+  hasWholesaleApplied,
+  useCart
+} from "../context/CartContext";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -27,9 +31,14 @@ function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
     const productsText = items
       .map((item) => {
-        const subtotal = item.unitPrice * item.quantity;
+        const finalUnitPrice = getCartItemUnitPrice(item);
+        const subtotal = finalUnitPrice * item.quantity;
+        const wholesaleText = hasWholesaleApplied(item)
+          ? "Precio mayorista aplicado"
+          : "Precio unitario";
 
         return `- ${item.quantity} x ${item.name} — $${formatPrice(subtotal)}
+  ${wholesaleText}: $${formatPrice(finalUnitPrice)} c/u
   Aroma: ${item.aroma?.trim() || "A confirmar"}
   Personalización: ${item.customization?.trim() || "Sin aclaraciones"}`;
       })
@@ -79,79 +88,90 @@ Total: $${formatPrice(totalPrice)}
         ) : (
           <>
             <div className="cart-items">
-              {items.map((item) => (
-                <article className="cart-item" key={item.productId}>
-                  <div className="cart-item-image">
-                    {item.image ? (
-                      <img src={item.image} alt={item.name} />
-                    ) : (
-                      <ShoppingBag size={24} strokeWidth={2.1} />
-                    )}
-                  </div>
+              {items.map((item) => {
+                const finalUnitPrice = getCartItemUnitPrice(item);
+                const subtotal = finalUnitPrice * item.quantity;
+                const wholesaleActive = hasWholesaleApplied(item);
 
-                  <div className="cart-item-info">
-                    <h3>{item.name}</h3>
+                return (
+                  <article className="cart-item" key={item.productId}>
+                    <div className="cart-item-image">
+                      {item.image ? (
+                        <img src={item.image} alt={item.name} />
+                      ) : (
+                        <ShoppingBag size={24} strokeWidth={2.1} />
+                      )}
+                    </div>
 
-                    <p>$ {formatPrice(item.unitPrice)} c/u</p>
+                    <div className="cart-item-info">
+                      <h3>{item.name}</h3>
 
-                    <div className="cart-quantity">
+                      <p>
+                        $ {formatPrice(finalUnitPrice)} c/u
+                        {wholesaleActive && (
+                          <span className="cart-wholesale-label">
+                            Mayorista aplicado
+                          </span>
+                        )}
+                      </p>
+
+                      <div className="cart-quantity">
+                        <button
+                          type="button"
+                          onClick={() => decreaseQuantity(item.productId)}
+                        >
+                          <Minus size={15} strokeWidth={2.4} />
+                        </button>
+
+                        <span>{item.quantity}</span>
+
+                        <button
+                          type="button"
+                          onClick={() => increaseQuantity(item.productId)}
+                        >
+                          <Plus size={15} strokeWidth={2.4} />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="cart-item-right">
+                      <strong>$ {formatPrice(subtotal)}</strong>
+
                       <button
                         type="button"
-                        onClick={() => decreaseQuantity(item.productId)}
+                        className="cart-remove-button"
+                        onClick={() => removeFromCart(item.productId)}
                       >
-                        <Minus size={15} strokeWidth={2.4} />
-                      </button>
-
-                      <span>{item.quantity}</span>
-
-                      <button
-                        type="button"
-                        onClick={() => increaseQuantity(item.productId)}
-                      >
-                        <Plus size={15} strokeWidth={2.4} />
+                        <Trash2 size={16} strokeWidth={2.2} />
                       </button>
                     </div>
-                  </div>
 
-                  <div className="cart-item-right">
-                    <strong>
-                      $ {formatPrice(item.unitPrice * item.quantity)}
-                    </strong>
+                    <div className="cart-item-details">
+                      <label>Aroma elegido</label>
+                      <input
+                        value={item.aroma || ""}
+                        onChange={(e) =>
+                          updateItemDetails(item.productId, {
+                            aroma: e.target.value
+                          })
+                        }
+                        placeholder="Ej: Vainilla, coco, lavanda..."
+                      />
 
-                    <button
-                      type="button"
-                      className="cart-remove-button"
-                      onClick={() => removeFromCart(item.productId)}
-                    >
-                      <Trash2 size={16} strokeWidth={2.2} />
-                    </button>
-                  </div>
-
-                  <div className="cart-item-details">
-                    <label>Aroma elegido</label>
-                    <input
-                      value={item.aroma || ""}
-                      onChange={(e) =>
-                        updateItemDetails(item.productId, {
-                          aroma: e.target.value
-                        })
-                      }
-                      placeholder="Ej: Vainilla, coco, lavanda..."
-                    />
-
-                    <label>Personalización</label>
-                    <textarea
-                      value={item.customization || ""}
-                      onChange={(e) =>
-                        updateItemDetails(item.productId, {
-                          customization: e.target.value
-                        })
-                      }
-                      placeholder="Ej: color, frase, nombre, evento, detalles del souvenir..."
-                    />
-                  </div>
-                </article>
-              ))}
+                      <label>Personalización</label>
+                      <textarea
+                        value={item.customization || ""}
+                        onChange={(e) =>
+                          updateItemDetails(item.productId, {
+                            customization: e.target.value
+                          })
+                        }
+                        placeholder="Ej: color, frase, nombre, evento, detalles del souvenir..."
+                      />
+                    </div>
+                  </article>
+                );
+              })}
             </div>
 
             <div className="cart-summary">
