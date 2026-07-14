@@ -47,11 +47,11 @@ function ProductCard({ product, image, onClick }: ProductCardProps) {
         </p>
 
         <button type="button" className="premium-product-button">
-          Ver detalle
+          Pedir por WhatsApp
         </button>
       </div>
     </article>
   );
 }
 
-export default ProductCard; 
+export default ProductCard;  
