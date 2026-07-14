@@ -3927,3 +3927,219 @@ button {
     height: 155px !important;
   }
 } 
+/* ======================================= */
+/* HERO MOBILE PREMIUM - HARMONIA          */
+/* ======================================= */
+
+.hero-mobile-kicker,
+.hero-mobile-benefits {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .hero {
+    position: relative !important;
+    min-height: calc(100vh - 86px) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: stretch !important;
+    overflow: hidden !important;
+    background: #17120e !important;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(25, 20, 15, 0.82) 0%,
+        rgba(25, 20, 15, 0.58) 42%,
+        rgba(25, 20, 15, 0.16) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(20, 16, 12, 0.08) 0%,
+        rgba(20, 16, 12, 0.18) 45%,
+        rgba(20, 16, 12, 0.78) 100%
+      );
+    pointer-events: none;
+  }
+
+  .hero-text {
+    position: relative !important;
+    z-index: 4 !important;
+    width: 100% !important;
+    min-height: calc(100vh - 86px) !important;
+    padding: 72px 24px 190px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    color: #fffaf4 !important;
+  }
+
+  .hero-logo,
+  .hero-desktop-subtitle {
+    display: none !important;
+  }
+
+  .hero-mobile-kicker {
+    display: block !important;
+    margin: 0 0 20px !important;
+    color: #f7efe6 !important;
+    font-size: 0.74rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+  }
+
+  .hero-text h1 {
+    max-width: 330px !important;
+    margin: 0 !important;
+    color: #fffaf4 !important;
+    font-size: clamp(2.7rem, 13vw, 4.4rem) !important;
+    line-height: 0.95 !important;
+    letter-spacing: -0.04em !important;
+    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.32) !important;
+  }
+
+  .hero-text .description {
+    max-width: 280px !important;
+    margin: 22px 0 0 !important;
+    color: rgba(255, 250, 244, 0.9) !important;
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.32) !important;
+  }
+
+  .hero-text .primary-button {
+    margin-top: 28px !important;
+    min-height: 52px !important;
+    padding: 0 26px !important;
+    border-radius: 14px !important;
+    background: rgba(91, 104, 53, 0.95) !important;
+    color: #fffaf4 !important;
+    border: 1px solid rgba(255, 250, 244, 0.28) !important;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28) !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+  }
+
+  .hero-text .primary-button::after {
+    content: "→";
+    margin-left: 12px;
+    font-size: 1rem;
+  }
+
+  .hero-product {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .hero-product img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center bottom !important;
+    display: block !important;
+    border-radius: 0 !important;
+  }
+
+  .hero-product-badge {
+    display: none !important;
+  }
+
+  .hero-mobile-benefits {
+    position: absolute !important;
+    left: 18px !important;
+    right: 18px !important;
+    bottom: 22px !important;
+    z-index: 5 !important;
+    min-height: 112px !important;
+    padding: 18px 10px !important;
+    border-radius: 24px !important;
+    background: rgba(91, 104, 53, 0.92) !important;
+    backdrop-filter: blur(10px) !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 4px !important;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28) !important;
+  }
+
+  .hero-mobile-benefits div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 8px !important;
+    padding: 0 6px !important;
+  }
+
+  .hero-mobile-benefits div:not(:last-child) {
+    border-right: 1px solid rgba(255, 250, 244, 0.22) !important;
+  }
+
+  .hero-mobile-benefits span {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    border: 1px solid rgba(255, 250, 244, 0.55) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1rem !important;
+  }
+
+  .hero-mobile-benefits p {
+    margin: 0 !important;
+    color: #fffaf4 !important;
+    font-size: 0.68rem !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-text {
+    padding: 58px 22px 178px !important;
+  }
+
+  .hero-text h1 {
+    font-size: clamp(2.45rem, 12vw, 3.8rem) !important;
+  }
+
+  .hero-text .description {
+    max-width: 260px !important;
+    font-size: 0.94rem !important;
+  }
+
+  .hero-mobile-benefits {
+    left: 14px !important;
+    right: 14px !important;
+    bottom: 18px !important;
+    min-height: 102px !important;
+    padding: 14px 8px !important;
+  }
+
+  .hero-mobile-benefits span {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .hero-mobile-benefits p {
+    font-size: 0.6rem !important;
+  }
+} 
