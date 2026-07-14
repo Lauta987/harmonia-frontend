@@ -204,7 +204,7 @@ function App() {
 
           <p className="subtitle">Velas artesanales</p>
 
-          <h1>Aromas que enamoran el hogar</h1>
+          <h1>Aromas que enamorar el hogar</h1>
 
           <p className="description">
             Creamos velas artesanales y souvenirs únicos, pensados para llenar
@@ -212,7 +212,7 @@ function App() {
           </p>
 
           <a href="#catalogo" className="primary-button">
-            Ver catálogo
+            Comprar ahora
           </a>
         </div>
 
