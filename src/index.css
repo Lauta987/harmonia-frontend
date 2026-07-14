@@ -4241,3 +4241,28 @@ button {
     font-size: 0.72rem !important;
   }
 } 
+/* ======================================= */
+/* FIX BOTON COMPRAR AHORA HERO MOBILE     */
+/* ======================================= */
+
+@media (max-width: 700px) {
+  .hero-text .primary-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    text-align: center !important;
+    line-height: 1 !important;
+    padding: 0 24px !important;
+  }
+
+  .hero-text .primary-button::after {
+    content: "→" !important;
+    margin-left: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    transform: translateY(-1px);
+  }
+} 
