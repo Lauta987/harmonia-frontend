@@ -3301,3 +3301,69 @@ button {
     font-size: 0.72rem !important;
   }
 } 
+/* ========================= */
+/* FIX TEXTOS CATALOGO MOBILE */
+/* ========================= */
+
+@media (max-width: 700px) {
+  .product-card,
+  .product-card * {
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+  }
+
+  .product-card-content {
+    min-width: 0;
+  }
+
+  .product-card-content span,
+  .product-card-content p,
+  .product-card-content h3,
+  .product-card-content strong,
+  .product-card-content small {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+  }
+
+  .product-card-content h3 {
+    font-size: 0.95rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .product-card-content p {
+    font-size: 0.74rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .product-card-content .section-subtitle,
+  .product-category,
+  .product-card-content span:first-child {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.05em !important;
+    line-height: 1.2 !important;
+  }
+
+  .product-price,
+  .product-card-price {
+    font-size: 0.82rem !important;
+    line-height: 1.25 !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .product-card-content h3 {
+    font-size: 0.88rem !important;
+  }
+
+  .product-card-content p {
+    font-size: 0.7rem !important;
+  }
+
+  .product-card-content .section-subtitle,
+  .product-category,
+  .product-card-content span:first-child {
+    font-size: 0.58rem !important;
+  }
+} 
