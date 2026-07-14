@@ -3633,3 +3633,91 @@ button {
     min-height: 42px !important;
   }
 } 
+/* ================================= */
+/* CATALOGO MOBILE - PRECIOS EN FILA */
+/* UNITARIO ARRIBA / MAYORISTA ABAJO */
+/* ================================= */
+
+@media (max-width: 700px) {
+  .premium-price-box {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .premium-price-box > div {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 9px 10px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    overflow: visible !important;
+    text-align: left !important;
+  }
+
+  .premium-price-box span {
+    font-size: 0.62rem !important;
+    line-height: 1 !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important;
+  }
+
+  .premium-price-box strong {
+    font-size: 0.95rem !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+  }
+
+  .premium-product-content {
+    padding: 14px 12px 16px !important;
+  }
+
+  .premium-product-header h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.08 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .premium-product-description {
+    display: none !important;
+  }
+
+  .premium-minimum {
+    font-size: 0.78rem !important;
+    margin-top: 10px !important;
+    line-height: 1.2 !important;
+  }
+
+  .premium-product-button {
+    margin-top: 12px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .premium-price-box > div {
+    padding: 8px 9px !important;
+  }
+
+  .premium-price-box span {
+    font-size: 0.56rem !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  .premium-price-box strong {
+    font-size: 0.86rem !important;
+  }
+
+  .premium-product-header h3 {
+    font-size: 1.12rem !important;
+  }
+
+  .premium-minimum {
+    font-size: 0.7rem !important;
+  }
+} 
