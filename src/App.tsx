@@ -389,7 +389,7 @@ function App() {
               <h4>Volvé a encenderlo</h4>
               <span></span>
               <p>
-                Renovamos tu vela con cera vegetal
+                Renovamos tu vela con cera de soja
                 <br />
                 y una mecha nueva.
               </p>
