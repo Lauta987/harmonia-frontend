@@ -51,6 +51,8 @@ import VelaRusticaCorazon3 from "./assets/VelaRusticaCorazon3.png";
 
 import "./index.css";
 
+type CatalogCategory = "classic" | "bakery" | "wax-melts";
+
 const productImages: Record<string, string[]> = {
   "Vela Osito": [VelaOsito1, VelaOsito2, VelaOsito3],
   "Vela Macarron": [VelaMacarron1, VelaMacarron2, VelaMacarron3],
@@ -105,6 +107,8 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [activeCatalogCategory, setActiveCatalogCategory] =
+    useState<CatalogCategory>("classic");
 
   const [selectedAromaCategory, setSelectedAromaCategory] = useState<{
     title: string;
@@ -134,6 +138,11 @@ function App() {
 
     return productImages[product.name] || [VelaOsito1, VelaOsito2, VelaOsito3];
   };
+
+  const filteredProducts = products.filter((product) => {
+    const productCategory = product.category || "classic";
+    return productCategory === activeCatalogCategory;
+  });
 
   const openCart = () => {
     setIsMobileMenuOpen(false);
@@ -180,6 +189,10 @@ function App() {
             Catálogo
           </a>
 
+          <a href="#refill" onClick={() => setIsMobileMenuOpen(false)}>
+            Refill
+          </a>
+
           <a href="#aromas" onClick={() => setIsMobileMenuOpen(false)}>
             Aromas
           </a>
@@ -189,11 +202,7 @@ function App() {
           </a>
         </div>
 
-        <button
-          type="button"
-          className="navbar-whatsapp"
-          onClick={openCart}
-        >
+        <button type="button" className="navbar-whatsapp" onClick={openCart}>
           Carrito
         </button>
       </nav>
@@ -204,7 +213,7 @@ function App() {
 
           <p className="subtitle">Velas artesanales</p>
 
-          <h1>Aromas que enamorar el hogar</h1>
+          <h1>Aromas que enamoran el hogar</h1>
 
           <p className="description">
             Creamos velas artesanales y souvenirs únicos, pensados para llenar
@@ -284,17 +293,82 @@ function App() {
 
       <section id="catalogo" className="section catalog-section">
         <p className="section-subtitle">Catálogo</p>
-        <h2>Todas nuestras velas</h2>
+        <h2>Elegí tu línea favorita</h2>
+
+        <div className="catalog-tabs">
+          <button
+            type="button"
+            className={activeCatalogCategory === "classic" ? "active" : ""}
+            onClick={() => setActiveCatalogCategory("classic")}
+          >
+            Velas clásicas
+          </button>
+
+          <button
+            type="button"
+            className={activeCatalogCategory === "bakery" ? "active" : ""}
+            onClick={() => setActiveCatalogCategory("bakery")}
+          >
+            Línea Bakery
+          </button>
+
+          <button
+            type="button"
+            className={activeCatalogCategory === "wax-melts" ? "active" : ""}
+            onClick={() => setActiveCatalogCategory("wax-melts")}
+          >
+            Wax Melts
+          </button>
+        </div>
 
         <div className="products-grid">
-          {products.map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-              image={getProductImages(product)[0]}
-              onClick={() => setSelectedProduct(product)}
-            />
-          ))}
+          {filteredProducts.length === 0 ? (
+            <p className="catalog-empty-message">
+              Todavía no hay productos cargados en esta línea.
+            </p>
+          ) : (
+            filteredProducts.map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                image={getProductImages(product)[0]}
+                onClick={() => setSelectedProduct(product)}
+              />
+            ))
+          )}
+        </div>
+      </section>
+
+      <section id="refill" className="refill-section">
+        <div className="refill-card">
+          <div className="refill-content">
+            <p className="section-subtitle">Servicio especial</p>
+
+            <h2>Refill de velas</h2>
+
+            <p>
+              ¿Tenés un recipiente vacío que querés volver a usar? Lo rellenamos
+              con cera vegetal y el aroma que elijas para darle una segunda
+              vida.
+            </p>
+
+            <div className="refill-features">
+              <span>🌿 Cera vegetal</span>
+              <span>✨ Aroma a elección</span>
+              <span>♻️ Reutilizá tu recipiente</span>
+            </div>
+
+            <a
+              href={`https://wa.me/5493465659024?text=${encodeURIComponent(
+                "¡Hola! 😊 Quiero consultar por el servicio de refill de velas. Tengo un recipiente para rellenar y me gustaría saber opciones de aromas, precio y tiempo de preparación."
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+              className="refill-button"
+            >
+              Consultar refill por WhatsApp
+            </a>
+          </div>
         </div>
       </section>
 
@@ -406,10 +480,7 @@ function App() {
 
       <CartButton onClick={() => setIsCartOpen(true)} />
 
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-      />
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </main>
   );
 }

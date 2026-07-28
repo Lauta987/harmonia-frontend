@@ -4266,3 +4266,213 @@ button {
     transform: translateY(-1px);
   }
 } 
+/* ========================= */
+/* ADMIN SELECT              */
+/* ========================= */
+
+.admin-form select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #e7dacd;
+  border-radius: 14px;
+  background: #fffdf9;
+  color: #2f2a22;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0 14px;
+  outline: none;
+}
+
+.admin-form select:focus {
+  border-color: #2f3b22;
+  box-shadow: 0 0 0 3px rgba(47, 59, 34, 0.1);
+}
+
+/* ========================= */
+/* CATALOG TABS              */
+/* ========================= */
+
+.catalog-tabs {
+  width: 100%;
+  max-width: 720px;
+  margin: 26px auto 34px;
+  padding: 8px;
+  border-radius: 999px;
+  background: #f2e7da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.catalog-tabs button {
+  flex: 1;
+  min-height: 46px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #5f5144;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.catalog-tabs button.active {
+  background: #2f3b22;
+  color: #fffaf4;
+  box-shadow: 0 12px 26px rgba(47, 59, 34, 0.18);
+}
+
+.catalog-tabs button:hover {
+  background: rgba(47, 59, 34, 0.1);
+}
+
+.catalog-tabs button.active:hover {
+  background: #2f3b22;
+}
+
+.catalog-empty-message {
+  grid-column: 1 / -1;
+  margin: 20px auto 0;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: #fff8ef;
+  border: 1px solid #eadfd3;
+  color: #6d6257;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ========================= */
+/* REFILL SECTION            */
+/* ========================= */
+
+.refill-section {
+  padding: 90px 24px;
+  background: #fffaf4;
+}
+
+.refill-card {
+  max-width: 1120px;
+  margin: 0 auto;
+  border-radius: 34px;
+  background:
+    linear-gradient(135deg, rgba(47, 59, 34, 0.9), rgba(91, 104, 53, 0.86)),
+    #2f3b22;
+  padding: 54px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(47, 59, 34, 0.18);
+}
+
+.refill-content {
+  max-width: 620px;
+}
+
+.refill-content .section-subtitle {
+  color: #e8d9c8;
+}
+
+.refill-content h2 {
+  margin: 0 0 18px;
+  color: #fffaf4;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+}
+
+.refill-content p {
+  margin: 0;
+  color: rgba(255, 250, 244, 0.88);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.refill-features {
+  margin: 28px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.refill-features span {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 250, 244, 0.13);
+  color: #fffaf4;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.refill-button {
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: #fffaf4;
+  color: #2f3b22;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+}
+
+/* ========================= */
+/* MOBILE CATALOG + REFILL   */
+/* ========================= */
+
+@media (max-width: 700px) {
+  .catalog-tabs {
+    max-width: 100%;
+    margin: 22px 0 28px;
+    padding: 6px;
+    border-radius: 22px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .catalog-tabs button {
+    min-height: 42px;
+    font-size: 0.82rem;
+  }
+
+  .refill-section {
+    padding: 64px 18px;
+  }
+
+  .refill-card {
+    border-radius: 28px;
+    padding: 34px 22px;
+  }
+
+  .refill-content h2 {
+    font-size: 2.25rem;
+    line-height: 1;
+  }
+
+  .refill-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .refill-features {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .refill-features span {
+    width: 100%;
+    text-align: center;
+    font-size: 0.82rem;
+  }
+
+  .refill-button {
+    width: 100%;
+    min-height: 50px;
+    font-size: 0.86rem;
+    text-align: center;
+  }
+} 

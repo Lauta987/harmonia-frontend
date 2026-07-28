@@ -13,7 +13,8 @@ function CreateProduct() {
     wholesalePrice: "",
     wholesaleMinQuantity: "10",
     available: true,
-    featured: false
+    featured: false,
+    category: "classic"
   });
 
   const [images, setImages] = useState<File[]>([]);
@@ -21,7 +22,9 @@ function CreateProduct() {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value, type } = e.target;
 
@@ -45,10 +48,23 @@ function CreateProduct() {
   const handleImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []);
 
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
     setError("");
 
     if (selectedFiles.length > 3) {
       setError("Podés subir como máximo 3 imágenes.");
+      e.target.value = "";
+      setImages([]);
+      return;
+    }
+
+    const invalidFile = selectedFiles.find(
+      (file) => !allowedTypes.includes(file.type)
+    );
+
+    if (invalidFile) {
+      setError("Formato no permitido. Subí imágenes JPG, PNG o WEBP.");
       e.target.value = "";
       setImages([]);
       return;
@@ -82,10 +98,7 @@ function CreateProduct() {
       return;
     }
 
-    if (
-      !form.wholesaleMinQuantity ||
-      Number(form.wholesaleMinQuantity) <= 0
-    ) {
+    if (!form.wholesaleMinQuantity || Number(form.wholesaleMinQuantity) <= 0) {
       setError("La cantidad mínima mayorista debe ser mayor a 0.");
       return;
     }
@@ -112,6 +125,7 @@ function CreateProduct() {
       formData.append("wholesaleMinQuantity", form.wholesaleMinQuantity);
       formData.append("available", String(form.available));
       formData.append("featured", String(form.featured));
+      formData.append("category", form.category);
 
       images.forEach((image) => {
         formData.append("images", image);
@@ -183,16 +197,28 @@ function CreateProduct() {
             onChange={handleChange}
           />
 
+          <label>Categoría</label>
+          <select
+            name="category"
+            value={form.category}
+            onChange={handleChange}
+          >
+            <option value="classic">Velas clásicas</option>
+            <option value="bakery">Línea Bakery</option>
+            <option value="wax-melts">Wax Melts</option>
+          </select>
+
           <label>Imágenes del producto</label>
           <input
             type="file"
-            accept="image/*"
+            accept="image/jpeg,image/png,image/webp"
             multiple
             onChange={handleImagesChange}
           />
 
           <small className="admin-form-help">
-            Podés subir entre 1 y 3 imágenes.
+            Podés subir entre 1 y 3 imágenes. Si la foto está en Google Fotos,
+            descargala primero al dispositivo.
           </small>
 
           {images.length > 0 && (
