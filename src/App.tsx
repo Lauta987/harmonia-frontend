@@ -149,6 +149,13 @@ function App() {
     setIsCartOpen(true);
   };
 
+  const refillWhatsAppMessage =
+    "¡Hola! 😊 Quiero consultar por el servicio de refill de velas de Harmonia Aromas. Tengo un envase para rellenar y me gustaría saber opciones de aromas, precio y tiempo de preparación.";
+
+  const refillWhatsAppUrl = `https://wa.me/5493465659024?text=${encodeURIComponent(
+    refillWhatsAppMessage
+  )}`;
+
   return (
     <main className="app">
       <nav className="navbar">
@@ -339,36 +346,64 @@ function App() {
         </div>
       </section>
 
-      <section id="refill" className="refill-section">
-        <div className="refill-card">
-          <div className="refill-content">
-            <p className="section-subtitle">Servicio especial</p>
-
-            <h2>Refill de velas</h2>
-
-            <p>
-              ¿Tenés un recipiente vacío que querés volver a usar? Lo rellenamos
-              con cera vegetal y el aroma que elijas para darle una segunda
-              vida.
-            </p>
-
-            <div className="refill-features">
-              <span>🌿 Cera vegetal</span>
-              <span>✨ Aroma a elección</span>
-              <span>♻️ Reutilizá tu recipiente</span>
-            </div>
-
-            <a
-              href={`https://wa.me/5493465659024?text=${encodeURIComponent(
-                "¡Hola! 😊 Quiero consultar por el servicio de refill de velas. Tengo un recipiente para rellenar y me gustaría saber opciones de aromas, precio y tiempo de preparación."
-              )}`}
-              target="_blank"
-              rel="noreferrer"
-              className="refill-button"
-            >
-              Consultar refill por WhatsApp
-            </a>
+      <section id="refill" className="refill-premium-section">
+        <div className="refill-premium-shell">
+          <div className="refill-premium-heading">
+            <p>Harmonia Aromas</p>
+            <span></span>
+            <h2>Servicio de Refill</h2>
+            <h3>Dale una nueva vida a tu vela</h3>
+            <span></span>
           </div>
+
+          <div className="refill-premium-timeline">
+            <div className="refill-premium-number">01</div>
+            <div className="refill-premium-line"></div>
+            <div className="refill-premium-number">02</div>
+            <div className="refill-premium-line"></div>
+            <div className="refill-premium-number">03</div>
+          </div>
+
+          <div className="refill-premium-grid">
+            <article className="refill-premium-step">
+              <h4>Traé tu envase</h4>
+              <span></span>
+              <p>
+                Acercalo a nuestro espacio
+                <br />
+                o coordiná la entrega.
+              </p>
+            </article>
+
+            <article className="refill-premium-step">
+              <h4>Elegí tu aroma</h4>
+              <span></span>
+              <p>
+                Seleccioná la fragancia que
+                <br />
+                más te guste.
+              </p>
+            </article>
+
+            <article className="refill-premium-step">
+              <h4>Volvé a encenderlo</h4>
+              <span></span>
+              <p>
+                Renovamos tu vela con cera vegetal
+                <br />
+                y una mecha nueva.
+              </p>
+            </article>
+          </div>
+
+          <a
+            href={refillWhatsAppUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="refill-premium-button"
+          >
+            Quiero renovar mi vela
+          </a>
         </div>
       </section>
 
