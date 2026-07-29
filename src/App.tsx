@@ -51,7 +51,7 @@ import VelaRusticaCorazon3 from "./assets/VelaRusticaCorazon3.png";
 
 import "./index.css";
 
-type CatalogCategory = "classic" | "bakery" | "wax-melts";
+type CatalogCategory = "classic" | "bakery" | "wax-melts" | "candle-box";
 
 const productImages: Record<string, string[]> = {
   "Vela Osito": [VelaOsito1, VelaOsito2, VelaOsito3],
@@ -326,6 +326,14 @@ function App() {
           >
             Wax Melts
           </button>
+
+          <button
+            type="button"
+            className={activeCatalogCategory === "candle-box" ? "active" : ""}
+            onClick={() => setActiveCatalogCategory("candle-box")}
+          >
+            Candle Box
+          </button>
         </div>
 
         <div className="products-grid">
@@ -495,6 +503,17 @@ function App() {
         </div>
 
         <p className="footer-copy">© 2026 Harmonia Aromas · Hecho con 🤎</p>
+
+      <p className="footer-credit">
+        Sitio web desarrollado por{" "}
+       <a
+          href="https://innova-web-mauve.vercel.app/"
+          target="_blank"
+          rel="noreferrer"
+         >
+          Innova
+       </a>
+     </p> 
       </footer>
 
       {selectedProduct && (
