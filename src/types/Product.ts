@@ -10,5 +10,5 @@ export interface Product {
   imageUrl?: string;
   available: boolean;
   featured: boolean;
-  category?: "classic" | "bakery" | "wax-melts";
+  category?: "classic" | "bakery" | "wax-melts" | "candle-box";
 } 

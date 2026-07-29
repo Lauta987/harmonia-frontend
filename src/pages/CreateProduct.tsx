@@ -206,6 +206,7 @@ function CreateProduct() {
             <option value="classic">Velas clásicas</option>
             <option value="bakery">Línea Bakery</option>
             <option value="wax-melts">Wax Melts</option>
+            <option value="candle-box">Candle Box</option> 
           </select>
 
           <label>Imágenes del producto</label>
