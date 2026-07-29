@@ -5015,3 +5015,33 @@ button {
     font-size: 0.95rem;
   }
 } 
+/* =============================== */
+/* AJUSTE TITULO / TEXTO AROMAS    */
+/* =============================== */
+
+.aromas-editorial-title-block h2 {
+  font-size: clamp(3.2rem, 5.2vw, 5.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.aromas-editorial-text {
+  color: var(--green-soft);
+  font-weight: 500;
+}
+
+.aromas-editorial-text p {
+  color: var(--green-soft);
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .aromas-editorial-title-block h2 {
+    font-size: 2.75rem;
+    line-height: 1;
+  }
+
+  .aromas-editorial-text {
+    font-size: 0.98rem;
+  }
+} 
