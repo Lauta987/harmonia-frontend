@@ -1,0 +1,10 @@
+{
+  "name": "Harmonia Aromas",
+  "short_name": "Harmonia",
+  "description": "Velas artesanales y aromas para el hogar.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fffaf4",
+  "theme_color": "#66713b",
+  "icons": []
+} 

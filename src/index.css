@@ -4730,4 +4730,288 @@ button {
 
 .footer-credit a:hover {
   text-decoration: underline;
+}  
+/* =============================== */
+/* AROMAS EDITORIAL PREMIUM        */
+/* =============================== */
+
+.aromas-editorial-section {
+  background:
+    radial-gradient(circle at top left, rgba(232, 217, 200, 0.55), transparent 34%),
+    linear-gradient(135deg, #fffaf4 0%, #f5ecdf 100%);
+  padding: 110px 7% 120px;
+  overflow: hidden;
+}
+
+.aromas-editorial-header {
+  max-width: 1500px;
+  margin: 0 auto 58px;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: end;
+  gap: 48px;
+}
+
+.aromas-kicker {
+  margin-bottom: 44px;
+  color: var(--dark);
+  font-size: 1.55rem;
+  font-weight: 500;
+}
+
+.aromas-editorial-title-block h2 {
+  margin: 0;
+  color: var(--dark);
+  font-size: clamp(4rem, 7vw, 7.3rem);
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
+
+.aromas-divider {
+  margin-top: 36px;
+  width: 170px;
+  height: 24px;
+  position: relative;
+}
+
+.aromas-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 120px;
+  height: 2px;
+  background: #b78a35;
+}
+
+.aromas-divider span {
+  position: absolute;
+  left: 102px;
+  top: 2px;
+  width: 58px;
+  height: 22px;
+  border-bottom: 2px solid #b78a35;
+  border-radius: 50%;
+  transform: rotate(-12deg);
+}
+
+.aromas-divider span::before,
+.aromas-divider span::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 10px;
+  border: 2px solid #b78a35;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 50%;
+}
+
+.aromas-divider span::before {
+  right: 0;
+  top: 2px;
+  transform: rotate(20deg);
+}
+
+.aromas-divider span::after {
+  right: 22px;
+  top: 5px;
+  transform: rotate(-32deg);
+}
+
+.aromas-editorial-text {
+  max-width: 440px;
+  justify-self: end;
+  padding-bottom: 12px;
+  color: #5f574d;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.8;
+}
+
+.aromas-editorial-text p {
+  margin: 0 0 10px;
+}
+
+.aromas-editorial-grid {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.aroma-editorial-card {
+  position: relative;
+  height: 465px;
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #2f3b22;
+  box-shadow: 0 20px 44px rgba(47, 42, 34, 0.16);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.aroma-editorial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 64px rgba(47, 42, 34, 0.22);
+}
+
+.aroma-editorial-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.aroma-editorial-card:hover img {
+  transform: scale(1.06);
+}
+
+.aroma-editorial-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(31, 42, 24, 0.04) 0%, rgba(31, 42, 24, 0.2) 38%, rgba(31, 42, 24, 0.92) 100%);
+  z-index: 1;
+}
+
+.aroma-editorial-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 34px 34px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fffaf4;
+}
+
+.aroma-editorial-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.aroma-editorial-number {
+  color: #d8ae57;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.aroma-editorial-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 1.5px solid #d8ae57;
+  background: rgba(31, 42, 24, 0.28);
+  color: #f6df9a;
+  font-size: 2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s ease;
+}
+
+.aroma-editorial-arrow:hover {
+  background: #d8ae57;
+  color: #2f3b22;
+}
+
+.aroma-editorial-bottom h3 {
+  margin: 0 0 12px;
+  color: #fffaf4;
+  font-size: 2.55rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.aroma-editorial-bottom p {
+  margin: 0;
+  color: rgba(255, 250, 244, 0.88);
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+/* =============================== */
+/* AROMAS EDITORIAL MOBILE         */
+/* =============================== */
+
+@media (max-width: 1000px) {
+  .aromas-editorial-header {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .aromas-editorial-text {
+    justify-self: start;
+    max-width: 620px;
+  }
+
+  .aromas-editorial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .aromas-editorial-section {
+    padding: 72px 18px 84px;
+  }
+
+  .aromas-kicker {
+    margin-bottom: 22px;
+    font-size: 1.15rem;
+  }
+
+  .aromas-editorial-title-block h2 {
+    font-size: 3.25rem;
+  }
+
+  .aromas-divider {
+    margin-top: 22px;
+  }
+
+  .aromas-editorial-text {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .aromas-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .aroma-editorial-card {
+    height: 390px;
+    border-radius: 18px;
+  }
+
+  .aroma-editorial-content {
+    padding: 26px 24px 26px;
+  }
+
+  .aroma-editorial-number {
+    font-size: 1.65rem;
+  }
+
+  .aroma-editorial-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.7rem;
+  }
+
+  .aroma-editorial-bottom h3 {
+    font-size: 2.15rem;
+  }
+
+  .aroma-editorial-bottom p {
+    font-size: 0.95rem;
+  }
 } 

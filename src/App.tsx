@@ -70,7 +70,7 @@ const productImages: Record<string, string[]> = {
 const aromaCategories = [
   {
     title: "Frutales",
-    description: "Aromas frescos, dulces y vibrantes.",
+    description: "Frescos, dulces y vibrantes.",
     image: aromaFrutales,
     aromas: [
       "Mandarina",
@@ -83,19 +83,19 @@ const aromaCategories = [
   },
   {
     title: "Intensos",
-    description: "Fragancias profundas y envolventes.",
+    description: "Profundos y envolventes.",
     image: aromaIntensos,
     aromas: ["Café", "Capuccino", "Chocolate", "Pitanga maracuyá"]
   },
   {
     title: "Dulces",
-    description: "Aromas suaves, cálidos y reconfortantes.",
+    description: "Suaves, cálidos y reconfortantes.",
     image: aromaDulces,
     aromas: ["Dulce de leche", "Vainilla", "Vainilla coco", "Cherry"]
   },
   {
     title: "Florales",
-    description: "Fragancias delicadas y elegantes.",
+    description: "Delicados y elegantes.",
     image: aromaFlorales,
     aromas: ["Orquídeas", "Jazmín", "Lavanda", "Flores blancas"]
   }
@@ -415,23 +415,57 @@ function App() {
         </div>
       </section>
 
-      <section id="aromas" className="aromas-section">
-        <p className="section-subtitle">Fragancias disponibles</p>
-        <h2>Aromas para elegir</h2>
+      <section id="aromas" className="aromas-editorial-section">
+        <div className="aromas-editorial-header">
+          <div className="aromas-editorial-title-block">
+            <p>Harmonia Aromas</p>
+            <h2>Aromas para elegir</h2>
 
-        <div className="aroma-cards-grid">
-          {aromaCategories.map((category) => (
+            <div className="aromas-editorial-divider">
+              <span></span>
+            </div>
+          </div>
+
+          <div className="aromas-editorial-text">
+            <p>Explorá aromas únicos creados para acompañar cada momento.</p>
+          </div>
+        </div>
+
+        <div className="aromas-editorial-grid">
+          {aromaCategories.map((category, index) => (
             <article
               key={category.title}
-              className="aroma-category-card"
+              className="aroma-editorial-card"
               onClick={() => setSelectedAromaCategory(category)}
             >
-              <div className="aroma-card-image">
-                <img src={category.image} alt={category.title} />
-              </div>
+              <img src={category.image} alt={category.title} />
 
-              <h3>{category.title}</h3>
-              <p>{category.description}</p>
+              <div className="aroma-editorial-overlay"></div>
+
+              <div className="aroma-editorial-content">
+                <div className="aroma-editorial-middle">
+                  <span className="aroma-editorial-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <button
+                    type="button"
+                    className="aroma-editorial-arrow"
+                    aria-label={`Ver aromas ${category.title}`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setSelectedAromaCategory(category);
+                    }}
+                  >
+                    →
+                  </button>
+                </div>
+
+                <div className="aroma-editorial-bottom">
+                  <h3>{category.title}</h3>
+                  <p>{category.description}</p>
+                </div>
+              </div>
             </article>
           ))}
         </div>
@@ -539,4 +573,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;  
