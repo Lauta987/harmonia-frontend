@@ -40,29 +40,20 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | null>(null);
 
 const CART_STORAGE_KEY = "harmonia-cart";
+const WHOLESALE_GLOBAL_MIN_QUANTITY = 10;
 
-export const getCartItemUnitPrice = (item: CartItem) => {
-  const hasWholesalePrice = item.wholesalePrice && item.wholesalePrice > 0;
-  const hasWholesaleMin =
-    item.wholesaleMinQuantity && item.wholesaleMinQuantity > 0;
+export const getCartItemUnitPrice = (item: CartItem, totalItems: number) => {
+  const hasWholesalePrice = item.wholesalePrice > 0;
 
-  if (
-    hasWholesalePrice &&
-    hasWholesaleMin &&
-    item.quantity >= item.wholesaleMinQuantity
-  ) {
+  if (hasWholesalePrice && totalItems >= WHOLESALE_GLOBAL_MIN_QUANTITY) {
     return item.wholesalePrice;
   }
 
   return item.unitPrice;
 };
 
-export const hasWholesaleApplied = (item: CartItem) => {
-  return (
-    item.wholesalePrice > 0 &&
-    item.wholesaleMinQuantity > 0 &&
-    item.quantity >= item.wholesaleMinQuantity
-  );
+export const hasWholesaleApplied = (item: CartItem, totalItems: number) => {
+  return item.wholesalePrice > 0 && totalItems >= WHOLESALE_GLOBAL_MIN_QUANTITY;
 };
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
@@ -186,11 +177,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const totalPrice = useMemo(() => {
     return items.reduce((total, item) => {
-      const finalUnitPrice = getCartItemUnitPrice(item);
+      const finalUnitPrice = getCartItemUnitPrice(item, totalItems);
 
       return total + finalUnitPrice * item.quantity;
     }, 0);
-  }, [items]);
+  }, [items, totalItems]);
 
   return (
     <CartContext.Provider

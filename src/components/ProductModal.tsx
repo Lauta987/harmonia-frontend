@@ -108,7 +108,7 @@ function ProductModal({ product, images, onClose }: ProductModalProps) {
               <strong>
                 $ {product.wholesalePrice.toLocaleString("es-AR")}
               </strong>
-              <small>desde {product.wholesaleMinQuantity} unidades</small>
+              <small>desde 10 productos en el carrito</small>
             </div>
           </div>
 

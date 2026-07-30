@@ -22,13 +22,11 @@ function ProductCard({ product, image, onClick }: ProductCardProps) {
 
       <div className="premium-product-content">
         <div className="premium-product-header">
-          <p className="premium-product-category">Vela aromatica</p>
+          <p className="premium-product-category">Harmonia Aromas</p>
           <h3>{product.name}</h3>
         </div>
 
-        <p className="premium-product-description">
-          {product.description}
-        </p>
+        <p className="premium-product-description">{product.description}</p>
 
         <div className="premium-price-box">
           <div>
@@ -43,7 +41,7 @@ function ProductCard({ product, image, onClick }: ProductCardProps) {
         </div>
 
         <p className="premium-minimum">
-          Desde {product.wholesaleMinQuantity || 10} unidades
+          Precio mayorista desde 10 productos
         </p>
 
         <button type="button" className="premium-product-button">
@@ -54,4 +52,4 @@ function ProductCard({ product, image, onClick }: ProductCardProps) {
   );
 }
 
-export default ProductCard;  
+export default ProductCard; 

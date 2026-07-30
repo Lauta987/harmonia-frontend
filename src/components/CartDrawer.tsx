@@ -31,9 +31,9 @@ function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
     const productsText = items
       .map((item) => {
-        const finalUnitPrice = getCartItemUnitPrice(item);
+        const finalUnitPrice = getCartItemUnitPrice(item, totalItems);
         const subtotal = finalUnitPrice * item.quantity;
-        const wholesaleText = hasWholesaleApplied(item)
+        const wholesaleText = hasWholesaleApplied(item, totalItems)
           ? "Precio mayorista aplicado"
           : "Precio unitario";
 
@@ -49,6 +49,7 @@ function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 Productos:
 ${productsText}
 
+Total de productos: ${totalItems}
 Total: $${formatPrice(totalPrice)}
 
 ¿Podrían confirmarme disponibilidad y tiempo de preparación?`;
@@ -83,15 +84,15 @@ Total: $${formatPrice(totalPrice)}
             </div>
 
             <h3>Tu carrito está vacío</h3>
-            <p>Agregá una o más velas para armar tu pedido.</p>
+            <p>Agregá uno o más productos para armar tu pedido.</p>
           </div>
         ) : (
           <>
             <div className="cart-items">
               {items.map((item) => {
-                const finalUnitPrice = getCartItemUnitPrice(item);
+                const finalUnitPrice = getCartItemUnitPrice(item, totalItems);
                 const subtotal = finalUnitPrice * item.quantity;
-                const wholesaleActive = hasWholesaleApplied(item);
+                const wholesaleActive = hasWholesaleApplied(item, totalItems);
 
                 return (
                   <article className="cart-item" key={item.productId}>
@@ -179,6 +180,10 @@ Total: $${formatPrice(totalPrice)}
                 <span>Productos</span>
                 <strong>{totalItems}</strong>
               </div>
+
+              <p className="cart-wholesale-info">
+                Precio mayorista desde 10 productos.
+              </p>
 
               <div className="cart-summary-row total">
                 <span>Total</span>
