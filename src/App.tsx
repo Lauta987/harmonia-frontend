@@ -354,53 +354,80 @@ function App() {
         </div>
       </section>
 
-      <section id="refill" className="refill-premium-section">
-        <div className="refill-premium-shell">
-          <div className="refill-premium-heading">
-            <p>Harmonia Aromas</p>
-            <span></span>
-            <h2>Servicio de Refill</h2>
-            <h3>Dale una nueva vida a tu vela</h3>
-            <span></span>
-          </div>
+      <section id="refill" className="refill-split-section">
+        <div className="refill-split-left">
+          <div className="refill-split-left-content">
+            <h2>
+              Servicio
+              <br />
+              de Refill
+            </h2>
 
-          <div className="refill-premium-timeline">
-            <div className="refill-premium-number">01</div>
-            <div className="refill-premium-line"></div>
-            <div className="refill-premium-number">02</div>
-            <div className="refill-premium-line"></div>
-            <div className="refill-premium-number">03</div>
-          </div>
+            <div className="refill-split-divider"></div>
 
-          <div className="refill-premium-grid">
-            <article className="refill-premium-step">
-              <h4>Traé tu envase</h4>
+            <p>
+              Dale una nueva vida
+              <br />
+              a tu vela
+            </p>
+
+            <div className="refill-split-line">
               <span></span>
-              <p>
-                Acercalo a nuestro espacio
-                <br />
-                o coordiná la entrega.
-              </p>
+            </div>
+
+            <a
+              href={refillWhatsAppUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="refill-split-button refill-split-button-desktop"
+            >
+              Quiero renovar mi vela
+            </a>
+          </div>
+        </div>
+
+        <div className="refill-split-right">
+          <div className="refill-split-steps">
+            <article className="refill-split-step">
+              <div className="refill-split-number">01</div>
+
+              <div className="refill-split-step-text">
+                <h3>Traé tu envase</h3>
+                <span></span>
+                <p>
+                  Acercalo a nuestro espacio
+                  <br />
+                  o coordiná la entrega.
+                </p>
+              </div>
             </article>
 
-            <article className="refill-premium-step">
-              <h4>Elegí tu aroma</h4>
-              <span></span>
-              <p>
-                Seleccioná la fragancia que
-                <br />
-                más te guste.
-              </p>
+            <article className="refill-split-step">
+              <div className="refill-split-number">02</div>
+
+              <div className="refill-split-step-text">
+                <h3>Elegí tu aroma</h3>
+                <span></span>
+                <p>
+                  Seleccioná la fragancia que
+                  <br />
+                  más te guste.
+                </p>
+              </div>
             </article>
 
-            <article className="refill-premium-step">
-              <h4>Volvé a encenderlo</h4>
-              <span></span>
-              <p>
-                Renovamos tu vela con cera de soja
-                <br />
-                y una mecha nueva.
-              </p>
+            <article className="refill-split-step">
+              <div className="refill-split-number">03</div>
+
+              <div className="refill-split-step-text">
+                <h3>Volvé a encenderlo</h3>
+                <span></span>
+                <p>
+                  Renovamos tu vela con cera de soja
+                  <br />
+                  y una mecha nueva.
+                </p>
+              </div>
             </article>
           </div>
 
@@ -408,7 +435,7 @@ function App() {
             href={refillWhatsAppUrl}
             target="_blank"
             rel="noreferrer"
-            className="refill-premium-button"
+            className="refill-split-button refill-split-button-mobile"
           >
             Quiero renovar mi vela
           </a>
@@ -538,16 +565,16 @@ function App() {
 
         <p className="footer-copy">© 2026 Harmonia Aromas · Hecho con 🤎</p>
 
-      <p className="footer-credit">
-        Sitio web desarrollado por{" "}
-       <a
-          href="https://innova-web-mauve.vercel.app/"
-          target="_blank"
-          rel="noreferrer"
-         >
-          Innova
-       </a>
-     </p> 
+        <p className="footer-credit">
+          Sitio web desarrollado por{" "}
+          <a
+            href="https://innova-web-mauve.vercel.app/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Innova
+          </a>
+        </p>
       </footer>
 
       {selectedProduct && (
@@ -573,4 +600,4 @@ function App() {
   );
 }
 
-export default App;  
+export default App; 
