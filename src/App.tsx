@@ -16,6 +16,8 @@ import {
   FaEnvelope
 } from "react-icons/fa";
 
+import { Leaf, HeartHandshake, Truck, Tag } from "lucide-react";
+
 import aromaFrutales from "./assets/aromaFrutales.png";
 import aromaIntensos from "./assets/aromaIntensos.png";
 import aromaDulces from "./assets/aromaDulces.png";
@@ -242,41 +244,64 @@ function App() {
         </div>
       </section>
 
-      <section className="trust-section">
-        <div className="trust-grid">
-          <article className="trust-card">
-            <span>🌿</span>
-            <h3>Cera de soja</h3>
+      <section className="trust-editorial-section">
+        <div className="trust-editorial-grid">
+          <article className="trust-editorial-item">
+            <Leaf className="trust-editorial-icon" strokeWidth={1.4} />
+
+            <div className="trust-editorial-ornament">
+              <span></span>
+            </div>
+
+            <h3>Cera vegetal</h3>
+
             <p>
-              Velas elaboradas con materiales seleccionados y aromas
-              cuidadosamente elegidos.
+              Elaboradas con cera de soja y aromas cuidadosamente seleccionados.
             </p>
           </article>
 
-          <article className="trust-card">
-            <span>🤎</span>
+          <article className="trust-editorial-item">
+            <HeartHandshake
+              className="trust-editorial-icon"
+              strokeWidth={1.4}
+            />
+
+            <div className="trust-editorial-ornament">
+              <span></span>
+            </div>
+
             <h3>Hechas a mano</h3>
+
             <p>
-              Cada pieza se realiza con dedicación, detalle y una terminación
-              única.
+              Cada vela está creada artesanalmente con atención en cada detalle.
             </p>
           </article>
 
-          <article className="trust-card">
-            <span>🚚</span>
-            <h3>Envíos a todo el país</h3>
+          <article className="trust-editorial-item">
+            <Truck className="trust-editorial-icon" strokeWidth={1.4} />
+
+            <div className="trust-editorial-ornament">
+              <span></span>
+            </div>
+
+            <h3>Envíos nacionales</h3>
+
             <p>
-              Preparamos cada pedido con cuidado para que llegue en perfectas
-              condiciones.
+              Preparamos cada pedido para que llegue en perfectas condiciones.
             </p>
           </article>
 
-          <article className="trust-card">
-            <span>🏷️</span>
-            <h3>Venta mayorista</h3>
+          <article className="trust-editorial-item">
+            <Tag className="trust-editorial-icon" strokeWidth={1.4} />
+
+            <div className="trust-editorial-ornament">
+              <span></span>
+            </div>
+
+            <h3>Ventas mayoristas</h3>
+
             <p>
-              Opciones ideales para souvenirs, eventos, regalos empresariales y
-              reventa.
+              Propuestas para eventos, regalos empresariales y reventa.
             </p>
           </article>
         </div>
