@@ -6290,3 +6290,193 @@ button {
     display: none !important;
   }
 }
+/* =============================== */
+/* MODAL PRODUCTO MOBILE COMPACTO  */
+/* =============================== */
+
+@media (max-width: 700px) {
+  .modal-price-boxes {
+    gap: 10px !important;
+    margin: 16px 0 18px !important;
+  }
+
+  .modal-price-box {
+    padding: 12px 10px !important;
+    border-radius: 14px !important;
+  }
+
+  .modal-price-box span {
+    margin-bottom: 6px !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 1.6px !important;
+  }
+
+  .modal-price-box strong {
+    margin-bottom: 4px !important;
+    font-size: 1.25rem !important;
+  }
+
+  .modal-price-box small {
+    font-size: 0.68rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .modal-info {
+    padding: 28px 18px 22px !important;
+  }
+
+  .modal-info h2 {
+    margin-bottom: 10px !important;
+    font-size: 1.75rem !important;
+  }
+
+  .modal-info p {
+    margin-bottom: 14px !important;
+    font-size: 0.86rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .modal-quantity-box {
+    margin-top: 12px !important;
+    padding: 10px 12px !important;
+  }
+}
+/* =============================== */
+/* TRUST DESKTOP MÁS COMPACTO      */
+/* SOLO COMPUTADORA                */
+/* =============================== */
+
+@media (min-width: 701px) {
+  .trust-editorial-section {
+    padding: 58px 7% 64px !important;
+  }
+
+  .trust-editorial-grid {
+    max-width: 1320px !important;
+  }
+
+  .trust-editorial-item {
+    min-height: 220px !important;
+    padding: 6px 34px 0 !important;
+  }
+
+  .trust-editorial-item:not(:last-child)::after {
+    top: 8px !important;
+    height: 190px !important;
+  }
+
+  .trust-editorial-item:not(:last-child)::before {
+    top: 104px !important;
+  }
+
+  .trust-editorial-icon {
+    width: 58px !important;
+    height: 58px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .trust-editorial-ornament {
+    width: 86px !important;
+    height: 14px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .trust-editorial-ornament::before,
+  .trust-editorial-ornament::after {
+    width: 32px !important;
+  }
+
+  .trust-editorial-ornament span {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  .trust-editorial-item h3 {
+    margin-bottom: 16px !important;
+    font-size: clamp(1.85rem, 2.25vw, 2.65rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .trust-editorial-item p {
+    max-width: 245px !important;
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+  }
+}
+/* =============================== */
+/* FIX HERO MOBILE                 */
+/* =============================== */
+
+@media (max-width: 700px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+
+  .hero {
+    width: 100% !important;
+    min-height: calc(100vh - 76px) !important;
+    height: calc(100vh - 76px) !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    overflow: hidden !important;
+  }
+
+  .hero-text {
+    position: relative !important;
+    z-index: 3 !important;
+    width: 100% !important;
+    max-width: 245px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  .hero h1,
+  .hero-text h1 {
+    max-width: 245px !important;
+    margin: 0 0 16px !important;
+    font-size: 2.25rem !important;
+    line-height: 0.96 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  .hero .description,
+  .hero-text .description {
+    max-width: 235px !important;
+    margin: 0 0 22px !important;
+    font-size: 0.78rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .hero .subtitle,
+  .hero-text .subtitle {
+    margin-bottom: 12px !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 2.3px !important;
+  }
+
+  .hero .primary-button {
+    padding: 12px 20px !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 1.4px !important;
+  }
+
+  .hero-product {
+    position: absolute !important;
+    inset: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .hero-product img {
+    width: 170% !important;
+    max-width: none !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: translateX(-34%) !important;
+  }
+} 
