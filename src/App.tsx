@@ -8,6 +8,7 @@ import CartButton from "./components/CartButton";
 import CartDrawer from "./components/CartDrawer";
 import logo from "./assets/logo.png";
 import hero from "./assets/hero.png";
+import cursoVelas from "./assets/cursoVelas.png";
 
 import {
   FaInstagram,
@@ -16,7 +17,18 @@ import {
   FaEnvelope
 } from "react-icons/fa";
 
-import { Leaf, HeartHandshake, Truck, Tag } from "lucide-react";
+import {
+  Leaf,
+  HeartHandshake,
+  Truck,
+  Tag,
+  BookOpen,
+  PlayCircle,
+  Monitor,
+  Users,
+  Gift,
+  MessageCircle
+} from "lucide-react";
 
 import aromaFrutales from "./assets/aromaFrutales.png";
 import aromaIntensos from "./assets/aromaIntensos.png";
@@ -158,6 +170,13 @@ function App() {
     refillWhatsAppMessage
   )}`;
 
+  const courseWhatsAppMessage =
+    "¡Hola! 😊 Quiero consultar por el curso de velas de soja de Harmonia Aromas. Me gustaría saber modalidad, precio, duración y cómo reservar mi lugar.";
+
+  const courseWhatsAppUrl = `https://wa.me/5493465659024?text=${encodeURIComponent(
+    courseWhatsAppMessage
+  )}`;
+
   return (
     <main className="app">
       <nav className="navbar">
@@ -200,6 +219,10 @@ function App() {
 
           <a href="#refill" onClick={() => setIsMobileMenuOpen(false)}>
             Refill
+          </a>
+
+          <a href="#curso" onClick={() => setIsMobileMenuOpen(false)}>
+            Curso
           </a>
 
           <a href="#aromas" onClick={() => setIsMobileMenuOpen(false)}>
@@ -467,6 +490,156 @@ function App() {
         </div>
       </section>
 
+      <section id="curso" className="course-section course-full-section">
+        <div className="course-full-hero">
+          <div className="course-full-content">
+            <span className="course-open-badge">Inscripciones abiertas</span>
+
+            <p className="course-kicker">Taller Harmonia</p>
+
+            <h2>
+              Curso de velas
+              <br />
+              de soja
+            </h2>
+
+            <p className="course-description">
+              Aprendé desde cero, paso a paso.
+            </p>
+
+            <div className="course-cta-row">
+              <div className="course-online-seal">
+                <strong>100%</strong>
+                <span>Online</span>
+              </div>
+
+              <a
+                href={courseWhatsAppUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="course-button"
+              >
+                Quiero saber más
+              </a>
+            </div>
+          </div>
+
+          <div className="course-image">
+            <img src={cursoVelas} alt="Curso de velas de soja" />
+          </div>
+        </div>
+
+        <div className="course-benefits-bar">
+          <div className="course-benefit-item">
+            <BookOpen className="course-benefit-icon" strokeWidth={1.5} />
+            <p>
+              PDF completo
+              <br />y guiado
+            </p>
+          </div>
+
+          <div className="course-benefit-item">
+            <PlayCircle className="course-benefit-icon" strokeWidth={1.5} />
+            <p>
+              Videos explicativos
+              <br />
+              paso a paso
+            </p>
+          </div>
+
+          <div className="course-benefit-item">
+            <Monitor className="course-benefit-icon" strokeWidth={1.5} />
+            <p>
+              Acceso de por vida
+              <br />
+              al contenido
+            </p>
+          </div>
+
+          <div className="course-benefit-item">
+            <Users className="course-benefit-icon" strokeWidth={1.5} />
+            <p>
+              Opción con
+              <br />
+              clase en vivo
+            </p>
+          </div>
+
+          <div className="course-benefit-item">
+            <Gift className="course-benefit-icon" strokeWidth={1.5} />
+            <p>
+              Bonus
+              <br />
+              exclusivos
+            </p>
+          </div>
+        </div>
+
+        <div className="course-details-grid">
+          <div className="course-detail-block course-modalities">
+            <h3>Modalidades</h3>
+            <div className="course-small-divider">
+              <span></span>
+            </div>
+
+            <div className="course-modalities-grid">
+              <div>
+                <h4>Curso digital</h4>
+                <ul>
+                  <li>PDF completo</li>
+                  <li>Videos paso a paso</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4>Curso premium</h4>
+                <ul>
+                  <li>PDF completo</li>
+                  <li>Videos paso a paso</li>
+                  <li>Clase final en vivo por Zoom</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="course-detail-block course-learning">
+            <h3>¿Qué vas a aprender?</h3>
+            <div className="course-small-divider">
+              <span></span>
+            </div>
+
+            <ul>
+              <li>Materiales y herramientas</li>
+              <li>Cálculos y preparación</li>
+              <li>Elaboración paso a paso</li>
+              <li>Errores frecuentes y soluciones</li>
+              <li>Costos, precios y primeros pasos para vender</li>
+              <li>¡Y mucho más!</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="course-bottom-cta">
+          <p>
+            No necesitás experiencia previa.
+            <br />
+            Solo ganas de aprender y disfrutar del proceso.
+          </p>
+
+          <a
+            href={courseWhatsAppUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="course-whatsapp-box"
+          >
+            <MessageCircle strokeWidth={1.6} />
+            <span>
+              Escribime por WhatsApp para más info y reservar tu lugar
+            </span>
+          </a>
+        </div>
+      </section>
+
       <section id="aromas" className="aromas-editorial-section">
         <div className="aromas-editorial-header">
           <div className="aromas-editorial-title-block">
@@ -625,4 +798,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;  

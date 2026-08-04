@@ -6480,3 +6480,556 @@ button {
     transform: translateX(-34%) !important;
   }
 } 
+/* =============================== */
+/* CURSO DE VELAS COMPLETO         */
+/* =============================== */
+
+.course-full-section {
+  padding: 0 !important;
+  background:
+    radial-gradient(circle at top left, rgba(232, 217, 200, 0.42), transparent 32%),
+    linear-gradient(135deg, #fffaf4 0%, #f5eadc 100%) !important;
+  overflow: hidden;
+}
+
+.course-full-hero {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 82px 7% 34px;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: 72px;
+}
+
+.course-full-content {
+  position: relative;
+}
+
+.course-open-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-bottom: 44px;
+  padding: 0 22px;
+  border-radius: 6px;
+  background: #66713b;
+  color: #fffaf4;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  box-shadow: 0 12px 26px rgba(102, 113, 59, 0.2);
+}
+
+.course-full-section .course-kicker {
+  margin: 0 0 18px;
+  color: #66713b;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+}
+
+.course-full-content h2 {
+  margin: 0 0 24px;
+  color: #2f2a22;
+  font-size: clamp(4.7rem, 7vw, 8.3rem);
+  line-height: 0.9;
+  font-weight: 400;
+  letter-spacing: -0.065em;
+}
+
+.course-full-section .course-description {
+  max-width: 520px;
+  margin: 0 0 28px;
+  color: #3f372f;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.5;
+}
+
+.course-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  margin-top: 26px;
+}
+
+.course-online-seal {
+  position: relative;
+  width: 105px;
+  height: 105px;
+  border: 1.5px solid #7a5a36;
+  border-radius: 999px;
+  color: #66713b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.course-online-seal::after {
+  content: "";
+  position: absolute;
+  right: -18px;
+  top: 18px;
+  width: 34px;
+  height: 70px;
+  border-right: 1.4px solid #66713b;
+  border-radius: 50%;
+  transform: rotate(-8deg);
+  opacity: 0.85;
+}
+
+.course-online-seal strong {
+  font-size: 1.65rem;
+  font-weight: 400;
+}
+
+.course-online-seal span {
+  margin-top: 4px;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.course-full-section .course-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 245px;
+  min-height: 58px;
+  padding: 0 34px;
+  border-radius: 999px;
+  background: #66713b;
+  color: #fffaf4;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 16px 36px rgba(102, 113, 59, 0.24);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.course-full-section .course-button:hover {
+  transform: translateY(-2px);
+  background: #55602f;
+}
+
+.course-full-section .course-image {
+  position: relative;
+  border-radius: 0 42px 42px 0;
+  overflow: hidden;
+  box-shadow: 0 28px 80px rgba(47, 42, 34, 0.16);
+}
+
+.course-full-section .course-image img {
+  width: 100%;
+  height: 540px;
+  object-fit: cover;
+  display: block;
+}
+
+.course-benefits-bar {
+  border-top: 1px solid rgba(213, 170, 85, 0.25);
+  border-bottom: 1px solid rgba(213, 170, 85, 0.18);
+  padding: 24px 7%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  background: rgba(255, 250, 244, 0.55);
+}
+
+.course-benefit-item {
+  min-height: 78px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border-right: 1px solid rgba(197, 151, 70, 0.55);
+}
+
+.course-benefit-item:last-child {
+  border-right: none;
+}
+
+.course-benefit-icon {
+  width: 42px;
+  height: 42px;
+  color: #53602f;
+  flex-shrink: 0;
+}
+
+.course-benefit-item p {
+  margin: 0;
+  color: #3f372f;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.course-details-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 7% 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 78px;
+}
+
+.course-detail-block:first-child {
+  border-right: 1px solid rgba(197, 151, 70, 0.55);
+  padding-right: 70px;
+}
+
+.course-detail-block h3 {
+  margin: 0;
+  color: #53602f;
+  text-align: center;
+  font-size: clamp(2rem, 3vw, 3.1rem);
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.course-small-divider {
+  position: relative;
+  width: 250px;
+  height: 22px;
+  margin: 16px auto 32px;
+}
+
+.course-small-divider::before,
+.course-small-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 95px;
+  height: 1px;
+  background: rgba(197, 151, 70, 0.75);
+}
+
+.course-small-divider::before {
+  left: 0;
+}
+
+.course-small-divider::after {
+  right: 0;
+}
+
+.course-small-divider span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 12px;
+  border-bottom: 1.5px solid #c59746;
+  border-radius: 50%;
+  transform: translate(-50%, -55%) rotate(-14deg);
+}
+
+.course-modalities-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.course-detail-block h4 {
+  margin: 0 0 20px;
+  color: #2f2a22;
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.course-detail-block ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #3f372f;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.course-detail-block li::marker {
+  color: #66713b;
+}
+
+.course-learning ul {
+  max-width: 570px;
+  margin: 0 auto;
+  padding-left: 26px;
+  list-style: none;
+}
+
+.course-learning li {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.course-learning li::before {
+  content: "❧";
+  position: absolute;
+  left: -28px;
+  top: 0;
+  color: #c59746;
+}
+
+.course-bottom-cta {
+  padding: 28px 7%;
+  background:
+    radial-gradient(circle at top left, rgba(213, 170, 85, 0.12), transparent 30%),
+    linear-gradient(135deg, #26341f 0%, #40542a 100%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 42px;
+}
+
+.course-bottom-cta p {
+  max-width: 720px;
+  margin: 0 0 0 auto;
+  color: #fffaf4;
+  font-size: clamp(1.5rem, 2.3vw, 2.45rem);
+  line-height: 1.25;
+  font-weight: 400;
+}
+
+.course-whatsapp-box {
+  width: min(460px, 100%);
+  min-height: 78px;
+  padding: 14px 24px;
+  border: 2px solid #fffaf4;
+  border-radius: 18px;
+  background: rgba(255, 250, 244, 0.9);
+  color: #2f3b22;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: inset 0 0 0 3px rgba(47, 59, 34, 0.12);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.course-whatsapp-box:hover {
+  transform: translateY(-2px);
+  background: #fffaf4;
+}
+
+.course-whatsapp-box svg {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.course-whatsapp-box span {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+/* =============================== */
+/* CURSO MOBILE                    */
+/* =============================== */
+
+@media (max-width: 1000px) {
+  .course-full-hero {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .course-benefits-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .course-benefit-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(197, 151, 70, 0.28);
+  }
+
+  .course-benefit-item:last-child {
+    grid-column: 1 / -1;
+    border-bottom: none;
+  }
+
+  .course-details-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .course-detail-block:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(197, 151, 70, 0.4);
+    padding-right: 0;
+    padding-bottom: 42px;
+  }
+
+  .course-bottom-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .course-bottom-cta p {
+    margin: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .course-full-hero {
+    padding: 54px 20px 26px;
+    gap: 30px;
+  }
+
+  .course-open-badge {
+    min-height: 34px;
+    margin-bottom: 30px;
+    padding: 0 15px;
+    font-size: 0.68rem;
+    letter-spacing: 1.4px;
+  }
+
+  .course-full-section .course-kicker {
+    margin-bottom: 12px;
+    font-size: 0.66rem;
+    letter-spacing: 4px;
+  }
+
+  .course-full-content h2 {
+    font-size: 3.35rem;
+    line-height: 0.94;
+  }
+
+  .course-full-section .course-description {
+    font-size: 1rem;
+    margin-bottom: 22px;
+  }
+
+  .course-cta-row {
+    gap: 18px;
+    align-items: center;
+  }
+
+  .course-online-seal {
+    width: 76px;
+    height: 76px;
+  }
+
+  .course-online-seal::after {
+    display: none;
+  }
+
+  .course-online-seal strong {
+    font-size: 1.18rem;
+  }
+
+  .course-online-seal span {
+    font-size: 0.72rem;
+  }
+
+  .course-full-section .course-button {
+    min-width: 0;
+    flex: 1;
+    min-height: 48px;
+    padding: 0 18px;
+    font-size: 1rem;
+  }
+
+  .course-full-section .course-image {
+    border-radius: 24px;
+  }
+
+  .course-full-section .course-image img {
+    height: 300px;
+  }
+
+  .course-benefits-bar {
+    padding: 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .course-benefit-item {
+    min-height: auto;
+    justify-content: flex-start;
+    padding: 16px 0;
+    gap: 16px;
+  }
+
+  .course-benefit-item:last-child {
+    grid-column: auto;
+  }
+
+  .course-benefit-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .course-benefit-item p {
+    font-size: 0.92rem;
+  }
+
+  .course-details-grid {
+    padding: 42px 22px 38px;
+    gap: 36px;
+  }
+
+  .course-detail-block h3 {
+    font-size: 1.85rem;
+  }
+
+  .course-small-divider {
+    width: 210px;
+    margin-bottom: 24px;
+  }
+
+  .course-small-divider::before,
+  .course-small-divider::after {
+    width: 78px;
+  }
+
+  .course-modalities-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .course-detail-block h4 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .course-detail-block ul {
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .course-bottom-cta {
+    padding: 30px 20px 34px;
+    gap: 24px;
+  }
+
+  .course-bottom-cta p {
+    font-size: 1.45rem;
+  }
+
+  .course-whatsapp-box {
+    min-height: 70px;
+    border-radius: 16px;
+    padding: 12px 16px;
+  }
+
+  .course-whatsapp-box svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .course-whatsapp-box span {
+    font-size: 0.98rem;
+  }
+} 
