@@ -1,4 +1,7 @@
-const API_URL = "https://harmonia-backend-4uu0.onrender.com/api/products";
+import type { Product } from "../types/Product";
+import { API_BASE_URL, getAuthHeaders, handleApiResponse } from "./api";
+
+const API_URL = `${API_BASE_URL}/products`;
 
 export const getProducts = async () => {
   const response = await fetch(API_URL);
@@ -18,16 +21,11 @@ export const getProductById = async (id: string) => {
 export const createProduct = async (productData: FormData) => {
   const response = await fetch(API_URL, {
     method: "POST",
+    headers: getAuthHeaders(),
     body: productData
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Error al crear producto");
-  }
-
-  return data;
+  return handleApiResponse<Product>(response);
 };
 
 export const updateProduct = async (
@@ -36,33 +34,25 @@ export const updateProduct = async (
 ) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
+    headers: getAuthHeaders(),
     body: productData
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Error al actualizar producto");
-  }
-
-  return data;
+  return handleApiResponse<Product>(response);
 };
 
 export const deleteProduct = async (id: string) => {
   const response = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
+    headers: getAuthHeaders()
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Error al eliminar producto");
-  }
-
-  return data;
+  return handleApiResponse<{ message: string }>(response);
 };
 
-export const getProductsAdmin = async () => {
-  const response = await fetch(`${API_URL}/admin/all`);
-  return response.json();
-}; 
+export const getProductsAdmin = async (): Promise<Product[]> => {
+  const response = await fetch(`${API_URL}/admin/all`, {
+    headers: getAuthHeaders()
+  });
+  return handleApiResponse<Product[]>(response);
+};

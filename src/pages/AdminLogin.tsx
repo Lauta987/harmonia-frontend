@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { loginAdmin } from "../services/adminService";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -15,31 +16,14 @@ function AdminLogin() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://harmonia-backend-4uu0.onrender.com/api/admin/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            username,
-            password
-          })
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.message || "Usuario o contraseña incorrectos");
-        return;
-      }
+      const data = await loginAdmin(username, password);
 
       localStorage.setItem("token", data.token);
       navigate("/admin");
     } catch (error) {
-      setError("Error al iniciar sesión");
+      setError(
+        error instanceof Error ? error.message : "Error al iniciar sesión"
+      );
     }
   };
 
@@ -76,4 +60,4 @@ function AdminLogin() {
   );
 }
 
-export default AdminLogin; 
+export default AdminLogin;

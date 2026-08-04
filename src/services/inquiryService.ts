@@ -1,4 +1,6 @@
-const API_URL = "https://harmonia-backend-4uu0.onrender.com/api/inquiries";
+import { API_BASE_URL, getAuthHeaders, handleApiResponse } from "./api";
+
+const API_URL = `${API_BASE_URL}/inquiries`;
 
 export interface InquiryStatsResponse {
   totalConsultas: number;
@@ -33,6 +35,8 @@ export const registerInquiry = async (
 };
 
 export const getInquiryStats = async (): Promise<InquiryStatsResponse> => {
-  const response = await fetch(`${API_URL}/stats`);
-  return response.json();
+  const response = await fetch(`${API_URL}/stats`, {
+    headers: getAuthHeaders()
+  });
+  return handleApiResponse<InquiryStatsResponse>(response);
 }; 

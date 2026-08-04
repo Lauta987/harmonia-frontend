@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 
 import App from "./App";
@@ -10,16 +10,7 @@ import ProductsAdmin from "./pages/ProductsAdmin";
 import CreateProduct from "./pages/CreateProduct";
 import EditProduct from "./pages/EditProduct";
 import { CartProvider } from "./context/CartContext";
-
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    return <Navigate to="/admin/login" replace />;
-  }
-
-  return <>{children}</>;
-}
+import ProtectedRoute from "./components/ProtectedRoute";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

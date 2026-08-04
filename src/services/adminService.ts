@@ -1,4 +1,6 @@
-const API_URL = "https://harmonia-backend-4uu0.onrender.com/api/admin";
+import { API_BASE_URL, getAuthHeaders, handleApiResponse } from "./api";
+
+const API_URL = `${API_BASE_URL}/admin`;
 
 export const loginAdmin = async (
   username: string,
@@ -15,11 +17,18 @@ export const loginAdmin = async (
     })
   });
 
-  const data = await response.json();
+  return handleApiResponse<{ token: string }>(response);
+};
+
+export const checkAdminSession = async (): Promise<boolean> => {
+  const response = await fetch(`${API_URL}/check`, {
+    headers: getAuthHeaders()
+  });
 
   if (!response.ok) {
-    throw new Error(data.message);
+    localStorage.removeItem("token");
+    return false;
   }
 
-  return data;
+  return true;
 }; 
