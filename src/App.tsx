@@ -330,19 +330,25 @@ function App() {
         </div>
       </section>
 
-      <section id="destacados" className="section">
+      <section id="destacados" className="section featured-carousel-section">
         <p className="section-subtitle">Nuestros favoritos</p>
         <h2>Productos destacados</h2>
 
-        <div className="products-grid">
-          {featuredProducts.map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-              image={getProductImages(product)[0]}
-              onClick={() => setSelectedProduct(product)}
-            />
-          ))}
+        <div className="featured-carousel">
+          <div className="featured-carousel-track">
+            {[...featuredProducts, ...featuredProducts].map((product, index) => (
+              <div
+                className="featured-carousel-item"
+                key={`${product._id}-${index}`}
+              >
+                <ProductCard
+                  product={product}
+                  image={getProductImages(product)[0]}
+                  onClick={() => setSelectedProduct(product)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -798,4 +804,4 @@ function App() {
   );
 }
 
-export default App;  
+export default App;   
