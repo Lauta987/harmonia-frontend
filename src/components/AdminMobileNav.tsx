@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Package, Plus, MoreHorizontal } from "lucide-react";
+import { Home, Leaf, Package, Plus } from "lucide-react";
 
 function AdminMobileNav() {
   const location = useLocation();
@@ -32,9 +32,12 @@ function AdminMobileNav() {
         <span>Nueva</span>
       </Link>
 
-      <Link to="/admin" className="">
-        <MoreHorizontal size={20} strokeWidth={2.2} />
-        <span>Más</span>
+      <Link
+        to="/admin/aromas"
+        className={isActive("/admin/aromas") ? "active" : ""}
+      >
+        <Leaf size={20} strokeWidth={2.2} />
+        <span>Aromas</span>
       </Link>
     </nav>
   );

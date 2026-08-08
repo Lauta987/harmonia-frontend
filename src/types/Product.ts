@@ -1,3 +1,10 @@
+import type { Aroma } from "./Aroma";
+
+export interface ReadyStockItem {
+  aroma: string | Aroma;
+  quantity: number;
+}
+
 export interface Product {
   _id: string;
   name: string;
@@ -11,4 +18,5 @@ export interface Product {
   available: boolean;
   featured: boolean;
   category?: "classic" | "bakery" | "wax-melts" | "candle-box";
+  readyStock?: ReadyStockItem[];
 } 

@@ -3,7 +3,8 @@ import {
   LayoutDashboard,
   Package,
   LogOut,
-  CircleCheck
+  CircleCheck,
+  Leaf
 } from "lucide-react";
 import logo from "../assets/logo.png";
 
@@ -51,6 +52,18 @@ function AdminSidebar() {
           >
             <Package size={19} strokeWidth={2} />
             Productos
+          </Link>
+
+          <Link
+            to="/admin/aromas"
+            className={
+              location.pathname.includes("/admin/aromas")
+                ? "admin-nav-active"
+                : ""
+            }
+          >
+            <Leaf size={19} strokeWidth={2} />
+            Aromas
           </Link>
         </nav>
       </div>

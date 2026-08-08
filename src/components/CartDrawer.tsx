@@ -1,5 +1,6 @@
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import {
+  getCartItemAvailabilityLabel,
   getCartItemUnitPrice,
   hasWholesaleApplied,
   useCart
@@ -36,11 +37,14 @@ function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         const wholesaleText = hasWholesaleApplied(item, totalItems)
           ? "Precio mayorista aplicado"
           : "Precio unitario";
+        const aromaName = item.aromaName || item.aroma || "A confirmar";
+        const availabilityText = getCartItemAvailabilityLabel(item);
 
         return `- ${item.quantity} x ${item.name} — $${formatPrice(subtotal)}
-  ${wholesaleText}: $${formatPrice(finalUnitPrice)} c/u
-  Aroma: ${item.aroma?.trim() || "A confirmar"}
-  Personalización: ${item.customization?.trim() || "Sin aclaraciones"}`;
+${wholesaleText}: $${formatPrice(finalUnitPrice)} c/u
+Aroma: ${aromaName}
+Estado: ${availabilityText}
+Personalización: ${item.customization?.trim() || "Sin aclaraciones"}`;
       })
       .join("\n\n");
 
@@ -63,8 +67,6 @@ Total: $${formatPrice(totalPrice)}
 
   return (
     <div className={isOpen ? "cart-drawer-overlay open" : "cart-drawer-overlay"}>
-      <div className="cart-drawer-backdrop" onClick={onClose} />
-
       <aside className={isOpen ? "cart-drawer open" : "cart-drawer"}>
         <div className="cart-drawer-header">
           <div>
@@ -93,9 +95,12 @@ Total: $${formatPrice(totalPrice)}
                 const finalUnitPrice = getCartItemUnitPrice(item, totalItems);
                 const subtotal = finalUnitPrice * item.quantity;
                 const wholesaleActive = hasWholesaleApplied(item, totalItems);
+                const aromaName = item.aromaName || item.aroma || "A confirmar";
+                const availabilityText = getCartItemAvailabilityLabel(item);
+                const isReady = item.aromaAvailabilityStatus === "ready";
 
                 return (
-                  <article className="cart-item" key={item.productId}>
+                  <article className="cart-item" key={item.lineId}>
                     <div className="cart-item-image">
                       {item.image ? (
                         <img src={item.image} alt={item.name} />
@@ -116,10 +121,19 @@ Total: $${formatPrice(totalPrice)}
                         )}
                       </p>
 
+                      <div className="cart-item-aroma-summary">
+                        <span>Aroma: {aromaName}</span>
+
+                        <strong className={isReady ? "ready" : "custom-order"}>
+                          {isReady ? "✓ " : "◷ "}
+                          {availabilityText}
+                        </strong>
+                      </div>
+
                       <div className="cart-quantity">
                         <button
                           type="button"
-                          onClick={() => decreaseQuantity(item.productId)}
+                          onClick={() => decreaseQuantity(item.lineId)}
                         >
                           <Minus size={15} strokeWidth={2.4} />
                         </button>
@@ -128,7 +142,7 @@ Total: $${formatPrice(totalPrice)}
 
                         <button
                           type="button"
-                          onClick={() => increaseQuantity(item.productId)}
+                          onClick={() => increaseQuantity(item.lineId)}
                         >
                           <Plus size={15} strokeWidth={2.4} />
                         </button>
@@ -141,29 +155,18 @@ Total: $${formatPrice(totalPrice)}
                       <button
                         type="button"
                         className="cart-remove-button"
-                        onClick={() => removeFromCart(item.productId)}
+                        onClick={() => removeFromCart(item.lineId)}
                       >
                         <Trash2 size={16} strokeWidth={2.2} />
                       </button>
                     </div>
 
                     <div className="cart-item-details">
-                      <label>Aroma elegido</label>
-                      <input
-                        value={item.aroma || ""}
-                        onChange={(e) =>
-                          updateItemDetails(item.productId, {
-                            aroma: e.target.value
-                          })
-                        }
-                        placeholder="Ej: Vainilla, coco, lavanda..."
-                      />
-
                       <label>Personalización</label>
                       <textarea
                         value={item.customization || ""}
                         onChange={(e) =>
-                          updateItemDetails(item.productId, {
+                          updateItemDetails(item.lineId, {
                             customization: e.target.value
                           })
                         }

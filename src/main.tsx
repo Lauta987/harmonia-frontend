@@ -9,6 +9,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ProductsAdmin from "./pages/ProductsAdmin";
 import CreateProduct from "./pages/CreateProduct";
 import EditProduct from "./pages/EditProduct";
+import AromasAdmin from "./pages/AromasAdmin";
+import CreateAroma from "./pages/CreateAroma";
+import EditAroma from "./pages/EditAroma";
 import { CartProvider } from "./context/CartContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -53,6 +56,33 @@ createRoot(document.getElementById("root")!).render(
             element={
               <ProtectedRoute>
                 <EditProduct />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/aromas"
+            element={
+              <ProtectedRoute>
+                <AromasAdmin />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/aromas/create"
+            element={
+              <ProtectedRoute>
+                <CreateAroma />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/aromas/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditAroma />
               </ProtectedRoute>
             }
           />

@@ -1,9 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminSidebar from "../components/AdminSidebar";
 import { getProductById, updateProduct } from "../services/productService";
+import { getAromas } from "../services/aromaService";
+import type { Aroma } from "../types/Aroma";
+import type { Product, ReadyStockItem } from "../types/Product";
 
 const API_BASE_URL = "https://harmonia-backend-4uu0.onrender.com";
+
+interface ReadyStockDraft {
+  aroma: string;
+  quantity: string;
+  aromaName?: string;
+}
+
+const getReadyStockAromaId = (stockItem: ReadyStockItem) => {
+  if (typeof stockItem.aroma === "string") return stockItem.aroma;
+
+  return stockItem.aroma._id;
+};
+
+const getReadyStockAromaName = (stockItem: ReadyStockItem) => {
+  if (typeof stockItem.aroma === "string") return "";
+
+  return stockItem.aroma.name;
+};
 
 function EditProduct() {
   const navigate = useNavigate();
@@ -22,15 +43,41 @@ function EditProduct() {
 
   const [currentImages, setCurrentImages] = useState<string[]>([]);
   const [newImages, setNewImages] = useState<File[]>([]);
+  const [aromas, setAromas] = useState<Aroma[]>([]);
+  const [aromasLoading, setAromasLoading] = useState(false);
+  const [aromasError, setAromasError] = useState("");
+  const [readyStock, setReadyStock] = useState<ReadyStockDraft[]>([]);
+  const [selectedAromaId, setSelectedAromaId] = useState("");
+  const [selectedQuantity, setSelectedQuantity] = useState("1");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchAromas = async () => {
+      try {
+        setAromasLoading(true);
+        setAromasError("");
+
+        const data = await getAromas();
+
+        setAromas(data.filter((aroma) => aroma.available));
+      } catch (error) {
+        console.error("Error al cargar aromas:", error);
+        setAromasError("No se pudieron cargar los aromas.");
+      } finally {
+        setAromasLoading(false);
+      }
+    };
+
+    fetchAromas();
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
       if (!id) return;
 
       try {
-        const product = await getProductById(id);
+        const product: Product = await getProductById(id);
 
         setForm({
           name: product.name,
@@ -44,6 +91,14 @@ function EditProduct() {
         });
 
         setCurrentImages(product.images || []);
+
+        setReadyStock(
+          (product.readyStock || []).map((stockItem) => ({
+            aroma: getReadyStockAromaId(stockItem),
+            quantity: String(stockItem.quantity),
+            aromaName: getReadyStockAromaName(stockItem)
+          }))
+        );
       } catch (error) {
         console.error("Error al cargar producto:", error);
         setError("No se pudo cargar el producto.");
@@ -52,6 +107,19 @@ function EditProduct() {
 
     fetchProduct();
   }, [id]);
+
+  const availableAromasToAdd = useMemo(() => {
+    const usedAromaIds = new Set(readyStock.map((item) => item.aroma));
+
+    return aromas.filter((aroma) => !usedAromaIds.has(aroma._id));
+  }, [aromas, readyStock]);
+
+  const getAromaName = (aromaId: string) => {
+    const activeAromaName = aromas.find((aroma) => aroma._id === aromaId)?.name;
+    const savedAromaName = readyStock.find((item) => item.aroma === aromaId)?.aromaName;
+
+    return activeAromaName || savedAromaName || "Aroma";
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -79,7 +147,6 @@ function EditProduct() {
 
   const handleImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []);
-
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
     setError("");
@@ -108,6 +175,80 @@ function EditProduct() {
   const getImageUrl = (image: string) => {
     if (image.startsWith("http")) return image;
     return `${API_BASE_URL}${image}`;
+  };
+
+  const handleAddReadyStock = () => {
+    setError("");
+
+    if (!selectedAromaId) {
+      setError("Elegí un aroma para agregar al stock inmediato.");
+      return;
+    }
+
+    const quantity = Number(selectedQuantity);
+
+    if (!Number.isInteger(quantity) || quantity < 0) {
+      setError("La cantidad del stock inmediato debe ser un número entero igual o mayor a 0.");
+      return;
+    }
+
+    const aromaAlreadyAdded = readyStock.some(
+      (item) => item.aroma === selectedAromaId
+    );
+
+    if (aromaAlreadyAdded) {
+      setError("Ese aroma ya fue agregado al stock inmediato de este producto.");
+      return;
+    }
+
+    setReadyStock((current) => [
+      ...current,
+      {
+        aroma: selectedAromaId,
+        quantity: String(quantity),
+        aromaName: getAromaName(selectedAromaId)
+      }
+    ]);
+
+    setSelectedAromaId("");
+    setSelectedQuantity("1");
+  };
+
+  const handleReadyStockQuantityChange = (aromaId: string, quantity: string) => {
+    setReadyStock((current) =>
+      current.map((item) =>
+        item.aroma === aromaId
+          ? {
+              ...item,
+              quantity
+            }
+          : item
+      )
+    );
+  };
+
+  const handleRemoveReadyStock = (aromaId: string) => {
+    setReadyStock((current) => current.filter((item) => item.aroma !== aromaId));
+  };
+
+  const validateReadyStock = () => {
+    const aromaIds = new Set<string>();
+
+    for (const item of readyStock) {
+      if (aromaIds.has(item.aroma)) {
+        return "No puede repetirse el mismo aroma en el stock inmediato.";
+      }
+
+      aromaIds.add(item.aroma);
+
+      const quantity = Number(item.quantity);
+
+      if (!Number.isInteger(quantity) || quantity < 0) {
+        return "Todas las cantidades del stock inmediato deben ser enteros iguales o mayores a 0.";
+      }
+    }
+
+    return "";
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -142,6 +283,13 @@ function EditProduct() {
       return;
     }
 
+    const readyStockError = validateReadyStock();
+
+    if (readyStockError) {
+      setError(readyStockError);
+      return;
+    }
+
     try {
       setLoading(true);
 
@@ -155,6 +303,16 @@ function EditProduct() {
       formData.append("available", String(form.available));
       formData.append("featured", String(form.featured));
       formData.append("category", form.category);
+
+      formData.append(
+        "readyStock",
+        JSON.stringify(
+          readyStock.map((item) => ({
+            aroma: item.aroma,
+            quantity: Number(item.quantity)
+          }))
+        )
+      );
 
       newImages.forEach((image) => {
         formData.append("images", image);
@@ -227,8 +385,101 @@ function EditProduct() {
             <option value="classic">Velas clásicas</option>
             <option value="bakery">Línea Bakery</option>
             <option value="wax-melts">Wax Melts</option>
-            <option value="candle-box">Candle Box</option> 
+            <option value="candle-box">Candle Box</option>
           </select>
+
+          <section className="admin-ready-stock-section">
+            <div className="admin-ready-stock-header">
+              <div>
+                <h2>Stock para entrega inmediata</h2>
+                <p>
+                  Cargá qué aromas ya están fabricados para este producto.
+                  Los demás aromas seguirán disponibles por encargo.
+                </p>
+              </div>
+            </div>
+
+            {aromasError && (
+              <p className="admin-form-error">{aromasError}</p>
+            )}
+
+            <div className="admin-ready-stock-controls">
+              <div>
+                <label>Aroma</label>
+                <select
+                  value={selectedAromaId}
+                  onChange={(event) => setSelectedAromaId(event.target.value)}
+                  disabled={aromasLoading}
+                >
+                  <option value="">
+                    {aromasLoading ? "Cargando aromas..." : "Seleccionar aroma"}
+                  </option>
+
+                  {availableAromasToAdd.map((aroma) => (
+                    <option key={aroma._id} value={aroma._id}>
+                      {aroma.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label>Cantidad lista</label>
+                <input
+                  type="number"
+                  min="0"
+                  step="1"
+                  value={selectedQuantity}
+                  onChange={(event) => setSelectedQuantity(event.target.value)}
+                />
+              </div>
+
+              <button type="button" onClick={handleAddReadyStock}>
+                Agregar aroma
+              </button>
+            </div>
+
+            {readyStock.length === 0 ? (
+              <p className="admin-ready-stock-empty">
+                Este producto todavía no tiene aromas marcados para entrega inmediata.
+              </p>
+            ) : (
+              <div className="admin-ready-stock-list">
+                {readyStock.map((item) => (
+                  <article className="admin-ready-stock-item" key={item.aroma}>
+                    <div>
+                      <strong>{getAromaName(item.aroma)}</strong>
+                      <span>
+                        {Number(item.quantity) > 0
+                          ? "Entrega inmediata"
+                          : "Disponible por encargo"}
+                      </span>
+                    </div>
+
+                    <input
+                      type="number"
+                      min="0"
+                      step="1"
+                      value={item.quantity}
+                      onChange={(event) =>
+                        handleReadyStockQuantityChange(
+                          item.aroma,
+                          event.target.value
+                        )
+                      }
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveReadyStock(item.aroma)}
+                    >
+                      Eliminar
+                    </button>
+                  </article>
+                ))}
+              </div>
+            )}
+          </section>
 
           {currentImages.length > 0 && (
             <>
