@@ -8687,3 +8687,129 @@ button {
     white-space: normal !important;
   }
 } 
+/* ========================================= */
+/* FOOTER / CONTACTO - CUADRILLÉ ONDULADO    */
+/* ========================================= */
+
+.footer {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  background: #f7edd9 !important;
+}
+
+/* DAMERO VERDE + CREMA */
+.footer::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: -12% !important;
+  z-index: -2 !important;
+
+  background:
+    conic-gradient(
+      from 90deg,
+      #f7edd9 0deg 90deg,
+      #4f7657 90deg 180deg,
+      #f7edd9 180deg 270deg,
+      #4f7657 270deg 360deg
+    ) !important;
+
+  background-size: 300px 300px !important;
+
+  transform:
+    scale(1.14)
+    rotate(-1.5deg)
+    skewX(-2.5deg)
+    skewY(1.5deg) !important;
+
+  transform-origin: center center !important;
+}
+
+/* CAPA SUAVE PARA QUE SE PAREZCA MÁS A LA REFERENCIA */
+.footer::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 25%,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 75% 70%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 35%
+    ) !important;
+
+  pointer-events: none !important;
+}
+
+/* ASEGURAR QUE EL CONTENIDO QUEDE ARRIBA */
+.footer > * {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .footer::before {
+    inset: -15% !important;
+    background-size: 170px 170px !important;
+
+    transform:
+      scale(1.18)
+      rotate(-1.2deg)
+      skewX(-3deg)
+      skewY(2deg) !important;
+  }
+} 
+/* ========================================= */
+/* FOOTER - TEXTOS OSCUROS SOBRE EL DAMERO   */
+/* ========================================= */
+
+.footer,
+.footer p,
+.footer span,
+.footer h2,
+.footer h3,
+.footer a {
+  color: #18311e !important;
+}
+
+/* subtítulo "NUESTRAS REDES" */
+.footer > .section-subtitle {
+  color: #b77d21 !important;
+}
+
+/* título principal */
+.footer > h2 {
+  color: #18311e !important;
+}
+
+/* texto debajo del título */
+.footer-text {
+  color: #18311e !important;
+}
+
+/* textos de las cards */
+.social-card,
+.social-card h3,
+.social-card p {
+  color: #18311e !important;
+}
+
+/* textos del pie */
+.footer-copy,
+.footer-credit {
+  color: #18311e !important;
+}
+
+/* link Innova */
+.footer-credit a {
+  color: #18311e !important;
+  font-weight: 700 !important;
+  text-decoration: underline !important;
+} 
