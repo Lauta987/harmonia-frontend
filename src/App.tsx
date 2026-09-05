@@ -67,6 +67,8 @@ import "./index.css";
 
 type CatalogCategory = "classic" | "bakery" | "wax-melts" | "candle-box";
 
+const SHOW_COURSE_SECTION = false;
+
 const productImages: Record<string, string[]> = {
   "Vela Osito": [VelaOsito1, VelaOsito2, VelaOsito3],
   "Vela Macarron": [VelaMacarron1, VelaMacarron2, VelaMacarron3],
@@ -221,9 +223,11 @@ function App() {
             Refill
           </a>
 
-          <a href="#curso" onClick={() => setIsMobileMenuOpen(false)}>
-            Curso
-          </a>
+          {SHOW_COURSE_SECTION && (
+            <a href="#curso" onClick={() => setIsMobileMenuOpen(false)}>
+              Curso
+            </a>
+          )}
 
           <a href="#aromas" onClick={() => setIsMobileMenuOpen(false)}>
             Aromas
@@ -496,155 +500,157 @@ function App() {
         </div>
       </section>
 
-      <section id="curso" className="course-section course-full-section">
-        <div className="course-full-hero">
-          <div className="course-full-content">
-            <span className="course-open-badge">Inscripciones abiertas</span>
+      {SHOW_COURSE_SECTION && (
+        <section id="curso" className="course-section course-full-section">
+          <div className="course-full-hero">
+            <div className="course-full-content">
+              <span className="course-open-badge">Inscripciones abiertas</span>
 
-            <p className="course-kicker">Taller Harmonia</p>
+              <p className="course-kicker">Taller Harmonia</p>
 
-            <h2>
-              Curso de velas
-              <br />
-              de soja
-            </h2>
+              <h2>
+                Curso de velas
+                <br />
+                de soja
+              </h2>
 
-            <p className="course-description">
-              Aprendé desde cero, paso a paso.
-            </p>
+              <p className="course-description">
+                Aprendé desde cero, paso a paso.
+              </p>
 
-            <div className="course-cta-row">
-              <div className="course-online-seal">
-                <strong>100%</strong>
-                <span>Online</span>
-              </div>
+              <div className="course-cta-row">
+                <div className="course-online-seal">
+                  <strong>100%</strong>
+                  <span>Online</span>
+                </div>
 
-              <a
-                href={courseWhatsAppUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="course-button"
-              >
-                Quiero saber más
-              </a>
-            </div>
-          </div>
-
-          <div className="course-image">
-            <img src={cursoVelas} alt="Curso de velas de soja" />
-          </div>
-        </div>
-
-        <div className="course-benefits-bar">
-          <div className="course-benefit-item">
-            <BookOpen className="course-benefit-icon" strokeWidth={1.5} />
-            <p>
-              PDF completo
-              <br />y guiado
-            </p>
-          </div>
-
-          <div className="course-benefit-item">
-            <PlayCircle className="course-benefit-icon" strokeWidth={1.5} />
-            <p>
-              Videos explicativos
-              <br />
-              paso a paso
-            </p>
-          </div>
-
-          <div className="course-benefit-item">
-            <Monitor className="course-benefit-icon" strokeWidth={1.5} />
-            <p>
-              Acceso de por vida
-              <br />
-              al contenido
-            </p>
-          </div>
-
-          <div className="course-benefit-item">
-            <Users className="course-benefit-icon" strokeWidth={1.5} />
-            <p>
-              Opción con
-              <br />
-              clase en vivo
-            </p>
-          </div>
-
-          <div className="course-benefit-item">
-            <Gift className="course-benefit-icon" strokeWidth={1.5} />
-            <p>
-              Bonus
-              <br />
-              exclusivos
-            </p>
-          </div>
-        </div>
-
-        <div className="course-details-grid">
-          <div className="course-detail-block course-modalities">
-            <h3>Modalidades</h3>
-            <div className="course-small-divider">
-              <span></span>
-            </div>
-
-            <div className="course-modalities-grid">
-              <div>
-                <h4>Curso digital</h4>
-                <ul>
-                  <li>PDF completo</li>
-                  <li>Videos paso a paso</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4>Curso premium</h4>
-                <ul>
-                  <li>PDF completo</li>
-                  <li>Videos paso a paso</li>
-                  <li>Clase final en vivo por Zoom</li>
-                </ul>
+                <a
+                  href={courseWhatsAppUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="course-button"
+                >
+                  Quiero saber más
+                </a>
               </div>
             </div>
+
+            <div className="course-image">
+              <img src={cursoVelas} alt="Curso de velas de soja" />
+            </div>
           </div>
 
-          <div className="course-detail-block course-learning">
-            <h3>¿Qué vas a aprender?</h3>
-            <div className="course-small-divider">
-              <span></span>
+          <div className="course-benefits-bar">
+            <div className="course-benefit-item">
+              <BookOpen className="course-benefit-icon" strokeWidth={1.5} />
+              <p>
+                PDF completo
+                <br />y guiado
+              </p>
             </div>
 
-            <ul>
-              <li>Materiales y herramientas</li>
-              <li>Cálculos y preparación</li>
-              <li>Elaboración paso a paso</li>
-              <li>Errores frecuentes y soluciones</li>
-              <li>Costos, precios y primeros pasos para vender</li>
-              <li>¡Y mucho más!</li>
-            </ul>
+            <div className="course-benefit-item">
+              <PlayCircle className="course-benefit-icon" strokeWidth={1.5} />
+              <p>
+                Videos explicativos
+                <br />
+                paso a paso
+              </p>
+            </div>
+
+            <div className="course-benefit-item">
+              <Monitor className="course-benefit-icon" strokeWidth={1.5} />
+              <p>
+                Acceso de por vida
+                <br />
+                al contenido
+              </p>
+            </div>
+
+            <div className="course-benefit-item">
+              <Users className="course-benefit-icon" strokeWidth={1.5} />
+              <p>
+                Opción con
+                <br />
+                clase en vivo
+              </p>
+            </div>
+
+            <div className="course-benefit-item">
+              <Gift className="course-benefit-icon" strokeWidth={1.5} />
+              <p>
+                Bonus
+                <br />
+                exclusivos
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="course-bottom-cta">
-          <p>
-            No necesitás experiencia previa.
-            <br />
-            Solo ganas de aprender y disfrutar del proceso.
-          </p>
+          <div className="course-details-grid">
+            <div className="course-detail-block course-modalities">
+              <h3>Modalidades</h3>
+              <div className="course-small-divider">
+                <span></span>
+              </div>
 
-          <a
-            href={courseWhatsAppUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="course-whatsapp-box"
-          >
-            <MessageCircle strokeWidth={1.6} />
-            <span>
-              Escribime por WhatsApp para más info y reservar tu lugar
-            </span>
-          </a>
-        </div>
-      </section>
+              <div className="course-modalities-grid">
+                <div>
+                  <h4>Curso digital</h4>
+                  <ul>
+                    <li>PDF completo</li>
+                    <li>Videos paso a paso</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4>Curso premium</h4>
+                  <ul>
+                    <li>PDF completo</li>
+                    <li>Videos paso a paso</li>
+                    <li>Clase final en vivo por Zoom</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="course-detail-block course-learning">
+              <h3>¿Qué vas a aprender?</h3>
+              <div className="course-small-divider">
+                <span></span>
+              </div>
+
+              <ul>
+                <li>Materiales y herramientas</li>
+                <li>Cálculos y preparación</li>
+                <li>Elaboración paso a paso</li>
+                <li>Errores frecuentes y soluciones</li>
+                <li>Costos, precios y primeros pasos para vender</li>
+                <li>¡Y mucho más!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="course-bottom-cta">
+            <p>
+              No necesitás experiencia previa.
+              <br />
+              Solo ganas de aprender y disfrutar del proceso.
+            </p>
+
+            <a
+              href={courseWhatsAppUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="course-whatsapp-box"
+            >
+              <MessageCircle strokeWidth={1.6} />
+              <span>
+                Escribime por WhatsApp para más info y reservar tu lugar
+              </span>
+            </a>
+          </div>
+        </section>
+      )}
 
       <section id="aromas" className="aromas-editorial-section">
         <div className="aromas-editorial-header">
@@ -804,4 +810,4 @@ function App() {
   );
 }
 
-export default App;   
+export default App; 
