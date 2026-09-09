@@ -455,4 +455,4 @@ function ProductModal({ product, images, onClose }: ProductModalProps) {
   );
 }
 
-export default ProductModal; 
+export default ProductModal;  

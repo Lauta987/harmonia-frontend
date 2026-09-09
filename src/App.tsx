@@ -131,6 +131,11 @@ function App() {
     aromas: string[];
   } | null>(null);
 
+  const isOverlayOpen =
+    selectedProduct !== null ||
+    selectedAromaCategory !== null ||
+    isCartOpen;
+
   useEffect(() => {
     const fetchData = async () => {
       const featuredData = await getFeaturedProducts();
@@ -142,6 +147,40 @@ function App() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (!isOverlayOpen) return;
+
+    const scrollY = window.scrollY;
+
+    const previousBodyPosition = document.body.style.position;
+    const previousBodyTop = document.body.style.top;
+    const previousBodyLeft = document.body.style.left;
+    const previousBodyRight = document.body.style.right;
+    const previousBodyWidth = document.body.style.width;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.position = previousBodyPosition;
+      document.body.style.top = previousBodyTop;
+      document.body.style.left = previousBodyLeft;
+      document.body.style.right = previousBodyRight;
+      document.body.style.width = previousBodyWidth;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+
+      window.scrollTo(0, scrollY);
+    };
+  }, [isOverlayOpen]);
 
   const getProductImages = (product: Product) => {
     if (product.images && product.images.length > 0) {
@@ -803,11 +842,13 @@ function App() {
         />
       )}
 
-      <CartButton onClick={() => setIsCartOpen(true)} />
+      {!isOverlayOpen && (
+        <CartButton onClick={() => setIsCartOpen(true)} />
+      )}
 
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </main>
   );
 }
 
-export default App; 
+export default App;  
