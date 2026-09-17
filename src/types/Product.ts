@@ -5,6 +5,11 @@ export interface ReadyStockItem {
   quantity: number;
 }
 
+export interface ImagePosition {
+  x: number;
+  y: number;
+}
+
 export interface Product {
   _id: string;
   name: string;
@@ -14,9 +19,11 @@ export interface Product {
   wholesalePrice: number;
   wholesaleMinQuantity: number;
   images: string[];
+  imagePositions?: ImagePosition[];
   imageUrl?: string;
   available: boolean;
   featured: boolean;
   category?: "classic" | "bakery" | "wax-melts" | "candle-box";
   readyStock?: ReadyStockItem[];
-} 
+}
+ 

@@ -46,6 +46,10 @@ function ProductModal({ product, images, onClose }: ProductModalProps) {
 
   const hasMultipleImages = images.length > 1;
   const activeImage = images[currentImage] || images[0];
+  const activeImagePosition = product.imagePositions?.[currentImage] || {
+    x: 50,
+    y: 50
+  };
 
   const unitPrice = product.unitPrice || product.price || 0;
   const wholesalePrice = product.wholesalePrice || product.price || 0;
@@ -203,7 +207,15 @@ function ProductModal({ product, images, onClose }: ProductModalProps) {
               </button>
             )}
 
-            {activeImage && <img src={activeImage} alt={product.name} />}
+            {activeImage && (
+              <img
+                src={activeImage}
+                alt={product.name}
+                style={{
+                  objectPosition: `${activeImagePosition.x}% ${activeImagePosition.y}%`
+                }}
+              />
+            )}
 
             {hasMultipleImages && (
               <button

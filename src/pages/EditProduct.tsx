@@ -5,6 +5,10 @@ import { getProductById, updateProduct } from "../services/productService";
 import { getAromas } from "../services/aromaService";
 import type { Aroma } from "../types/Aroma";
 import type { Product, ReadyStockItem } from "../types/Product";
+import ImageCropEditor, {
+  prepareFilesForUpload,
+  type CropPosition
+} from "../components/ImageCropEditor";
 
 const API_BASE_URL = "https://harmonia-backend-4uu0.onrender.com";
 
@@ -42,7 +46,9 @@ function EditProduct() {
   });
 
   const [currentImages, setCurrentImages] = useState<string[]>([]);
+  const [currentImagePositions, setCurrentImagePositions] = useState<CropPosition[]>([]);
   const [newImages, setNewImages] = useState<File[]>([]);
+  const [newImagePositions, setNewImagePositions] = useState<CropPosition[]>([]);
   const [aromas, setAromas] = useState<Aroma[]>([]);
   const [aromasLoading, setAromasLoading] = useState(false);
   const [aromasError, setAromasError] = useState("");
@@ -90,7 +96,13 @@ function EditProduct() {
           category: product.category || "classic"
         });
 
-        setCurrentImages(product.images || []);
+        const savedImages = product.images || [];
+        const savedPositions = product.imagePositions || [];
+
+        setCurrentImages(savedImages);
+        setCurrentImagePositions(
+          savedImages.map((_, index) => savedPositions[index] || { x: 50, y: 50 })
+        );
 
         setReadyStock(
           (product.readyStock || []).map((stockItem) => ({
@@ -155,6 +167,7 @@ function EditProduct() {
       setError("Podés subir como máximo 3 imágenes.");
       e.target.value = "";
       setNewImages([]);
+      setNewImagePositions([]);
       return;
     }
 
@@ -166,10 +179,12 @@ function EditProduct() {
       setError("Formato no permitido. Subí imágenes JPG, PNG o WEBP.");
       e.target.value = "";
       setNewImages([]);
+      setNewImagePositions([]);
       return;
     }
 
     setNewImages(selectedFiles);
+    setNewImagePositions(selectedFiles.map(() => ({ x: 50, y: 50 })));
   };
 
   const getImageUrl = (image: string) => {
@@ -314,9 +329,20 @@ function EditProduct() {
         )
       );
 
-      newImages.forEach((image) => {
-        formData.append("images", image);
-      });
+      if (newImages.length > 0) {
+        formData.append("imagePositions", JSON.stringify(newImagePositions));
+
+        const preparedImages = await prepareFilesForUpload(newImages);
+
+        preparedImages.forEach((image) => {
+          formData.append("images", image);
+        });
+      } else {
+        formData.append(
+          "imagePositions",
+          JSON.stringify(currentImagePositions)
+        );
+      }
 
       await updateProduct(id, formData);
 
@@ -485,16 +511,19 @@ function EditProduct() {
             <>
               <label>Imágenes actuales</label>
 
-              <div className="admin-preview-images">
-                {currentImages.map((image, index) => (
-                  <img
-                    key={index}
-                    src={getImageUrl(image)}
-                    alt={`Imagen actual ${index + 1}`}
-                    className="admin-preview-image"
-                  />
-                ))}
-              </div>
+              <small className="admin-form-help">
+                Podés cambiar el encuadre de las imágenes que ya están publicadas
+                sin volver a subirlas.
+              </small>
+
+              <ImageCropEditor
+                imageUrls={currentImages.map(getImageUrl)}
+                labels={currentImages.map((_, index) => `Imagen actual ${index + 1}`)}
+                positions={currentImagePositions}
+                onPositionsChange={setCurrentImagePositions}
+                title="Encuadre de las imágenes actuales"
+                description="Arrastrá cada foto para corregir qué parte se ve en la web. La imagen original no se recorta ni se vuelve a subir."
+              />
             </>
           )}
 
@@ -508,23 +537,18 @@ function EditProduct() {
 
           <small className="admin-form-help">
             Opcional. Si cargás nuevas imágenes, reemplazan a las actuales.
-            Máximo 3 imágenes.
+            Máximo 3 imágenes. Podés ajustar el encuadre antes de guardar.
           </small>
 
           {newImages.length > 0 && (
             <>
-              <label>Nuevas imágenes</label>
+              <label>Encuadre de las nuevas imágenes</label>
 
-              <div className="admin-preview-images">
-                {newImages.map((image, index) => (
-                  <img
-                    key={index}
-                    src={URL.createObjectURL(image)}
-                    alt={`Nueva imagen ${index + 1}`}
-                    className="admin-preview-image"
-                  />
-                ))}
-              </div>
+              <ImageCropEditor
+                files={newImages}
+                positions={newImagePositions}
+                onPositionsChange={setNewImagePositions}
+              />
             </>
           )}
 
@@ -557,4 +581,4 @@ function EditProduct() {
   );
 }
 
-export default EditProduct; 
+export default EditProduct;  

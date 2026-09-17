@@ -8813,3 +8813,734 @@ button {
   font-weight: 700 !important;
   text-decoration: underline !important;
 } 
+/* ========================================= */
+/* ADMIN - EDITOR DE ENCUADRE DE IMÁGENES    */
+/* ========================================= */
+
+.admin-image-editor-section {
+  margin-top: 18px;
+  padding: 22px;
+  border: 1px solid rgba(47, 59, 34, 0.14);
+  border-radius: 22px;
+  background: #fffaf4;
+}
+
+.admin-image-editor-heading {
+  margin-bottom: 18px;
+}
+
+.admin-image-editor-heading h2 {
+  margin: 0 0 6px;
+  color: #2f2a22;
+  font-size: 1.08rem;
+}
+
+.admin-image-editor-heading p {
+  margin: 0;
+  color: #675b4d;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.admin-image-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-image-editor-card {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(47, 59, 34, 0.12);
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.admin-image-editor-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 10px;
+}
+
+.admin-image-editor-card-top strong {
+  color: #2f2a22;
+  font-size: 0.9rem;
+}
+
+.admin-image-editor-card-top span {
+  overflow: hidden;
+  color: #675b4d;
+  font-size: 0.72rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-image-crop-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  overflow: hidden;
+  border: 2px solid rgba(47, 59, 34, 0.24);
+  border-radius: 16px;
+  background: #f1e5d7;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.admin-image-crop-frame:active {
+  cursor: grabbing;
+}
+
+.admin-image-crop-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.admin-image-crop-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 66%,
+    rgba(31, 42, 24, 0.5) 100%
+  );
+}
+
+.admin-image-crop-overlay span {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(255, 250, 244, 0.9);
+  color: #2f2a22;
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.admin-image-editor-controls {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.admin-image-editor-controls label {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #675b4d;
+  font-size: 0.74rem;
+}
+
+.admin-image-editor-controls input[type="range"] {
+  width: 100%;
+  margin: 0;
+  accent-color: #2f3b22;
+}
+
+.admin-image-editor-center-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px 12px;
+  border: 1px solid rgba(47, 59, 34, 0.18);
+  border-radius: 999px;
+  background: #f8f2e8;
+  color: #2f3b22;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-image-editor-center-button:hover {
+  background: #efe6d9;
+}
+
+@media (max-width: 900px) {
+  .admin-image-editor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-image-editor-section {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .admin-image-editor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-image-editor-card {
+    padding: 12px;
+  }
+
+  .admin-image-crop-frame {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+/* ========================================= */
+/* ADMIN - EDITOR DE ENCUADRE DE IMÁGENES    */
+/* ========================================= */
+
+.admin-image-editor-section {
+  margin-top: 18px;
+  padding: 22px;
+  border: 1px solid rgba(47, 59, 34, 0.14);
+  border-radius: 22px;
+  background: #fffaf4;
+}
+
+.admin-image-editor-heading {
+  margin-bottom: 18px;
+}
+
+.admin-image-editor-heading h2 {
+  margin: 0 0 6px;
+  color: #2f2a22;
+  font-size: 1.08rem;
+}
+
+.admin-image-editor-heading p {
+  margin: 0;
+  color: #675b4d;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.admin-image-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-image-editor-card {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(47, 59, 34, 0.12);
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.admin-image-editor-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 10px;
+}
+
+.admin-image-editor-card-top strong {
+  color: #2f2a22;
+  font-size: 0.9rem;
+}
+
+.admin-image-editor-card-top span {
+  overflow: hidden;
+  color: #675b4d;
+  font-size: 0.72rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-image-crop-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  overflow: hidden;
+  border: 2px solid rgba(47, 59, 34, 0.24);
+  border-radius: 16px;
+  background: #f1e5d7;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.admin-image-crop-frame:active {
+  cursor: grabbing;
+}
+
+.admin-image-crop-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.admin-image-crop-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 66%,
+    rgba(31, 42, 24, 0.5) 100%
+  );
+}
+
+.admin-image-crop-overlay span {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(255, 250, 244, 0.9);
+  color: #2f2a22;
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.admin-image-editor-controls {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.admin-image-editor-controls label {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #675b4d;
+  font-size: 0.74rem;
+}
+
+.admin-image-editor-controls input[type="range"] {
+  width: 100%;
+  margin: 0;
+  accent-color: #2f3b22;
+}
+
+.admin-image-editor-center-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px 12px;
+  border: 1px solid rgba(47, 59, 34, 0.18);
+  border-radius: 999px;
+  background: #f8f2e8;
+  color: #2f3b22;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-image-editor-center-button:hover {
+  background: #efe6d9;
+}
+
+@media (max-width: 900px) {
+  .admin-image-editor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-image-editor-section {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .admin-image-editor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-image-editor-card {
+    padding: 12px;
+  }
+
+  .admin-image-crop-frame {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+/* ========================================= */
+/* ADMIN - EDITOR DE ENCUADRE DE IMÁGENES    */
+/* ========================================= */
+
+.admin-image-editor-section {
+  margin-top: 18px;
+  padding: 22px;
+  border: 1px solid rgba(47, 59, 34, 0.14);
+  border-radius: 22px;
+  background: #fffaf4;
+}
+
+.admin-image-editor-heading {
+  margin-bottom: 18px;
+}
+
+.admin-image-editor-heading h2 {
+  margin: 0 0 6px;
+  color: #2f2a22;
+  font-size: 1.08rem;
+}
+
+.admin-image-editor-heading p {
+  margin: 0;
+  color: #675b4d;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.admin-image-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-image-editor-card {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(47, 59, 34, 0.12);
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.admin-image-editor-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 10px;
+}
+
+.admin-image-editor-card-top strong {
+  color: #2f2a22;
+  font-size: 0.9rem;
+}
+
+.admin-image-editor-card-top span {
+  overflow: hidden;
+  color: #675b4d;
+  font-size: 0.72rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-image-crop-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  overflow: hidden;
+  border: 2px solid rgba(47, 59, 34, 0.24);
+  border-radius: 16px;
+  background: #f1e5d7;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.admin-image-crop-frame:active {
+  cursor: grabbing;
+}
+
+.admin-image-crop-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.admin-image-crop-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 66%,
+    rgba(31, 42, 24, 0.5) 100%
+  );
+}
+
+.admin-image-crop-overlay span {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(255, 250, 244, 0.9);
+  color: #2f2a22;
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.admin-image-editor-controls {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.admin-image-editor-controls label {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #675b4d;
+  font-size: 0.74rem;
+}
+
+.admin-image-editor-controls input[type="range"] {
+  width: 100%;
+  margin: 0;
+  accent-color: #2f3b22;
+}
+
+.admin-image-editor-center-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px 12px;
+  border: 1px solid rgba(47, 59, 34, 0.18);
+  border-radius: 999px;
+  background: #f8f2e8;
+  color: #2f3b22;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-image-editor-center-button:hover {
+  background: #efe6d9;
+}
+
+@media (max-width: 900px) {
+  .admin-image-editor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-image-editor-section {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .admin-image-editor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-image-editor-card {
+    padding: 12px;
+  }
+
+  .admin-image-crop-frame {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+/* ========================================= */
+/* BUSCADOR DE PRODUCTOS - ADMIN             */
+/* ========================================= */
+
+.admin-product-search-section {
+  width: 100%;
+  margin: 0 0 26px;
+}
+
+.admin-product-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 620px;
+  height: 58px;
+  background: rgba(255, 250, 244, 0.97);
+  border: 1px solid #dfcdb9;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(47, 42, 34, 0.06);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-product-search-box:focus-within {
+  border-color: var(--green);
+  box-shadow:
+    0 0 0 3px rgba(47, 59, 34, 0.08),
+    0 12px 32px rgba(47, 42, 34, 0.08);
+}
+
+.admin-product-search-icon {
+  position: absolute;
+  left: 19px;
+  color: var(--green-soft);
+  pointer-events: none;
+}
+
+.admin-product-search-box input {
+  width: 100%;
+  height: 100%;
+  padding: 0 54px 0 54px;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  color: var(--dark);
+  font-family: inherit;
+  font-size: 0.98rem;
+  box-shadow: none !important;
+}
+
+.admin-product-search-box input::placeholder {
+  color: #92887d;
+}
+
+.admin-product-search-clear {
+  position: absolute;
+  right: 13px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #eee4d8;
+  color: var(--brown-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-product-search-clear:hover {
+  background: var(--green);
+  color: #fff;
+}
+
+.admin-product-search-info {
+  margin-top: 10px;
+  padding-left: 5px;
+  color: var(--brown-soft);
+  font-size: 0.82rem;
+}
+
+.admin-product-search-info strong {
+  color: var(--green-dark);
+}
+
+.admin-product-search-info span {
+  color: #92887d;
+}
+
+/* SIN RESULTADOS */
+
+.admin-product-search-empty {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 50px 24px;
+  background: rgba(255, 250, 244, 0.92);
+  border: 1px dashed #d8c5af;
+  border-radius: 26px;
+  text-align: center;
+  color: var(--brown-soft);
+}
+
+.admin-product-search-empty svg {
+  margin-bottom: 14px;
+  color: var(--green-soft);
+}
+
+.admin-product-search-empty h3 {
+  margin: 0 0 7px;
+  color: var(--green-dark);
+  font-size: 1.15rem;
+}
+
+.admin-product-search-empty p {
+  margin: 0 0 20px;
+  font-size: 0.9rem;
+}
+
+.admin-product-search-empty button,
+.admin-product-search-empty-table button {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: var(--green);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-product-search-empty-table {
+  padding: 55px 20px !important;
+}
+
+.admin-product-search-empty-table > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  color: var(--brown-soft);
+}
+
+.admin-product-search-empty-table svg {
+  color: var(--green-soft);
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .admin-product-search-section {
+    margin: 0 0 18px;
+  }
+
+  .admin-product-search-box {
+    max-width: none;
+    height: 52px;
+    border-radius: 18px;
+  }
+
+  .admin-product-search-icon {
+    left: 16px;
+    width: 19px;
+    height: 19px;
+  }
+
+  .admin-product-search-box input {
+    padding-left: 46px;
+    padding-right: 48px;
+    font-size: 0.9rem;
+  }
+
+  .admin-product-search-clear {
+    right: 10px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .admin-product-search-info {
+    margin-top: 8px;
+    font-size: 0.76rem;
+  }
+
+  .admin-product-search-empty {
+    padding: 38px 20px;
+    border-radius: 22px;
+  }
+
+  .admin-product-search-empty h3 {
+    font-size: 1.05rem;
+  }
+
+  .admin-product-search-empty p {
+    font-size: 0.82rem;
+  }
+} 

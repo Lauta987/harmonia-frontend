@@ -9,11 +9,19 @@ interface ProductCardProps {
 function ProductCard({ product, image, onClick }: ProductCardProps) {
   const unitPrice = product.unitPrice || product.price || 0;
   const wholesalePrice = product.wholesalePrice || product.price || 0;
+  const imagePosition = product.imagePositions?.[0] || { x: 50, y: 50 };
 
   return (
     <article className="product-card premium-product-card" onClick={onClick}>
       <div className="premium-product-image-wrapper">
-        <img src={image} alt={product.name} className="product-image" />
+        <img
+          src={image}
+          alt={product.name}
+          className="product-image"
+          style={{
+            objectPosition: `${imagePosition.x}% ${imagePosition.y}%`
+          }}
+        />
 
         {product.featured && (
           <span className="premium-product-badge">Destacado</span>
@@ -52,4 +60,4 @@ function ProductCard({ product, image, onClick }: ProductCardProps) {
   );
 }
 
-export default ProductCard; 
+export default ProductCard;

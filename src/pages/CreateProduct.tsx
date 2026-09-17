@@ -4,6 +4,10 @@ import AdminSidebar from "../components/AdminSidebar";
 import { createProduct } from "../services/productService";
 import { getAromas } from "../services/aromaService";
 import type { Aroma } from "../types/Aroma";
+import ImageCropEditor, {
+  prepareFilesForUpload,
+  type CropPosition
+} from "../components/ImageCropEditor";
 
 interface ReadyStockDraft {
   aroma: string;
@@ -25,6 +29,7 @@ function CreateProduct() {
   });
 
   const [images, setImages] = useState<File[]>([]);
+  const [imagePositions, setImagePositions] = useState<CropPosition[]>([]);
   const [aromas, setAromas] = useState<Aroma[]>([]);
   const [aromasLoading, setAromasLoading] = useState(false);
   const [aromasError, setAromasError] = useState("");
@@ -98,6 +103,7 @@ function CreateProduct() {
       setError("Podés subir como máximo 3 imágenes.");
       e.target.value = "";
       setImages([]);
+      setImagePositions([]);
       return;
     }
 
@@ -109,10 +115,12 @@ function CreateProduct() {
       setError("Formato no permitido. Subí imágenes JPG, PNG o WEBP.");
       e.target.value = "";
       setImages([]);
+      setImagePositions([]);
       return;
     }
 
     setImages(selectedFiles);
+    setImagePositions(selectedFiles.map(() => ({ x: 50, y: 50 })));
   };
 
   const handleAddReadyStock = () => {
@@ -259,7 +267,11 @@ function CreateProduct() {
         )
       );
 
-      images.forEach((image) => {
+      formData.append("imagePositions", JSON.stringify(imagePositions));
+
+      const preparedImages = await prepareFilesForUpload(images);
+
+      preparedImages.forEach((image) => {
         formData.append("images", image);
       });
 
@@ -443,21 +455,16 @@ function CreateProduct() {
           />
 
           <small className="admin-form-help">
-            Podés subir entre 1 y 3 imágenes. Si la foto está en Google Fotos,
-            descargala primero al dispositivo.
+            Podés subir entre 1 y 3 imágenes. Después de seleccionarlas,
+            arrastrá cada foto para elegir el encuadre que se verá en la web.
           </small>
 
           {images.length > 0 && (
-            <div className="admin-preview-images">
-              {images.map((image, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(image)}
-                  alt={`Vista previa ${index + 1}`}
-                  className="admin-preview-image"
-                />
-              ))}
-            </div>
+            <ImageCropEditor
+              files={images}
+              positions={imagePositions}
+              onPositionsChange={setImagePositions}
+            />
           )}
 
           <label className="admin-checkbox">
@@ -489,4 +496,4 @@ function CreateProduct() {
   );
 }
 
-export default CreateProduct; 
+export default CreateProduct;  
