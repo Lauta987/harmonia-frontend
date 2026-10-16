@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import type { Product } from "./types/Product";
 import { getFeaturedProducts, getProducts } from "./services/productService";
@@ -6,8 +7,9 @@ import ProductModal from "./components/ProductModal";
 import AromaModal from "./components/AromaModal";
 import CartButton from "./components/CartButton";
 import CartDrawer from "./components/CartDrawer";
-import logo from "./assets/logo.png";
-import hero from "./assets/hero.png";
+
+import logo from "./assets/logo.webp";
+import hero from "./assets/hero.webp";
 import cursoVelas from "./assets/cursoVelas.png";
 
 import {
@@ -30,10 +32,10 @@ import {
   MessageCircle
 } from "lucide-react";
 
-import aromaFrutales from "./assets/aromaFrutales.png";
-import aromaIntensos from "./assets/aromaIntensos.png";
-import aromaDulces from "./assets/aromaDulces.png";
-import aromaFlorales from "./assets/aromaFlorales.png";
+import aromaFrutales from "./assets/aromaFrutales.webp";
+import aromaIntensos from "./assets/aromaIntensos.webp";
+import aromaDulces from "./assets/aromaDulces.webp";
+import aromaFlorales from "./assets/aromaFlorales.webp";
 
 import VelaOsito1 from "./assets/VelaOsito1.png";
 import VelaOsito2 from "./assets/VelaOsito2.png";
@@ -286,13 +288,15 @@ function App() {
         <div className="hero-text">
           <img src={logo} alt="Harmonia Aromas" className="hero-logo" />
 
-          <p className="subtitle">Velas artesanales</p>
+          <p className="subtitle">Velas de soja artesanales en Venado Tuerto</p>
 
           <h1>Aromas que enamoran el hogar</h1>
 
           <p className="description">
-            Creamos velas artesanales y souvenirs únicos, pensados para llenar
-            cada rincón de tu hogar con armonía, calidez y un aroma inolvidable.
+            En Harmonia Aromas creamos velas de soja artesanales,
+            souvenirs y productos aromáticos en Venado Tuerto.
+            Descubrí nuestro catálogo y encontrá aromas únicos
+            para tu hogar. Realizamos envíos a toda Argentina.
           </p>
 
           <a href="#catalogo" className="primary-button">
@@ -301,7 +305,13 @@ function App() {
         </div>
 
         <div className="hero-product">
-          <img src={hero} alt="Harmonia Aromas" />
+          <img
+            src={hero}
+            alt="Velas de soja artesanales de Harmonia Aromas"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
 
           <div className="hero-product-badge">
             <span>Velas artesanales</span>
@@ -714,7 +724,12 @@ function App() {
               className="aroma-editorial-card"
               onClick={() => setSelectedAromaCategory(category)}
             >
-              <img src={category.image} alt={category.title} />
+              <img
+                src={category.image}
+                alt={`Aromas ${category.title.toLowerCase()} de Harmonia Aromas`}
+                loading="lazy"
+                decoding="async"
+              />
 
               <div className="aroma-editorial-overlay"></div>
 
@@ -851,4 +866,5 @@ function App() {
   );
 }
 
-export default App;   
+export default App;
+ 
