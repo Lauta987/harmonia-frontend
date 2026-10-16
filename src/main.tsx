@@ -1,3 +1,4 @@
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -12,18 +13,27 @@ import EditProduct from "./pages/EditProduct";
 import AromasAdmin from "./pages/AromasAdmin";
 import CreateAroma from "./pages/CreateAroma";
 import EditAroma from "./pages/EditAroma";
+
 import { CartProvider } from "./context/CartContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+// SEO: controla la indexación según la ruta
+import SeoManager from "./components/SeoManager";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <CartProvider>
       <BrowserRouter>
+        <SeoManager />
+
         <Routes>
+          {/* Página pública */}
           <Route path="/" element={<App />} />
 
+          {/* Inicio de sesión administrativo */}
           <Route path="/admin/login" element={<AdminLogin />} />
 
+          {/* Panel principal */}
           <Route
             path="/admin"
             element={
@@ -33,6 +43,7 @@ createRoot(document.getElementById("root")!).render(
             }
           />
 
+          {/* Administración de productos */}
           <Route
             path="/admin/products"
             element={
@@ -42,6 +53,7 @@ createRoot(document.getElementById("root")!).render(
             }
           />
 
+          {/* Crear producto */}
           <Route
             path="/admin/products/create"
             element={
@@ -51,6 +63,7 @@ createRoot(document.getElementById("root")!).render(
             }
           />
 
+          {/* Editar producto */}
           <Route
             path="/admin/products/edit/:id"
             element={
@@ -60,6 +73,7 @@ createRoot(document.getElementById("root")!).render(
             }
           />
 
+          {/* Administración de aromas */}
           <Route
             path="/admin/aromas"
             element={
@@ -69,6 +83,7 @@ createRoot(document.getElementById("root")!).render(
             }
           />
 
+          {/* Crear aroma */}
           <Route
             path="/admin/aromas/create"
             element={
@@ -78,6 +93,7 @@ createRoot(document.getElementById("root")!).render(
             }
           />
 
+          {/* Editar aroma */}
           <Route
             path="/admin/aromas/edit/:id"
             element={
@@ -90,4 +106,5 @@ createRoot(document.getElementById("root")!).render(
       </BrowserRouter>
     </CartProvider>
   </StrictMode>
-); 
+);
+ 
