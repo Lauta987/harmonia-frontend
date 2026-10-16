@@ -2,39 +2,59 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const SITE_URL = "https://www.harmoniaaromas.com.ar";
+const SITE_URL = "https://www.harmoniaaromas.com.ar/";
+
+const HOME_TITLE =
+  "Velas de Soja Artesanales en Venado Tuerto | Harmonia Aromas";
 
 export default function SeoManager() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const isAdmin = pathname === "/admin" || pathname.startsWith("/admin/");
+    const isAdmin =
+      pathname === "/admin" ||
+      pathname.startsWith("/admin/");
 
-    const robots = document.querySelector<HTMLMetaElement>(
-      'meta[name="robots"]'
-    );
+    let robots =
+      document.querySelector<HTMLMetaElement>(
+        'meta[name="robots"]'
+      );
 
-    const canonical = document.querySelector<HTMLLinkElement>(
-      'link[rel="canonical"]'
-    );
+    let canonical =
+      document.querySelector<HTMLLinkElement>(
+        'link[rel="canonical"]'
+      );
+
+    if (!robots) {
+      robots = document.createElement("meta");
+      robots.name = "robots";
+      document.head.appendChild(robots);
+    }
 
     if (isAdmin) {
       document.title = "Administración | Harmonia Aromas";
 
-      robots?.setAttribute("content", "noindex, nofollow");
+      robots.content = "noindex, nofollow";
+
       canonical?.remove();
-    } else {
-      document.title =
-        "Harmonia Aromas | Velas de Soja y Aromas para tu Hogar";
+    } else if (pathname === "/") {
+      document.title = HOME_TITLE;
 
-      robots?.setAttribute("content", "index, follow");
+      robots.content = "index, follow";
 
-      if (!document.querySelector('link[rel="canonical"]')) {
-        const link = document.createElement("link");
-        link.rel = "canonical";
-        link.href = `${SITE_URL}/`;
-        document.head.appendChild(link);
+      if (!canonical) {
+        canonical = document.createElement("link");
+        canonical.rel = "canonical";
+        document.head.appendChild(canonical);
       }
+
+      canonical.href = SITE_URL;
+    } else {
+      document.title = "Página no encontrada | Harmonia Aromas";
+
+      robots.content = "noindex, follow";
+
+      canonical?.remove();
     }
   }, [pathname]);
 
