@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import type { Product } from "./types/Product";
 import { getFeaturedProducts, getProducts } from "./services/productService";
@@ -7,6 +6,7 @@ import ProductModal from "./components/ProductModal";
 import AromaModal from "./components/AromaModal";
 import CartButton from "./components/CartButton";
 import CartDrawer from "./components/CartDrawer";
+import CatalogFilters from "./components/CatalogFilters";
 
 import logo from "./assets/logo.webp";
 import hero from "./assets/hero.webp";
@@ -67,7 +67,7 @@ import VelaRusticaCorazon3 from "./assets/VelaRusticaCorazon3.png";
 
 import "./index.css";
 
-type CatalogCategory = "classic" | "bakery" | "wax-melts" | "candle-box";
+type CatalogCategory = NonNullable<Product["category"]>;
 
 const SHOW_COURSE_SECTION = false;
 
@@ -193,7 +193,11 @@ function App() {
       });
     }
 
-    return productImages[product.name] || [VelaOsito1, VelaOsito2, VelaOsito3];
+    return productImages[product.name] || [
+      VelaOsito1,
+      VelaOsito2,
+      VelaOsito3
+    ];
   };
 
   const filteredProducts = products.filter((product) => {
@@ -409,44 +413,17 @@ function App() {
         <p className="section-subtitle">Catálogo</p>
         <h2>Elegí tu línea favorita</h2>
 
-        <div className="catalog-tabs">
-          <button
-            type="button"
-            className={activeCatalogCategory === "classic" ? "active" : ""}
-            onClick={() => setActiveCatalogCategory("classic")}
-          >
-            Velas clásicas
-          </button>
-
-          <button
-            type="button"
-            className={activeCatalogCategory === "bakery" ? "active" : ""}
-            onClick={() => setActiveCatalogCategory("bakery")}
-          >
-            Línea Bakery
-          </button>
-
-          <button
-            type="button"
-            className={activeCatalogCategory === "wax-melts" ? "active" : ""}
-            onClick={() => setActiveCatalogCategory("wax-melts")}
-          >
-            Wax Melts
-          </button>
-
-          <button
-            type="button"
-            className={activeCatalogCategory === "candle-box" ? "active" : ""}
-            onClick={() => setActiveCatalogCategory("candle-box")}
-          >
-            Candle Box
-          </button>
-        </div>
+        <CatalogFilters
+          activeCategory={activeCatalogCategory}
+          onCategoryChange={setActiveCatalogCategory}
+        />
 
         <div className="products-grid">
           {filteredProducts.length === 0 ? (
             <p className="catalog-empty-message">
-              Todavía no hay productos cargados en esta línea.
+              {activeCatalogCategory === "christmas"
+                ? "Próximamente vas a encontrar nuestra colección navideña acá."
+                : "Todavía no hay productos cargados en esta línea."}
             </p>
           ) : (
             filteredProducts.map((product) => (
@@ -777,9 +754,7 @@ function App() {
             className="social-card"
           >
             <FaEnvelope className="social-icon email-icon" />
-
             <h3>Email</h3>
-
             <p>Escribinos</p>
           </a>
 
@@ -790,9 +765,7 @@ function App() {
             className="social-card"
           >
             <FaInstagram className="social-icon instagram-icon" />
-
             <h3>Instagram</h3>
-
             <p>@harmonia_aromass</p>
           </a>
 
@@ -803,9 +776,7 @@ function App() {
             className="social-card"
           >
             <FaWhatsapp className="social-icon whatsapp-icon" />
-
             <h3>WhatsApp</h3>
-
             <p>Escribinos</p>
           </a>
 
@@ -816,9 +787,7 @@ function App() {
             className="social-card"
           >
             <FaTiktok className="social-icon tiktok-icon" />
-
             <h3>TikTok</h3>
-
             <p>@harmonia.aromas2</p>
           </a>
         </div>
@@ -861,10 +830,12 @@ function App() {
         <CartButton onClick={() => setIsCartOpen(true)} />
       )}
 
-      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
     </main>
   );
 }
 
-export default App;
- 
+export default App; 

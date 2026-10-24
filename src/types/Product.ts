@@ -23,7 +23,11 @@ export interface Product {
   imageUrl?: string;
   available: boolean;
   featured: boolean;
-  category?: "classic" | "bakery" | "wax-melts" | "candle-box";
+  category?:
+    | "classic"
+    | "bakery"
+    | "wax-melts"
+    | "candle-box"
+    | "christmas";
   readyStock?: ReadyStockItem[];
-}
- 
+} 

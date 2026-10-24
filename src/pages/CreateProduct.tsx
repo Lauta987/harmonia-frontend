@@ -46,7 +46,6 @@ function CreateProduct() {
         setAromasError("");
 
         const data = await getAromas();
-
         setAromas(data.filter((aroma) => aroma.available));
       } catch (error) {
         console.error("Error al cargar aromas:", error);
@@ -134,7 +133,9 @@ function CreateProduct() {
     const quantity = Number(selectedQuantity);
 
     if (!Number.isInteger(quantity) || quantity < 0) {
-      setError("La cantidad del stock inmediato debe ser un número entero igual o mayor a 0.");
+      setError(
+        "La cantidad del stock inmediato debe ser un número entero igual o mayor a 0."
+      );
       return;
     }
 
@@ -159,7 +160,10 @@ function CreateProduct() {
     setSelectedQuantity("1");
   };
 
-  const handleReadyStockQuantityChange = (aromaId: string, quantity: string) => {
+  const handleReadyStockQuantityChange = (
+    aromaId: string,
+    quantity: string
+  ) => {
     setReadyStock((current) =>
       current.map((item) =>
         item.aroma === aromaId
@@ -173,7 +177,9 @@ function CreateProduct() {
   };
 
   const handleRemoveReadyStock = (aromaId: string) => {
-    setReadyStock((current) => current.filter((item) => item.aroma !== aromaId));
+    setReadyStock((current) =>
+      current.filter((item) => item.aroma !== aromaId)
+    );
   };
 
   const validateReadyStock = () => {
@@ -198,7 +204,6 @@ function CreateProduct() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setError("");
 
     if (!form.name.trim()) {
@@ -351,6 +356,7 @@ function CreateProduct() {
             <option value="bakery">Línea Bakery</option>
             <option value="wax-melts">Wax Melts</option>
             <option value="candle-box">Candle Box</option>
+            <option value="christmas">Colección navideña</option>
           </select>
 
           <section className="admin-ready-stock-section">
@@ -496,4 +502,4 @@ function CreateProduct() {
   );
 }
 
-export default CreateProduct;  
+export default CreateProduct; 

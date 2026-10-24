@@ -46,9 +46,11 @@ function EditProduct() {
   });
 
   const [currentImages, setCurrentImages] = useState<string[]>([]);
-  const [currentImagePositions, setCurrentImagePositions] = useState<CropPosition[]>([]);
+  const [currentImagePositions, setCurrentImagePositions] =
+    useState<CropPosition[]>([]);
   const [newImages, setNewImages] = useState<File[]>([]);
-  const [newImagePositions, setNewImagePositions] = useState<CropPosition[]>([]);
+  const [newImagePositions, setNewImagePositions] =
+    useState<CropPosition[]>([]);
   const [aromas, setAromas] = useState<Aroma[]>([]);
   const [aromasLoading, setAromasLoading] = useState(false);
   const [aromasError, setAromasError] = useState("");
@@ -65,7 +67,6 @@ function EditProduct() {
         setAromasError("");
 
         const data = await getAromas();
-
         setAromas(data.filter((aroma) => aroma.available));
       } catch (error) {
         console.error("Error al cargar aromas:", error);
@@ -101,7 +102,9 @@ function EditProduct() {
 
         setCurrentImages(savedImages);
         setCurrentImagePositions(
-          savedImages.map((_, index) => savedPositions[index] || { x: 50, y: 50 })
+          savedImages.map(
+            (_, index) => savedPositions[index] || { x: 50, y: 50 }
+          )
         );
 
         setReadyStock(
@@ -127,8 +130,13 @@ function EditProduct() {
   }, [aromas, readyStock]);
 
   const getAromaName = (aromaId: string) => {
-    const activeAromaName = aromas.find((aroma) => aroma._id === aromaId)?.name;
-    const savedAromaName = readyStock.find((item) => item.aroma === aromaId)?.aromaName;
+    const activeAromaName = aromas.find(
+      (aroma) => aroma._id === aromaId
+    )?.name;
+
+    const savedAromaName = readyStock.find(
+      (item) => item.aroma === aromaId
+    )?.aromaName;
 
     return activeAromaName || savedAromaName || "Aroma";
   };
@@ -203,7 +211,9 @@ function EditProduct() {
     const quantity = Number(selectedQuantity);
 
     if (!Number.isInteger(quantity) || quantity < 0) {
-      setError("La cantidad del stock inmediato debe ser un número entero igual o mayor a 0.");
+      setError(
+        "La cantidad del stock inmediato debe ser un número entero igual o mayor a 0."
+      );
       return;
     }
 
@@ -229,7 +239,10 @@ function EditProduct() {
     setSelectedQuantity("1");
   };
 
-  const handleReadyStockQuantityChange = (aromaId: string, quantity: string) => {
+  const handleReadyStockQuantityChange = (
+    aromaId: string,
+    quantity: string
+  ) => {
     setReadyStock((current) =>
       current.map((item) =>
         item.aroma === aromaId
@@ -243,7 +256,9 @@ function EditProduct() {
   };
 
   const handleRemoveReadyStock = (aromaId: string) => {
-    setReadyStock((current) => current.filter((item) => item.aroma !== aromaId));
+    setReadyStock((current) =>
+      current.filter((item) => item.aroma !== aromaId)
+    );
   };
 
   const validateReadyStock = () => {
@@ -369,7 +384,11 @@ function EditProduct() {
           {error && <p className="admin-form-error">{error}</p>}
 
           <label>Nombre</label>
-          <input name="name" value={form.name} onChange={handleChange} />
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+          />
 
           <label>Descripción</label>
           <textarea
@@ -412,6 +431,7 @@ function EditProduct() {
             <option value="bakery">Línea Bakery</option>
             <option value="wax-melts">Wax Melts</option>
             <option value="candle-box">Candle Box</option>
+            <option value="christmas">Colección navideña</option>
           </select>
 
           <section className="admin-ready-stock-section">
@@ -518,7 +538,9 @@ function EditProduct() {
 
               <ImageCropEditor
                 imageUrls={currentImages.map(getImageUrl)}
-                labels={currentImages.map((_, index) => `Imagen actual ${index + 1}`)}
+                labels={currentImages.map(
+                  (_, index) => `Imagen actual ${index + 1}`
+                )}
                 positions={currentImagePositions}
                 onPositionsChange={setCurrentImagePositions}
                 title="Encuadre de las imágenes actuales"
@@ -581,4 +603,4 @@ function EditProduct() {
   );
 }
 
-export default EditProduct;  
+export default EditProduct; 
