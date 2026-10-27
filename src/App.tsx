@@ -9,7 +9,8 @@ import CartDrawer from "./components/CartDrawer";
 import CatalogFilters from "./components/CatalogFilters";
 
 import logo from "./assets/logo.webp";
-import hero from "./assets/hero.webp";
+import heroNavidadDesktop from "./assets/hero-navidad-desktop.webp";
+import heroNavidadMobile from "./assets/hero-navidad-mobile.webp";
 import cursoVelas from "./assets/cursoVelas.png";
 
 import {
@@ -66,6 +67,7 @@ import VelaRusticaCorazon2 from "./assets/VelaRusticaCorazon2.png";
 import VelaRusticaCorazon3 from "./assets/VelaRusticaCorazon3.png";
 
 import "./index.css";
+import "./ChristmasHero.css";
 
 type CatalogCategory = NonNullable<Product["category"]>;
 
@@ -125,6 +127,7 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
   const [activeCatalogCategory, setActiveCatalogCategory] =
     useState<CatalogCategory>("classic");
 
@@ -161,7 +164,8 @@ function App() {
     const previousBodyRight = document.body.style.right;
     const previousBodyWidth = document.body.style.width;
     const previousBodyOverflow = document.body.style.overflow;
-    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousHtmlOverflow =
+      document.documentElement.style.overflow;
 
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
@@ -178,7 +182,8 @@ function App() {
       document.body.style.right = previousBodyRight;
       document.body.style.width = previousBodyWidth;
       document.body.style.overflow = previousBodyOverflow;
-      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.documentElement.style.overflow =
+        previousHtmlOverflow;
 
       window.scrollTo(0, scrollY);
     };
@@ -210,6 +215,17 @@ function App() {
     setIsCartOpen(true);
   };
 
+  const openChristmasCollection = () => {
+    setActiveCatalogCategory("christmas");
+
+    window.requestAnimationFrame(() => {
+      document.getElementById("catalogo")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+  };
+
   const refillWhatsAppMessage =
     "¡Hola! 😊 Quiero consultar por el servicio de refill de velas de Harmonia Aromas. Tengo un envase para rellenar y me gustaría saber opciones de aromas, precio y tiempo de preparación.";
 
@@ -232,7 +248,11 @@ function App() {
           className="brand-logo"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <img src={logo} alt="Harmonia Aromas" className="brand-logo-img" />
+          <img
+            src={logo}
+            alt="Harmonia Aromas"
+            className="brand-logo-img"
+          />
 
           <div className="brand-logo-text">
             <span>HARMONIA</span>
@@ -251,75 +271,138 @@ function App() {
           <span></span>
         </button>
 
-        <div className={`nav-links ${isMobileMenuOpen ? "nav-links-open" : ""}`}>
-          <a href="#inicio" onClick={() => setIsMobileMenuOpen(false)}>
+        <div
+          className={`nav-links ${
+            isMobileMenuOpen ? "nav-links-open" : ""
+          }`}
+        >
+          <a
+            href="#inicio"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Inicio
           </a>
 
-          <a href="#destacados" onClick={() => setIsMobileMenuOpen(false)}>
+          <a
+            href="#destacados"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Destacados
           </a>
 
-          <a href="#catalogo" onClick={() => setIsMobileMenuOpen(false)}>
+          <a
+            href="#catalogo"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Catálogo
           </a>
 
-          <a href="#refill" onClick={() => setIsMobileMenuOpen(false)}>
+          <a
+            href="#refill"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Refill
           </a>
 
           {SHOW_COURSE_SECTION && (
-            <a href="#curso" onClick={() => setIsMobileMenuOpen(false)}>
+            <a
+              href="#curso"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               Curso
             </a>
           )}
 
-          <a href="#aromas" onClick={() => setIsMobileMenuOpen(false)}>
+          <a
+            href="#aromas"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Aromas
           </a>
 
-          <a href="#contacto" onClick={() => setIsMobileMenuOpen(false)}>
+          <a
+            href="#contacto"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Contacto
           </a>
         </div>
 
-        <button type="button" className="navbar-whatsapp" onClick={openCart}>
+        <button
+          type="button"
+          className="navbar-whatsapp"
+          onClick={openCart}
+        >
           Carrito
         </button>
       </nav>
 
-      <section id="inicio" className="hero">
-        <div className="hero-text">
-          <img src={logo} alt="Harmonia Aromas" className="hero-logo" />
+      <section id="inicio" className="christmas-hero">
+        <picture className="christmas-hero__media">
+          <source
+            media="(max-width: 768px)"
+            srcSet={heroNavidadMobile}
+          />
 
-          <p className="subtitle">Velas de soja artesanales en Venado Tuerto</p>
-
-          <h1>Aromas que enamoran el hogar</h1>
-
-          <p className="description">
-            En Harmonia Aromas creamos velas de soja artesanales,
-            souvenirs y productos aromáticos en Venado Tuerto.
-            Descubrí nuestro catálogo y encontrá aromas únicos
-            para tu hogar. Realizamos envíos a toda Argentina.
-          </p>
-
-          <a href="#catalogo" className="primary-button">
-            Comprar ahora
-          </a>
-        </div>
-
-        <div className="hero-product">
           <img
-            src={hero}
-            alt="Velas de soja artesanales de Harmonia Aromas"
+            src={heroNavidadDesktop}
+            alt="Colección navideña de velas artesanales de Harmonia Aromas"
             loading="eager"
             fetchPriority="high"
             decoding="async"
           />
+        </picture>
 
-          <div className="hero-product-badge">
-            <span>Velas artesanales</span>
-            <strong>Hechas con amor 🤎</strong>
+        <div className="christmas-hero__overlay"></div>
+
+        <div className="christmas-hero__content">
+          <div className="christmas-hero__eyebrow">
+            <span
+              className="christmas-hero__tree"
+              aria-hidden="true"
+            ></span>
+            <p>Edición especial</p>
+          </div>
+
+          <h1>
+            Colección
+            <br />
+            Navideña
+          </h1>
+
+          <div
+            className="christmas-hero__ornament"
+            aria-hidden="true"
+          >
+            <span></span>
+            <b>⋈</b>
+            <span></span>
+          </div>
+
+          <p className="christmas-hero__description">
+            Aromas y regalos para llenar
+            <br />
+            tu hogar de calidez.
+          </p>
+
+          <div className="christmas-hero__actions">
+            <button
+              type="button"
+              className="christmas-hero__button christmas-hero__button--primary"
+              onClick={openChristmasCollection}
+            >
+              Ver colección
+              <span aria-hidden="true">›</span>
+            </button>
+
+            <button
+              type="button"
+              className="christmas-hero__button christmas-hero__button--secondary"
+              onClick={openChristmasCollection}
+            >
+              Comprar ahora
+              <span aria-hidden="true">›</span>
+            </button>
           </div>
         </div>
       </section>
@@ -327,7 +410,10 @@ function App() {
       <section className="trust-editorial-section">
         <div className="trust-editorial-grid">
           <article className="trust-editorial-item">
-            <Leaf className="trust-editorial-icon" strokeWidth={1.4} />
+            <Leaf
+              className="trust-editorial-icon"
+              strokeWidth={1.4}
+            />
 
             <div className="trust-editorial-ornament">
               <span></span>
@@ -336,7 +422,8 @@ function App() {
             <h3>Cera vegetal</h3>
 
             <p>
-              Elaboradas con cera de soja y aromas cuidadosamente seleccionados.
+              Elaboradas con cera de soja y aromas cuidadosamente
+              seleccionados.
             </p>
           </article>
 
@@ -353,12 +440,16 @@ function App() {
             <h3>Hechas a mano</h3>
 
             <p>
-              Cada vela está creada artesanalmente con atención en cada detalle.
+              Cada vela está creada artesanalmente con atención en
+              cada detalle.
             </p>
           </article>
 
           <article className="trust-editorial-item">
-            <Truck className="trust-editorial-icon" strokeWidth={1.4} />
+            <Truck
+              className="trust-editorial-icon"
+              strokeWidth={1.4}
+            />
 
             <div className="trust-editorial-ornament">
               <span></span>
@@ -367,12 +458,16 @@ function App() {
             <h3>Envíos nacionales</h3>
 
             <p>
-              Preparamos cada pedido para que llegue en perfectas condiciones.
+              Preparamos cada pedido para que llegue en perfectas
+              condiciones.
             </p>
           </article>
 
           <article className="trust-editorial-item">
-            <Tag className="trust-editorial-icon" strokeWidth={1.4} />
+            <Tag
+              className="trust-editorial-icon"
+              strokeWidth={1.4}
+            />
 
             <div className="trust-editorial-ornament">
               <span></span>
@@ -387,29 +482,37 @@ function App() {
         </div>
       </section>
 
-      <section id="destacados" className="section featured-carousel-section">
+      <section
+        id="destacados"
+        className="section featured-carousel-section"
+      >
         <p className="section-subtitle">Nuestros favoritos</p>
         <h2>Productos destacados</h2>
 
         <div className="featured-carousel">
           <div className="featured-carousel-track">
-            {[...featuredProducts, ...featuredProducts].map((product, index) => (
-              <div
-                className="featured-carousel-item"
-                key={`${product._id}-${index}`}
-              >
-                <ProductCard
-                  product={product}
-                  image={getProductImages(product)[0]}
-                  onClick={() => setSelectedProduct(product)}
-                />
-              </div>
-            ))}
+            {[...featuredProducts, ...featuredProducts].map(
+              (product, index) => (
+                <div
+                  className="featured-carousel-item"
+                  key={`${product._id}-${index}`}
+                >
+                  <ProductCard
+                    product={product}
+                    image={getProductImages(product)[0]}
+                    onClick={() => setSelectedProduct(product)}
+                  />
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>
 
-      <section id="catalogo" className="section catalog-section">
+      <section
+        id="catalogo"
+        className="section catalog-section"
+      >
         <p className="section-subtitle">Catálogo</p>
         <h2>Elegí tu línea favorita</h2>
 
@@ -438,7 +541,10 @@ function App() {
         </div>
       </section>
 
-      <section id="refill" className="refill-split-section">
+      <section
+        id="refill"
+        className="refill-split-section"
+      >
         <div className="refill-split-left">
           <div className="refill-split-left-content">
             <h2>
@@ -478,6 +584,7 @@ function App() {
               <div className="refill-split-step-text">
                 <h3>Traé tu envase</h3>
                 <span></span>
+
                 <p>
                   Acercalo a nuestro espacio
                   <br />
@@ -492,6 +599,7 @@ function App() {
               <div className="refill-split-step-text">
                 <h3>Elegí tu aroma</h3>
                 <span></span>
+
                 <p>
                   Seleccioná la fragancia que
                   <br />
@@ -506,6 +614,7 @@ function App() {
               <div className="refill-split-step-text">
                 <h3>Volvé a encenderlo</h3>
                 <span></span>
+
                 <p>
                   Renovamos tu vela con cera de soja
                   <br />
@@ -527,10 +636,15 @@ function App() {
       </section>
 
       {SHOW_COURSE_SECTION && (
-        <section id="curso" className="course-section course-full-section">
+        <section
+          id="curso"
+          className="course-section course-full-section"
+        >
           <div className="course-full-hero">
             <div className="course-full-content">
-              <span className="course-open-badge">Inscripciones abiertas</span>
+              <span className="course-open-badge">
+                Inscripciones abiertas
+              </span>
 
               <p className="course-kicker">Taller Harmonia</p>
 
@@ -562,13 +676,19 @@ function App() {
             </div>
 
             <div className="course-image">
-              <img src={cursoVelas} alt="Curso de velas de soja" />
+              <img
+                src={cursoVelas}
+                alt="Curso de velas de soja"
+              />
             </div>
           </div>
 
           <div className="course-benefits-bar">
             <div className="course-benefit-item">
-              <BookOpen className="course-benefit-icon" strokeWidth={1.5} />
+              <BookOpen
+                className="course-benefit-icon"
+                strokeWidth={1.5}
+              />
               <p>
                 PDF completo
                 <br />y guiado
@@ -576,7 +696,10 @@ function App() {
             </div>
 
             <div className="course-benefit-item">
-              <PlayCircle className="course-benefit-icon" strokeWidth={1.5} />
+              <PlayCircle
+                className="course-benefit-icon"
+                strokeWidth={1.5}
+              />
               <p>
                 Videos explicativos
                 <br />
@@ -585,7 +708,10 @@ function App() {
             </div>
 
             <div className="course-benefit-item">
-              <Monitor className="course-benefit-icon" strokeWidth={1.5} />
+              <Monitor
+                className="course-benefit-icon"
+                strokeWidth={1.5}
+              />
               <p>
                 Acceso de por vida
                 <br />
@@ -594,7 +720,10 @@ function App() {
             </div>
 
             <div className="course-benefit-item">
-              <Users className="course-benefit-icon" strokeWidth={1.5} />
+              <Users
+                className="course-benefit-icon"
+                strokeWidth={1.5}
+              />
               <p>
                 Opción con
                 <br />
@@ -603,7 +732,10 @@ function App() {
             </div>
 
             <div className="course-benefit-item">
-              <Gift className="course-benefit-icon" strokeWidth={1.5} />
+              <Gift
+                className="course-benefit-icon"
+                strokeWidth={1.5}
+              />
               <p>
                 Bonus
                 <br />
@@ -615,6 +747,7 @@ function App() {
           <div className="course-details-grid">
             <div className="course-detail-block course-modalities">
               <h3>Modalidades</h3>
+
               <div className="course-small-divider">
                 <span></span>
               </div>
@@ -622,6 +755,7 @@ function App() {
               <div className="course-modalities-grid">
                 <div>
                   <h4>Curso digital</h4>
+
                   <ul>
                     <li>PDF completo</li>
                     <li>Videos paso a paso</li>
@@ -630,6 +764,7 @@ function App() {
 
                 <div>
                   <h4>Curso premium</h4>
+
                   <ul>
                     <li>PDF completo</li>
                     <li>Videos paso a paso</li>
@@ -641,6 +776,7 @@ function App() {
 
             <div className="course-detail-block course-learning">
               <h3>¿Qué vas a aprender?</h3>
+
               <div className="course-small-divider">
                 <span></span>
               </div>
@@ -650,7 +786,9 @@ function App() {
                 <li>Cálculos y preparación</li>
                 <li>Elaboración paso a paso</li>
                 <li>Errores frecuentes y soluciones</li>
-                <li>Costos, precios y primeros pasos para vender</li>
+                <li>
+                  Costos, precios y primeros pasos para vender
+                </li>
                 <li>¡Y mucho más!</li>
               </ul>
             </div>
@@ -670,15 +808,20 @@ function App() {
               className="course-whatsapp-box"
             >
               <MessageCircle strokeWidth={1.6} />
+
               <span>
-                Escribime por WhatsApp para más info y reservar tu lugar
+                Escribime por WhatsApp para más info y reservar tu
+                lugar
               </span>
             </a>
           </div>
         </section>
       )}
 
-      <section id="aromas" className="aromas-editorial-section">
+      <section
+        id="aromas"
+        className="aromas-editorial-section"
+      >
         <div className="aromas-editorial-header">
           <div className="aromas-editorial-title-block">
             <p>Harmonia Aromas</p>
@@ -690,7 +833,10 @@ function App() {
           </div>
 
           <div className="aromas-editorial-text">
-            <p>Explorá aromas únicos creados para acompañar cada momento.</p>
+            <p>
+              Explorá aromas únicos creados para acompañar cada
+              momento.
+            </p>
           </div>
         </div>
 
@@ -739,7 +885,10 @@ function App() {
         </div>
       </section>
 
-      <footer id="contacto" className="footer">
+      <footer
+        id="contacto"
+        className="footer"
+      >
         <p className="section-subtitle">Nuestras redes 🌿</p>
 
         <h2>Seguinos y contactanos</h2>
@@ -796,7 +945,9 @@ function App() {
           <span>🤎</span>
         </div>
 
-        <p className="footer-copy">© 2026 Harmonia Aromas · Hecho con 🤎</p>
+        <p className="footer-copy">
+          © 2026 Harmonia Aromas · Hecho con 🤎
+        </p>
 
         <p className="footer-credit">
           Sitio web desarrollado por{" "}
