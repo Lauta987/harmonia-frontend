@@ -25,6 +25,7 @@ export interface Product {
   featured: boolean;
   category?:
     | "classic"
+    | "premium"
     | "bakery"
     | "wax-melts"
     | "candle-box"

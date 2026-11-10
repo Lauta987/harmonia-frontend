@@ -13,6 +13,7 @@ const categories: {
   label: string;
 }[] = [
   { value: "classic", label: "Velas clásicas" },
+  { value: "premium", label: "Línea Premium" },
   { value: "bakery", label: "Línea Bakery" },
   { value: "wax-melts", label: "Wax Melts" },
   { value: "candle-box", label: "Candle Box" },
